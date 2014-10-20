@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Generic -->
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+
+    <!-- General -->
+    <color name="dex_primary">#e45953</color>
+    <color name="dex_primary_dark">#b94a45</color>
+    <color name="dex_primary_dull">#99b94a45</color>
+    <color name="dex_secondary">#21201d</color>
+    <color name="dex_supplementary">#c8c6c6</color>
+    <color name="dex_supplementary_medium">#ff4c4a4a</color>
+    <color name="dex_supplementary_dark">#21201d</color>
+
+    <!-- Type -->
+    <color name="none">#000000</color>
+    <color name="normal">#a8a878</color>
+    <color name="fighting">#82201b</color>
+    <color name="flying">#a890f0</color>
+    <color name="poison">#993c99</color>
+    <color name="ground">#e0c068</color>
+    <color name="rock">#b8a038</color>
+    <color name="bug">#a8b820</color>
+    <color name="ghost">#705898</color>
+    <color name="steel">#b8b8d0</color>
+    <color name="fire">#f08030</color>
+    <color name="water">#6890f0</color>
+    <color name="grass">#78c850</color>
+    <color name="electric">#f8d030</color>
+    <color name="psychic">#f85888</color>
+    <color name="ice">#98d8d8</color>
+    <color name="dragon">#7038f8</color>
+    <color name="dark">#705848</color>
+    <color name="fairy">#ee99ac</color>
+    <color name="unknown">#68a090</color>
+
+</resources>

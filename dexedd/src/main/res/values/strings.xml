@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!-- App -->
+    <string name="app_name">Dexedd!</string>
+    <string name="title_dex">Dex</string>
+    <string name="title_about">About</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_search">Search</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Pokémon -->
+    <string name="pokemon">Pokémon</string>
+
+    <!-- Type -->
+    <string name="none">None</string>
+    <string name="normal">Normal</string>
+    <string name="fighting">Fighting</string>
+    <string name="flying">Flying</string>
+    <string name="poison">Poison</string>
+    <string name="ground">Ground</string>
+    <string name="rock">Rock</string>
+    <string name="bug">Bug</string>
+    <string name="ghost">Ghost</string>
+    <string name="steel">Steel</string>
+    <string name="fire">Fire</string>
+    <string name="water">Water</string>
+    <string name="grass">Grass</string>
+    <string name="electric">Electric</string>
+    <string name="psychic">Psychic</string>
+    <string name="ice">Ice</string>
+    <string name="dragon">Dragon</string>
+    <string name="dark">Dark</string>
+    <string name="fairy">Fairy</string>
+    <string name="unknown">\?\?\?</string>
+
+    <!-- Content description -->
+    <string name="description_pokemon_picture">A pokémon picture</string>
+
+</resources>

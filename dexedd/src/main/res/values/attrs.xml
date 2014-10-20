@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <declare-styleable name="TypeTagView">
+        <attr name="no_text" format="boolean" />
+        <attr name="type" format="enum">
+            <enum name="none" value="0" />
+            <enum name="normal" value="1" />
+            <enum name="fighting" value="2" />
+            <enum name="flying" value="3" />
+            <enum name="poison" value="4" />
+            <enum name="ground" value="5" />
+            <enum name="rock" value="6" />
+            <enum name="bug" value="7" />
+            <enum name="ghost" value="8" />
+            <enum name="steel" value="9" />
+            <enum name="fire" value="10" />
+            <enum name="water" value="11" />
+            <enum name="grass" value="12" />
+            <enum name="electric" value="13" />
+            <enum name="psychic" value="14" />
+            <enum name="ice" value="15" />
+            <enum name="dragon" value="16" />
+            <enum name="dark" value="17" />
+            <enum name="fairy" value="18" />
+        </attr>
+    </declare-styleable>
+</resources>

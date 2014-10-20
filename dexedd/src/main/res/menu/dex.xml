@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:dexedd="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.edd.dexedd.app.DexActivity">
+
+    <item
+            android:id="@+id/action_example"
+            android:title="@string/action_search"
+            android:icon="@drawable/ic_menu_search"
+            dexedd:showAsAction="withText|ifRoom" />
+    <item
+            android:id="@+id/action_settings"
+            android:title="@string/action_settings"
+            android:orderInCategory="100"
+            dexedd:showAsAction="never" />
+
+</menu>

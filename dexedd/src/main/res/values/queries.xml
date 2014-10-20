@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="get_dex">SELECT p.id as _id, pokedex_number, name, catched FROM pokemon_species as ps
+        INNER JOIN pokemon as p ON (ps.id = p.id) INNER JOIN pokemon_species_names ON
+        (ps.id = pokemon_species_id AND local_language_id = 9) INNER JOIN pokemon_dex_numbers as pdn
+        ON (ps.id = pdn.species_id AND pokedex_id = ?)</string>
+
+    <string name="get_dex_entry">SELECT p.id as _id, pokedex_number, name, genus, flavor_text, catched
+        FROM pokemon_species AS ps  INNER JOIN pokemon as p ON (ps.id = p.id) INNER JOIN pokemon_species_names AS psn
+        ON (ps.id = pokemon_species_id AND local_language_id = 9) INNER JOIN pokemon_dex_numbers AS pdn
+        ON (ps.id = pdn.species_id AND pokedex_id = ?) INNER JOIN pokemon_species_flavor_text AS ft ON
+        (ps.id = ft.species_id AND language_id = 9 AND version_id = ?) WHERE _id = ?</string>
+
+    <string name="get_types">SELECT pt.type_id as _id, name FROM pokemon_types as pt INNER JOIN type_names as tn ON
+        (pt.type_id = tn.type_id AND local_language_id = 9) WHERE pokemon_id = ? ORDER BY slot</string>
+
+</resources>
