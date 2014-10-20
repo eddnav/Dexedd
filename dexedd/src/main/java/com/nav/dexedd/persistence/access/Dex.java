@@ -64,32 +64,22 @@ public class Dex extends Access {
         String queryPokemon = getContext().getString(R.string.get_dex);
         Cursor cursorPokemon = database.rawQuery(queryPokemon, argsPokemon);
         List<Pokemon> pokemon = new ArrayList<>();
-        Cursor cursorTypes;
-        String queryTypes = getContext().getString(R.string.get_types);
-        String[] argsTypes;
         while (cursorPokemon.moveToNext()) {
             Pokemon pokemonItem = new Pokemon();
             pokemonItem.setId(cursorPokemon.getInt(0));
             pokemonItem.setDexNumber(cursorPokemon.getInt(1));
             pokemonItem.setName(cursorPokemon.getString(2));
-            argsTypes = new String[]{pokemonItem.getId().toString()};
-            cursorTypes = database.rawQuery(queryTypes, argsTypes);
-            int i = 0;
-            while (cursorTypes.moveToNext()) {
-                Type type = new Type();
-                type.setId(cursorTypes.getInt(0));
-                type.setName(cursorTypes.getString(1));
-                if (i == 0) {
-                    pokemonItem.setPrimaryType(type);
-                } else {
-                    if (i == 1) {
-                        pokemonItem.setSecondaryType(type);
-                    }
-                }
-                i++;
+            Type primaryType = new Type();
+            primaryType.setId(cursorPokemon.getInt(3));
+            pokemonItem.setPrimaryType(primaryType);
+            Integer secondaryTypeId = cursorPokemon.getInt(4);
+            if(secondaryTypeId != null) {
+                Type secondaryType = new Type();
+                secondaryType.setId(secondaryTypeId);
+                pokemonItem.setSecondaryType(secondaryType);
             }
-            cursorTypes.close();
-            pokemonItem.setCatched(cursorPokemon.getInt(3) == 1);
+
+            pokemonItem.setCatched(cursorPokemon.getInt(5) == 1);
             pokemon.add(pokemonItem);
         }
         cursorPokemon.close();

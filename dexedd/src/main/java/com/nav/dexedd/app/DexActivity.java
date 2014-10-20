@@ -342,7 +342,7 @@ public class DexActivity extends ActionBarActivity
                 holder.catchButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (catched) {
+                        if (pokemon.getCatched()) {
                             Dex.setCatched(getContext().getApplicationContext(), id, false);
                             pokemon.setCatched(false);
                             view.setBackgroundResource(R.drawable.ic_uncatched);
@@ -351,7 +351,7 @@ public class DexActivity extends ActionBarActivity
                             pokemon.setCatched(true);
                             view.setBackgroundResource(R.drawable.ic_catched);
                         }
-                        view.invalidate();
+                        //view.invalidate();
                     }
                 });
 

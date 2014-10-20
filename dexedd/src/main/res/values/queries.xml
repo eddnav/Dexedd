@@ -2,8 +2,10 @@
 
 <resources>
 
-    <string name="get_dex">SELECT p.id as _id, pokedex_number, name, catched FROM pokemon_species as ps
-        INNER JOIN pokemon as p ON (ps.id = p.id) INNER JOIN pokemon_species_names ON
+    <string name="get_dex">SELECT p.id as _id, pokedex_number, name,
+        (SELECT type_id FROM pokemon_types as pt WHERE pt.pokemon_id = p.id AND slot = 1) as type1,
+        (SELECT type_id FROM pokemon_types as pt WHERE pt.pokemon_id = p.id AND slot = 2) as type2, catched
+        FROM pokemon_species as ps INNER JOIN pokemon as p ON (ps.id = p.id) INNER JOIN pokemon_species_names ON
         (ps.id = pokemon_species_id AND local_language_id = 9) INNER JOIN pokemon_dex_numbers as pdn
         ON (ps.id = pdn.species_id AND pokedex_id = ?)</string>
 
