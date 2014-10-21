@@ -66,25 +66,16 @@ public class DexEntry extends Access {
         pokemon.setName(cursorPokemon.getString(2));
         pokemon.setGenus(cursorPokemon.getString(3));
         pokemon.setFlavorText(cursorPokemon.getString(4));
-        String queryTypes = getContext().getString(R.string.get_types);
-        String[] argsTypes = {pokemon.getId().toString()};
-        Cursor cursorTypes = database.rawQuery(queryTypes, argsTypes);
-        int i = 0;
-        while (cursorTypes.moveToNext()) {
-            Type type = new Type();
-            type.setId(cursorTypes.getInt(0));
-            type.setName(cursorTypes.getString(1));
-            if (i == 0) {
-                pokemon.setPrimaryType(type);
-            } else {
-                if (i == 1) {
-                    pokemon.setSecondaryType(type);
-                }
-            }
-            i++;
+        Type primaryType = new Type();
+        primaryType.setId(cursorPokemon.getInt(5));
+        pokemon.setPrimaryType(primaryType);
+        Integer secondaryTypeId = cursorPokemon.getInt(6);
+        if (secondaryTypeId != null) {
+            Type secondaryType = new Type();
+            secondaryType.setId(secondaryTypeId);
+            pokemon.setSecondaryType(secondaryType);
         }
-        cursorTypes.close();
-        pokemon.setCatched(cursorPokemon.getInt(5) == 1);
+        pokemon.setCatched(cursorPokemon.getInt(7) == 1);
         cursorPokemon.close();
         return pokemon;
     }

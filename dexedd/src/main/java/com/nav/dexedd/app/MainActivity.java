@@ -21,6 +21,7 @@ import com.nav.dexedd.model.Pokemon;
 import com.nav.dexedd.model.Type;
 import com.nav.dexedd.persistence.access.Dex;
 import com.nav.dexedd.util.DexStringUtil;
+import com.nav.dexedd.util.TypeUtil;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
@@ -35,10 +36,10 @@ import java.util.List;
  * @author Eduardo Naveda
  * @since 0.0.1
  */
-public class DexActivity extends ActionBarActivity
+public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
-    private static final String TAG = DexActivity.class.getSimpleName();
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     private static final String DEX_FRAGMENT = "dex_fragment";
     /**
@@ -64,7 +65,7 @@ public class DexActivity extends ActionBarActivity
             dexFragment = getSupportFragmentManager().findFragmentByTag(DEX_FRAGMENT);
         }
 
-        setContentView(R.layout.activity_dex);
+        setContentView(R.layout.activity_main);
 
         Toolbar dexToolBar = (Toolbar) findViewById(R.id.dex_toolbar);
         setSupportActionBar(dexToolBar);
@@ -207,7 +208,7 @@ public class DexActivity extends ActionBarActivity
             int numColumns = (int) Math.floor(width / (dexGridCellWidth + dexGridCellSpacing));
 
             Dex dex = Dex.create(getActivity().getApplicationContext());
-            pokemon = dex.getPokemon();
+            pokemon = dex.listPokemon(); // Todo add dummies to list to fill remaining spaces pokemon.size()/numColums -
 
             DexAdapter adapter = new DexAdapter(getActivity().getApplicationContext(),
                                                 R.layout.dex_grid_cell, pokemon);
@@ -306,12 +307,12 @@ public class DexActivity extends ActionBarActivity
                     }
                 };
 
-                holder.primaryType.setType(TypeTagView.Type.getTypeByValue(primaryType.getId()));
+                holder.primaryType.setType(TypeUtil.Type.getTypeByValue(primaryType.getId()));
 
                 if (secondaryType != null) {
-                    holder.secondaryType.setType(TypeTagView.Type.getTypeByValue(secondaryType.getId()));
+                    holder.secondaryType.setType(TypeUtil.Type.getTypeByValue(secondaryType.getId()));
                 } else {
-                    holder.secondaryType.setType(TypeTagView.Type.NONE);
+                    holder.secondaryType.setType(TypeUtil.Type.NONE);
                 }
 
                 try {
@@ -351,7 +352,6 @@ public class DexActivity extends ActionBarActivity
                             pokemon.setCatched(true);
                             view.setBackgroundResource(R.drawable.ic_catched);
                         }
-                        //view.invalidate();
                     }
                 });
 

@@ -10,9 +10,9 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
  * @author Eduardo Naveda
  * @since 0.0.1
  */
-public class DexApp extends Application {
+public class Dexedd extends Application {
 
-    private static final String TAG = DexApp.class.getSimpleName();
+    private static final String TAG = Dexedd.class.getSimpleName();
 
     @Override
     public void onCreate() {

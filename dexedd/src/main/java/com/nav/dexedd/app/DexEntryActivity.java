@@ -6,6 +6,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.*;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.nav.dexedd.R;
@@ -14,11 +16,12 @@ import com.nav.dexedd.model.Pokemon;
 import com.nav.dexedd.model.Type;
 import com.nav.dexedd.persistence.access.DexEntry;
 import com.nav.dexedd.util.DexStringUtil;
+import com.nav.dexedd.util.TypeUtil;
 
 import java.lang.reflect.Field;
 
 /**
- * Dex entry activity, manages fragments that show entry information.
+ * Pokemon entry activity, manages fragments that show entry information.
  *
  * @author Eduardo Naveda
  * @since 0.0.1
@@ -65,12 +68,8 @@ public class DexEntryActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == android.R.id.home) {
-            onBackPressed();
-        } else {
-            if (id == R.id.action_settings) {
-                return true;
-            }
+        if (id == R.id.action_settings) {
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -90,6 +89,7 @@ public class DexEntryActivity extends ActionBarActivity {
      */
     public static class DexEntryFragment extends Fragment {
 
+        private RelativeLayout dexEntryHeadFrame;
         private ImageView dexEntryPicture;
         private TextView dexEntryName;
         private TextView dexEntryGenus;
@@ -105,6 +105,7 @@ public class DexEntryActivity extends ActionBarActivity {
                                  Bundle savedInstanceState) {
 
             View rootView = inflater.inflate(R.layout.fragment_dex_entry, container, false);
+            dexEntryHeadFrame = (RelativeLayout) rootView.findViewById(R.id.dex_entry_head_frame);
             dexEntryPicture = (ImageView) rootView.findViewById(R.id.dex_entry_picture);
             dexEntryName = (TextView) rootView.findViewById(R.id.dex_entry_name);
             dexEntryGenus = (TextView) rootView.findViewById(R.id.dex_entry_genus);
@@ -125,6 +126,12 @@ public class DexEntryActivity extends ActionBarActivity {
                 final Type primaryType = pokemon.getPrimaryType();
                 final Type secondaryType = pokemon.getSecondaryType();
 
+                //head.setBackgroundColor(getResources().getColor(
+                //        TypeUtil.getTypeColorRes(TypeUtil.Type.getTypeByValue(primaryType.getId())))); // Flat color
+
+                dexEntryHeadFrame.setBackgroundResource(
+                        TypeUtil.getTypeBackgroundRes(TypeUtil.Type.getTypeByValue(primaryType.getId())));
+
                 ((ActionBarActivity) getActivity()).getSupportActionBar().setTitle(dexNumber);
 
                 try {
@@ -137,12 +144,12 @@ public class DexEntryActivity extends ActionBarActivity {
                     dexEntryPicture.setImageDrawable(getResources().getDrawable(R.drawable.pokeball));
                 }
 
-                dexEntryPrimaryType.setType(TypeTagView.Type.getTypeByValue(primaryType.getId()));
+                dexEntryPrimaryType.setType(TypeUtil.Type.getTypeByValue(primaryType.getId()));
 
                 if (secondaryType != null) {
-                    dexEntrySecondaryType.setType(TypeTagView.Type.getTypeByValue(secondaryType.getId()));
+                    dexEntrySecondaryType.setType(TypeUtil.Type.getTypeByValue(secondaryType.getId()));
                 } else {
-                    dexEntrySecondaryType.setType(TypeTagView.Type.NONE);
+                    dexEntrySecondaryType.setType(TypeUtil.Type.NONE);
                 }
 
                 dexEntryName.setText(name);

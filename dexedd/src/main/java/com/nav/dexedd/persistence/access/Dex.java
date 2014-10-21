@@ -42,7 +42,6 @@ public class Dex extends Access {
 
     private DexType dexType;
 
-
     private Dex(Context context, DexType dexType) {
         super(context);
         this.dexType = dexType;
@@ -59,7 +58,7 @@ public class Dex extends Access {
         return new Dex(context, dexType);
     }
 
-    public List<Pokemon> getPokemon() {
+    public List<Pokemon> listPokemon() {
         String[] argsPokemon = {dexType.toString()};
         String queryPokemon = getContext().getString(R.string.get_dex);
         Cursor cursorPokemon = database.rawQuery(queryPokemon, argsPokemon);

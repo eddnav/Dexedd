@@ -8,6 +8,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.nav.dexedd.R;
+import com.nav.dexedd.util.TypeUtil;
+import com.nav.dexedd.util.TypeUtil.*;
 
 /**
  * Simple tag view for pokemon types.
@@ -16,33 +18,6 @@ import com.nav.dexedd.R;
  * @since 0.0.1
  */
 public class TypeTagView extends FrameLayout {
-
-    public static enum Type {
-
-        NONE(0), NORMAL(1), FIGHTING(2), FLYING(3), POISON(4), GROUND(5), ROCK(6), BUG(7), GHOST(8), STEEL(9), FIRE(10),
-        WATER(11), GRASS(12), ELECTRIC(13), PSYCHIC(14), ICE(15), DRAGON(16), DARK(17), FAIRY(18), UNKNOWN(10001);
-
-        private Integer type;
-
-        Type(Integer type) {
-            this.type = type;
-        }
-
-        public static Type getTypeByValue(Integer typeValue) {
-            for (Type type : Type.values()) {
-                if (type.type == typeValue) {
-                    return type;
-                }
-            }
-            return NONE;
-        }
-
-        @Override
-        public String toString() {
-            return type.toString();
-        }
-
-    }
 
     private Boolean noText;
     private TextView typeTagText;
@@ -65,7 +40,7 @@ public class TypeTagView extends FrameLayout {
         inflater.inflate(R.layout.type_tag_content, this, true);
 
         typeTagText = (TextView) getChildAt(0);
-        if(noText) {
+        if (noText) {
             typeTagText.setVisibility(GONE);
         }
 
@@ -79,88 +54,53 @@ public class TypeTagView extends FrameLayout {
         } else {
             setVisibility(VISIBLE);
         }
+        setBackgroundResource(getTypeTagBackgroundRes(type));
+        typeTagText.setText(getResources().getString(TypeUtil.getTypeNameRes(type)));
+    }
+
+    public static int getTypeTagBackgroundRes(Type type) {
         switch (type) {
             case NONE:
-                setBackgroundResource(R.drawable.type_tag_background_none);
-                typeTagText.setText(getResources().getString(R.string.none));
-                break;
+                return R.drawable.type_tag_background_none;
             case NORMAL:
-                setBackgroundResource(R.drawable.type_tag_background_normal);
-                typeTagText.setText(getResources().getString(R.string.normal));
-                break;
+                return R.drawable.type_tag_background_normal;
             case FIGHTING:
-                setBackgroundResource(R.drawable.type_tag_background_fighting);
-                typeTagText.setText(getResources().getString(R.string.fighting));
-                break;
+                return R.drawable.type_tag_background_fighting;
             case FLYING:
-                setBackgroundResource(R.drawable.type_tag_background_flying);
-                typeTagText.setText(getResources().getString(R.string.flying));
-                break;
+                return R.drawable.type_tag_background_flying;
             case POISON:
-                setBackgroundResource(R.drawable.type_tag_background_poison);
-                typeTagText.setText(getResources().getString(R.string.poison));
-                break;
+                return R.drawable.type_tag_background_poison;
             case GROUND:
-                setBackgroundResource(R.drawable.type_tag_background_ground);
-                typeTagText.setText(getResources().getString(R.string.ground));
-                break;
+                return R.drawable.type_tag_background_ground;
             case ROCK:
-                setBackgroundResource(R.drawable.type_tag_background_rock);
-                typeTagText.setText(getResources().getString(R.string.rock));
-                break;
+                return R.drawable.type_tag_background_rock;
             case BUG:
-                setBackgroundResource(R.drawable.type_tag_background_bug);
-                typeTagText.setText(getResources().getString(R.string.bug));
-                break;
+                return R.drawable.type_tag_background_bug;
             case GHOST:
-                setBackgroundResource(R.drawable.type_tag_background_ghost);
-                typeTagText.setText(getResources().getString(R.string.ghost));
-                break;
+                return R.drawable.type_tag_background_ghost;
             case STEEL:
-                setBackgroundResource(R.drawable.type_tag_background_steel);
-                typeTagText.setText(getResources().getString(R.string.steel));
-                break;
+                return R.drawable.type_tag_background_steel;
             case FIRE:
-                setBackgroundResource(R.drawable.type_tag_background_fire);
-                typeTagText.setText(getResources().getString(R.string.fire));
-                break;
+                return R.drawable.type_tag_background_fire;
             case WATER:
-                setBackgroundResource(R.drawable.type_tag_background_water);
-                typeTagText.setText(getResources().getString(R.string.water));
-                break;
+                return R.drawable.type_tag_background_water;
             case GRASS:
-                setBackgroundResource(R.drawable.type_tag_background_grass);
-                typeTagText.setText(getResources().getString(R.string.grass));
-                break;
+                return R.drawable.type_tag_background_grass;
             case ELECTRIC:
-                setBackgroundResource(R.drawable.type_tag_background_electric);
-                typeTagText.setText(getResources().getString(R.string.electric));
-                break;
+                return R.drawable.type_tag_background_electric;
             case PSYCHIC:
-                setBackgroundResource(R.drawable.type_tag_background_psychic);
-                typeTagText.setText(getResources().getString(R.string.psychic));
-                break;
+                return R.drawable.type_tag_background_psychic;
             case ICE:
-                setBackgroundResource(R.drawable.type_tag_background_ice);
-                typeTagText.setText(getResources().getString(R.string.ice));
-                break;
+                return R.drawable.type_tag_background_ice;
             case DRAGON:
-                setBackgroundResource(R.drawable.type_tag_background_dragon);
-                typeTagText.setText(getResources().getString(R.string.dragon));
-                break;
+                return R.drawable.type_tag_background_dragon;
             case DARK:
-                setBackgroundResource(R.drawable.type_tag_background_dark);
-                typeTagText.setText(getResources().getString(R.string.dark));
-                break;
+                return R.drawable.type_tag_background_dark;
             case FAIRY:
-                setBackgroundResource(R.drawable.type_tag_background_fairy);
-                typeTagText.setText(getResources().getString(R.string.fairy));
-                break;
+                return R.drawable.type_tag_background_fairy;
             default:
-                setBackgroundResource(R.drawable.type_tag_background_none);
-                typeTagText.setText(getResources().getString(R.string.none));
+                return R.drawable.type_tag_background_none;
         }
-        invalidate();
     }
 
 }

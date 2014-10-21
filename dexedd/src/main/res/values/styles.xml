@@ -4,9 +4,9 @@
 
     <!-- Base -->
     <style name="Theme.DexTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/dex_primary</item>
-        <item name="colorPrimaryDark">@color/dex_primary_dark</item>
-        <item name="colorAccent">@color/dex_primary_dull</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorAccent">@color/primary_dull</item>
     </style>
 
     <!-- Component -->
@@ -17,19 +17,19 @@
     <style name="TextShadowed">
         <item name="android:textColor">@color/white</item>
         <item name="android:shadowColor">@color/black</item>
-        <item name="android:shadowDx">1</item>
-        <item name="android:shadowDy">1</item>
-        <item name="android:shadowRadius">1</item>
+        <item name="android:shadowDx">0</item>
+        <item name="android:shadowDy">0</item>
+        <item name="android:shadowRadius">2</item>
     </style>
 
     <style name="LargeHeader">
         <item name="android:textSize">@dimen/large_header_text_size</item>
-        <item name="android:textColor">@color/dex_supplementary</item>
+        <item name="android:textColor">@color/supplementary</item>
     </style>
 
     <style name="ExtraLargeHeader">
         <item name="android:textSize">@dimen/extra_large_header_text_size</item>
-        <item name="android:textColor">@color/dex_supplementary</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="TypeTagView">
@@ -70,14 +70,14 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dex_grid_cell_width</item>
         <item name="android:scaleType">centerCrop</item>
-        <item name="android:background">@color/dex_supplementary_medium</item>
+        <item name="android:background">@drawable/dex_grid_cell_image_background</item>
     </style>
 
     <style name="DexGridCellPanel">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dex_grid_cell_panel_height</item>
         <item name="android:layout_gravity">bottom</item>
-        <item name="android:background">@color/dex_supplementary_dark</item>
+        <item name="android:background">@color/supplementary_dark</item>
     </style>
 
     <style name="DexGridCellPanelName">
@@ -90,7 +90,7 @@
         <item name="android:ellipsize">marquee</item>
         <item name="android:singleLine">true</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/dex_supplementary</item>
+        <item name="android:textColor">@color/supplementary</item>
     </style>
 
     <style name="DexGridCellPanelNumber">
@@ -102,7 +102,7 @@
         <item name="android:layout_alignParentLeft">true</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:singleLine">true</item>
-        <item name="android:textColor">@color/dex_supplementary</item>
+        <item name="android:textColor">@color/supplementary</item>
     </style>
 
     <style name="DexGridCellPanelCatchButton">

@@ -2,38 +2,58 @@
 <resources>
 
     <!-- Generic -->
-    <color name="white">#ffffff</color>
+    <color name="white">#ffff</color>
     <color name="black">#000000</color>
 
     <!-- General -->
-    <color name="dex_primary">#e45953</color>
-    <color name="dex_primary_dark">#b94a45</color>
-    <color name="dex_primary_dull">#99b94a45</color>
-    <color name="dex_secondary">#21201d</color>
-    <color name="dex_supplementary">#c8c6c6</color>
-    <color name="dex_supplementary_medium">#ff4c4a4a</color>
-    <color name="dex_supplementary_dark">#21201d</color>
+    <color name="primary">#e45953</color>
+    <color name="primary_dark">#b94a45</color>
+    <color name="primary_dull">#99b94a45</color>
+    <color name="secondary">#191618</color>
+    <color name="supplementary">#c8c6c6</color>
+    <color name="supplementary_medium">#4c4a4a</color>
+    <color name="supplementary_dark">#252524</color>
 
     <!-- Type -->
-    <color name="none">#000000</color>
+    <color name="none">#1d1d1d</color>
+    <color name="none_dark">#000000</color>
     <color name="normal">#a8a878</color>
+    <color name="normal_dark">#8a8a63</color>
     <color name="fighting">#82201b</color>
+    <color name="fighting_dark">#601714</color>
     <color name="flying">#a890f0</color>
+    <color name="flying_dark">#8c78c8</color>
     <color name="poison">#993c99</color>
+    <color name="poison_dark">#873587</color>
     <color name="ground">#e0c068</color>
+    <color name="ground_dark">#a38c4c</color>
     <color name="rock">#b8a038</color>
+    <color name="rock_dark">#ae9835</color>
     <color name="bug">#a8b820</color>
+    <color name="bug_dark">#8f9d1b</color>
     <color name="ghost">#705898</color>
+    <color name="ghost_dark">#624d85</color>
     <color name="steel">#b8b8d0</color>
+    <color name="steel_dark">#808091</color>
     <color name="fire">#f08030</color>
+    <color name="fire_dark">#d5712a</color>
     <color name="water">#6890f0</color>
+    <color name="water_dark">#5171bc</color>
     <color name="grass">#78c850</color>
+    <color name="grass_dark">#5fa041</color>
     <color name="electric">#f8d030</color>
+    <color name="electric_dark">#deba2b</color>
     <color name="psychic">#f85888</color>
+    <color name="psychic_dark">#c1446a</color>
     <color name="ice">#98d8d8</color>
+    <color name="ice_dark">#7db2b2</color>
     <color name="dragon">#7038f8</color>
+    <color name="dragon_dark">#6131d7</color>
     <color name="dark">#705848</color>
+    <color name="dark_dark">#ff554438</color>
     <color name="fairy">#ee99ac</color>
+    <color name="fairy_dark">#a86c79</color>
     <color name="unknown">#68a090</color>
+    <color name="unknown_dark">#4c7467</color>
 
 </resources>

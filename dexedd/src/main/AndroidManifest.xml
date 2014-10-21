@@ -4,7 +4,7 @@
           package="com.nav.dexedd">
 
     <application
-            android:name="com.nav.dexedd.app.DexApp"
+            android:name=".app.Dexedd"
             android:allowBackup="true"
             android:icon="@drawable/ic_launcher"
             android:label="@string/app_name"
@@ -12,8 +12,9 @@
             android:theme="@style/Theme.DexTheme">
 
         <activity
-                android:name="com.nav.dexedd.app.DexActivity"
-                android:label="@string/app_name">
+                android:name=".app.MainActivity"
+                android:label="@string/app_name"
+                android:launchMode="singleTop">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,8 +24,12 @@
         </activity>
 
         <activity
-                android:name="com.nav.dexedd.app.DexEntryActivity"
-                android:label="@string/app_name">
+                android:name=".app.DexEntryActivity"
+                android:label="@string/app_name"
+                android:parentActivityName=".app.MainActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".app.MainActivity" />
         </activity>
 
     </application>
