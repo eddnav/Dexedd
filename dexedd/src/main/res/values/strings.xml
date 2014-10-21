@@ -38,5 +38,6 @@
 
     <!-- Content description -->
     <string name="description_pokemon_picture">A pokémon picture</string>
+    <string name="description_mark_as_catched">Mark this pokemon as catched</string>
 
 </resources>

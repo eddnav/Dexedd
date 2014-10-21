@@ -72,7 +72,7 @@ public class Dex extends Access {
             primaryType.setId(cursorPokemon.getInt(3));
             pokemonItem.setPrimaryType(primaryType);
             Integer secondaryTypeId = cursorPokemon.getInt(4);
-            if(secondaryTypeId != null) {
+            if (secondaryTypeId != null) {
                 Type secondaryType = new Type();
                 secondaryType.setId(secondaryTypeId);
                 pokemonItem.setSecondaryType(secondaryType);

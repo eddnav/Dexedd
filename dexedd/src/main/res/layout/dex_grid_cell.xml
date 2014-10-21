@@ -57,6 +57,7 @@
 
         <ImageButton
                 android:id="@id/catch_button"
+                android:contentDescription="@string/description_mark_as_catched"
                 style="@style/DexGridCellPanelCatchButton" />
 
     </RelativeLayout>

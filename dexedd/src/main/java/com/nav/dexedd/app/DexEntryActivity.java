@@ -30,10 +30,16 @@ public class DexEntryActivity extends ActionBarActivity {
 
     private static final String TAG = DexEntryActivity.class.getSimpleName();
 
+    public static final String DEX_ENTRY_TYPE = "dex_entry_type";
     public static final String POKEMON_ID = "pokemon_id";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        boolean hasSavedState = savedInstanceState == null;
+        if(hasSavedState) {
+            //todo
+        }
+        setTheme(R.style.Theme_DexThemeGrass);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dex_entry);
 
@@ -52,9 +58,7 @@ public class DexEntryActivity extends ActionBarActivity {
 
             }
             dexEntryFragment.setArguments(args);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, dexEntryFragment)
-                    .commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.container, dexEntryFragment).commit();
         }
 
     }
@@ -101,8 +105,7 @@ public class DexEntryActivity extends ActionBarActivity {
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
             View rootView = inflater.inflate(R.layout.fragment_dex_entry, container, false);
             dexEntryHeadFrame = (RelativeLayout) rootView.findViewById(R.id.dex_entry_head_frame);
@@ -116,7 +119,7 @@ public class DexEntryActivity extends ActionBarActivity {
             if (getArguments() != null) {
 
                 DexEntry dexEntry = DexEntry.create(getActivity().getApplicationContext(),
-                                                    getArguments().getInt(DexEntryActivity.POKEMON_ID));
+                        getArguments().getInt(DexEntryActivity.POKEMON_ID));
                 Pokemon pokemon = dexEntry.getPokemon();
 
                 final String dexNumber = DexStringUtil.getFormattedDexNumber(pokemon.getDexNumber());
@@ -139,8 +142,7 @@ public class DexEntryActivity extends ActionBarActivity {
                     Field field = res.getField("b" + dexNumber.substring(1, dexNumber.length()));
                     int drawableId = field.getInt(null);
                     dexEntryPicture.setImageDrawable(getResources().getDrawable(drawableId));
-                }
-                catch (IllegalAccessException | NoSuchFieldException e) {
+                } catch (IllegalAccessException | NoSuchFieldException e) {
                     dexEntryPicture.setImageDrawable(getResources().getDrawable(R.drawable.pokeball));
                 }
 

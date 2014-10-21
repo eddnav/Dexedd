@@ -36,8 +36,7 @@ import java.util.List;
  * @author Eduardo Naveda
  * @since 0.0.1
  */
-public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class MainActivity extends ActionBarActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -70,13 +69,11 @@ public class MainActivity extends ActionBarActivity
         Toolbar dexToolBar = (Toolbar) findViewById(R.id.dex_toolbar);
         setSupportActionBar(dexToolBar);
 
-        navigationDrawerFragment = (NavigationDrawerFragment)
-                getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
+        navigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.navigation_drawer);
         title = getTitle();
 
-        navigationDrawerFragment.setUp(
-                R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout));
+        navigationDrawerFragment.setUp(R.id.navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout));
     }
 
     public void restoreActionBar() {
@@ -109,14 +106,11 @@ public class MainActivity extends ActionBarActivity
                 if (dexFragment == null) {
                     dexFragment = DexFragment.newInstance(position);
                 }
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, dexFragment, DEX_FRAGMENT)
-                        .commit();
+                fragmentManager.beginTransaction().replace(R.id.container, dexFragment, DEX_FRAGMENT).commit();
                 break;
             case 1:
                 // Todo change to About fragment
-                fragmentManager.beginTransaction()
-                        .replace(R.id.container, PlaceholderFragment.newInstance(position))
+                fragmentManager.beginTransaction().replace(R.id.container, PlaceholderFragment.newInstance(position))
                         .commit();
                 break;
         }
@@ -153,8 +147,7 @@ public class MainActivity extends ActionBarActivity
         }
 
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_about, container, false);
             return rootView;
         }
@@ -162,8 +155,8 @@ public class MainActivity extends ActionBarActivity
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
-            ((NavigationDrawerFragment.NavigationDrawerCallbacks) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
+            ((NavigationDrawerFragment.NavigationDrawerCallbacks) activity)
+                    .onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
 
@@ -192,7 +185,7 @@ public class MainActivity extends ActionBarActivity
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_dex_grid, container, false);
+            View rootView = inflater.inflate(R.layout.fragment_dex, container, false);
 
             // Get full face grid cell size
             int dexGridCellWidth = getResources().getDimensionPixelSize(R.dimen.dex_grid_cell_width);
@@ -210,8 +203,7 @@ public class MainActivity extends ActionBarActivity
             Dex dex = Dex.create(getActivity().getApplicationContext());
             pokemon = dex.listPokemon(); // Todo add dummies to list to fill remaining spaces pokemon.size()/numColums -
 
-            DexAdapter adapter = new DexAdapter(getActivity().getApplicationContext(),
-                                                R.layout.dex_grid_cell, pokemon);
+            DexAdapter adapter = new DexAdapter(getActivity().getApplicationContext(), R.layout.dex_grid_cell, pokemon);
 
             // Set number of columns and appropriate column size
             dexGrid.setNumColumns(numColumns);
@@ -219,8 +211,8 @@ public class MainActivity extends ActionBarActivity
             dexGrid.setAdapter(adapter);
 
             //Set scroll pause listeners
-            PauseOnScrollListener pauseOnScrollListener =
-                    new PauseOnScrollListener(ImageLoader.getInstance(), false, true);
+            PauseOnScrollListener pauseOnScrollListener = new PauseOnScrollListener(ImageLoader.getInstance(), false,
+                    true);
             dexGrid.setOnScrollListener(pauseOnScrollListener);
 
             return rootView;
@@ -244,8 +236,8 @@ public class MainActivity extends ActionBarActivity
         @Override
         public void onAttach(Activity activity) {
             super.onAttach(activity);
-            ((NavigationDrawerFragment.NavigationDrawerCallbacks) activity).onSectionAttached(
-                    getArguments().getInt(ARG_SECTION_NUMBER));
+            ((NavigationDrawerFragment.NavigationDrawerCallbacks) activity)
+                    .onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
         }
 
         @Override
@@ -259,8 +251,7 @@ public class MainActivity extends ActionBarActivity
         public class DexAdapter extends ArrayAdapter<Pokemon> {
 
             private DisplayImageOptions displayImageOptions = new DisplayImageOptions.Builder()
-                    .showImageOnLoading(R.drawable.pokeball)
-                    .showImageForEmptyUri(R.drawable.pokeball)
+                    .showImageOnLoading(R.drawable.pokeball).showImageForEmptyUri(R.drawable.pokeball)
                     .showImageOnFail(R.drawable.pokeball).cacheInMemory(true)
                     .displayer(new FadeInBitmapDisplayer(400, true, false, false)).build();
 
@@ -303,6 +294,7 @@ public class MainActivity extends ActionBarActivity
                     public void onClick(View view) {
                         Intent intent = new Intent(getActivity(), DexEntryActivity.class);
                         intent.putExtra(DexEntryActivity.POKEMON_ID, id);
+                        intent.putExtra(DexEntryActivity.DEX_ENTRY_TYPE, primaryType.getId());
                         startActivity(intent);
                     }
                 };
@@ -321,11 +313,9 @@ public class MainActivity extends ActionBarActivity
                     int drawableId = field.getInt(null);
                     ImageLoader.getInstance()
                             .displayImage("drawable://" + drawableId, holder.image, displayImageOptions);
-                }
-                catch (IllegalAccessException | NoSuchFieldException e) {
+                } catch (IllegalAccessException | NoSuchFieldException e) {
                     ImageLoader.getInstance()
-                            .displayImage("drawable://" + R.drawable.pokeball, holder.image,
-                                          displayImageOptions);
+                            .displayImage("drawable://" + R.drawable.pokeball, holder.image, displayImageOptions);
                 }
 
                 holder.image.setOnClickListener(toEntry);

@@ -4,7 +4,8 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/dex_entry_scroller"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/supplementary_dark">
 
     <RelativeLayout
             android:layout_width="match_parent"
@@ -58,7 +59,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:textStyle="bold"
-                            android:textAppearance="@style/ExtraLargeHeader">
+                            style="@style/ExtraLargeHeader">
                     </TextView>
 
                     <TextView
@@ -79,7 +80,7 @@
                             android:layout_below="@id/dex_entry_genus"
                             android:paddingBottom="15dp"
                             android:gravity="center"
-                            android:textAppearance="@style/TextStandard" />
+                            style="@style/TextStandard" />
 
                 </RelativeLayout>
 
@@ -169,12 +170,6 @@
             </TableLayout>
 
         </RelativeLayout>
-
-        <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_below="@id/dex_entry_general_extended_panel"
-                android:background="@color/supplementary_dark" />
 
     </RelativeLayout>
 

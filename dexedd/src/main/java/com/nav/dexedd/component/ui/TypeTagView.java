@@ -30,13 +30,11 @@ public class TypeTagView extends FrameLayout {
         try {
             noText = a.getBoolean(R.styleable.TypeTagView_no_text, false);
             typeValue = a.getInt(R.styleable.TypeTagView_type, 0);
-        }
-        finally {
+        } finally {
             a.recycle();
         }
 
-        LayoutInflater inflater = (LayoutInflater) context
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.type_tag_content, this, true);
 
         typeTagText = (TextView) getChildAt(0);

@@ -10,6 +10,8 @@ import com.nav.dexedd.R;
  */
 public class TypeUtil {
 
+    private static final String TAG = TypeUtil.class.getSimpleName();
+
     public static enum Type {
 
         NONE(0), NORMAL(1), FIGHTING(2), FLYING(3), POISON(4), GROUND(5), ROCK(6), BUG(7), GHOST(8), STEEL(9), FIRE(10),
@@ -127,9 +129,6 @@ public class TypeUtil {
         }
     }
 
-
-
-
     public static int getTypeBackgroundRes(Type type) {
         switch (type) {
             case NONE:
@@ -172,6 +171,51 @@ public class TypeUtil {
                 return R.drawable.type_background_fairy;
             default:
                 return R.drawable.type_background_none;
+        }
+    }
+
+    public static int getTypeStyleRes(Type type) {
+        switch (type) {
+            case NONE:
+                return R.style.Theme_DexThemeNone;
+            case NORMAL:
+                return R.style.Theme_DexThemeNormal;
+            case FIGHTING:
+                return R.style.Theme_DexThemeFighting;
+            case FLYING:
+                return R.style.Theme_DexThemeFlying;
+            case POISON:
+                return R.style.Theme_DexThemePoison;
+            case GROUND:
+                return R.style.Theme_DexThemeGround;
+            case ROCK:
+                return R.style.Theme_DexThemeRock;
+            case BUG:
+                return R.style.Theme_DexThemeBug;
+            case GHOST:
+                return R.style.Theme_DexThemeGhost;
+            case STEEL:
+                return R.style.Theme_DexThemeSteel;
+            case FIRE:
+                return R.style.Theme_DexThemeFire;
+            case WATER:
+                return R.style.Theme_DexThemeWater;
+            case GRASS:
+                return R.style.Theme_DexThemeGrass;
+            case ELECTRIC:
+                return R.style.Theme_DexThemeElectric;
+            case PSYCHIC:
+                return R.style.Theme_DexThemePsychic;
+            case ICE:
+                return R.style.Theme_DexThemeIce;
+            case DRAGON:
+                return R.style.Theme_DexThemeDragon;
+            case DARK:
+                return R.style.Theme_DexThemeDark;
+            case FAIRY:
+                return R.style.Theme_DexThemeFairy;
+            default:
+                return R.style.Theme_DexThemeNone;
         }
     }
 }
