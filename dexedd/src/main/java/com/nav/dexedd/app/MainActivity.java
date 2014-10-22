@@ -294,7 +294,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                     public void onClick(View view) {
                         Intent intent = new Intent(getActivity(), DexEntryActivity.class);
                         intent.putExtra(DexEntryActivity.POKEMON_ID, id);
-                        intent.putExtra(DexEntryActivity.DEX_ENTRY_TYPE, primaryType.getId());
+                        intent.putExtra(DexEntryActivity.DEX_ENTRY_TYPE_ID, primaryType.getId());
                         startActivity(intent);
                     }
                 };

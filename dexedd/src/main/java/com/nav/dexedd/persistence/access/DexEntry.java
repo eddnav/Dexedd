@@ -65,7 +65,7 @@ public class DexEntry extends Access {
         pokemon.setDexNumber(cursorPokemon.getInt(1));
         pokemon.setName(cursorPokemon.getString(2));
         pokemon.setGenus(cursorPokemon.getString(3));
-        pokemon.setFlavorText(cursorPokemon.getString(4));
+        pokemon.setFlavorText(cursorPokemon.getString(4).replace("\n", " "));
         Type primaryType = new Type();
         primaryType.setId(cursorPokemon.getInt(5));
         pokemon.setPrimaryType(primaryType);

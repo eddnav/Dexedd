@@ -3,128 +3,125 @@
 <resources>
 
     <!-- Base -->
-    <style name="Theme.DexTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/primary_dull</item>
+        <item name="colorAccent">@color/primary_accent</item>
     </style>
 
-    <style name="Theme.DexThemeNone" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexThemeNone" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/none</item>
         <item name="colorPrimaryDark">@color/none_dark</item>
-        <item name="colorAccent">@color/none_dull</item>
+        <item name="colorAccent">@color/none_accent</item>
     </style>
 
-    <style name="Theme.DexThemeNormal" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexThemeNormal" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/normal</item>
         <item name="colorPrimaryDark">@color/normal_dark</item>
-        <item name="colorAccent">@color/normal_dull</item>
+        <item name="colorAccent">@color/normal_accent</item>
     </style>
 
-    <style name="Theme.DexThemeFighting" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexThemeFighting" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/fighting</item>
         <item name="colorPrimaryDark">@color/fighting_dark</item>
-        <item name="colorAccent">@color/fighting_dull</item>
+        <item name="colorAccent">@color/fighting_accent</item>
     </style>
 
-    <style name="Theme.DexThemeFlying" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexThemeFlying" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/flying</item>
         <item name="colorPrimaryDark">@color/flying_dark</item>
-        <item name="colorAccent">@color/flying_dull</item>
+        <item name="colorAccent">@color/flying_accent</item>
     </style>
 
-
-    <style name="Theme.DexThemePoison" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexThemePoison" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/poison</item>
         <item name="colorPrimaryDark">@color/poison_dark</item>
-        <item name="colorAccent">@color/poison_dull</item>
+        <item name="colorAccent">@color/poison_accent</item>
     </style>
 
-    <style name="Theme.DexThemeGround" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexThemeGround" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/ground</item>
         <item name="colorPrimaryDark">@color/ground_dark</item>
-        <item name="colorAccent">@color/ground_dull</item>
+        <item name="colorAccent">@color/ground_accent</item>
     </style>
 
-    <style name="Theme.DexThemeRock" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexThemeRock" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/rock</item>
         <item name="colorPrimaryDark">@color/rock_dark</item>
-        <item name="colorAccent">@color/rock_dull</item>
+        <item name="colorAccent">@color/rock_accent</item>
     </style>
 
-    <style name="Theme.DexThemeBug" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexThemeBug" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/bug</item>
         <item name="colorPrimaryDark">@color/bug_dark</item>
-        <item name="colorAccent">@color/bug_dull</item>
+        <item name="colorAccent">@color/bug_accent</item>
     </style>
 
-    <style name="Theme.DexThemeGhost" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexThemeGhost" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/ghost</item>
         <item name="colorPrimaryDark">@color/ghost_dark</item>
-        <item name="colorAccent">@color/ghost_dull</item>
+        <item name="colorAccent">@color/ghost_accent</item>
     </style>
 
-    <style name="Theme.DexThemeSteel" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexThemeSteel" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/steel</item>
         <item name="colorPrimaryDark">@color/steel_dark</item>
-        <item name="colorAccent">@color/steel_dull</item>
+        <item name="colorAccent">@color/steel_accent</item>
     </style>
 
-    <style name="Theme.DexThemeFire" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexThemeFire" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/fire</item>
         <item name="colorPrimaryDark">@color/fire_dark</item>
-        <item name="colorAccent">@color/fire_dull</item>
+        <item name="colorAccent">@color/fire_accent</item>
     </style>
 
-    <style name="Theme.DexThemeWater" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexThemeWater" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/water</item>
         <item name="colorPrimaryDark">@color/water_dark</item>
-        <item name="colorAccent">@color/water_dull</item>
+        <item name="colorAccent">@color/water_accent</item>
     </style>
 
-    <style name="Theme.DexThemeGrass" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexThemeGrass" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/grass</item>
         <item name="colorPrimaryDark">@color/grass_dark</item>
-        <item name="colorAccent">@color/grass_dull</item>
+        <item name="colorAccent">@color/grass_accent</item>
     </style>
 
-
-    <style name="Theme.DexThemeElectric" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexThemeElectric" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/electric</item>
         <item name="colorPrimaryDark">@color/electric_dark</item>
-        <item name="colorAccent">@color/electric_dull</item>
+        <item name="colorAccent">@color/electric_accent</item>
     </style>
 
-    <style name="Theme.DexThemePsychic" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexThemePsychic" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/psychic</item>
         <item name="colorPrimaryDark">@color/psychic_dark</item>
-        <item name="colorAccent">@color/psychic_dull</item>
+        <item name="colorAccent">@color/psychic_accent</item>
     </style>
 
-    <style name="Theme.DexThemeIce" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexThemeIce" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/ice</item>
         <item name="colorPrimaryDark">@color/ice_dark</item>
-        <item name="colorAccent">@color/ice_dull</item>
+        <item name="colorAccent">@color/ice_accent</item>
     </style>
 
-    <style name="Theme.DexThemeDragon" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexThemeDragon" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/dragon</item>
         <item name="colorPrimaryDark">@color/dragon_dark</item>
-        <item name="colorAccent">@color/dragon_dull</item>
+        <item name="colorAccent">@color/dragon_accent</item>
     </style>
 
-    <style name="Theme.DexThemeDark" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexThemeDark" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/dark</item>
         <item name="colorPrimaryDark">@color/dark_dark</item>
-        <item name="colorAccent">@color/dark_dull</item>
+        <item name="colorAccent">@color/dark_accent</item>
     </style>
 
-    <style name="Theme.DexThemeFairy" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="Theme.DexThemeFairy" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/fairy</item>
         <item name="colorPrimaryDark">@color/fairy_dark</item>
-        <item name="colorAccent">@color/fairy_dull</item>
+        <item name="colorAccent">@color/fairy_accent</item>
     </style>
-
 
     <!-- Component -->
     <style name="TextStandard">
