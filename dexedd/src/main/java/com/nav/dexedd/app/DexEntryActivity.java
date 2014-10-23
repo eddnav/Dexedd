@@ -121,7 +121,7 @@ public class DexEntryActivity extends ActionBarActivity {
             if (getArguments() != null) {
 
                 final DexEntry dexEntry = DexEntry.create(getActivity().getApplicationContext(),
-                                                          getArguments().getInt(DexEntryActivity.POKEMON_ID));
+                        getArguments().getInt(DexEntryActivity.POKEMON_ID));
                 Pokemon pokemon = dexEntry.getPokemon();
 
                 final String dexNumber = DexStringUtil.getFormattedDexNumber(pokemon.getDexNumber());
@@ -132,9 +132,8 @@ public class DexEntryActivity extends ActionBarActivity {
                 final Type secondaryType = pokemon.getSecondaryType();
 
                 //  Setting up the toolbar
-                final ColorDrawable toolBarTypeColorDrawable =
-                        new ColorDrawable(getResources().getColor(
-                                TypeUtil.getTypeColorRes(TypeUtil.Type.getTypeByValue(primaryType.getId()))));
+                final ColorDrawable toolBarTypeColorDrawable = new ColorDrawable(getResources()
+                        .getColor(TypeUtil.getTypeColorRes(TypeUtil.Type.getTypeByValue(primaryType.getId()))));
 
                 toolBarTypeColorDrawable.setAlpha(toolBarDrawableAlpha);
 
@@ -159,60 +158,70 @@ public class DexEntryActivity extends ActionBarActivity {
                     toolBarTypeColorDrawable.setCallback(drawableCallback);
                 }
 
-                FrameLayout.LayoutParams dexEntryPictureLayoutParams =
-                        (FrameLayout.LayoutParams) dexEntryPicture.getLayoutParams();
+                FrameLayout.LayoutParams dexEntryPictureLayoutParams = (FrameLayout.LayoutParams) dexEntryPicture
+                        .getLayoutParams();
 
-                final int dexEntryPictureMinSize =
-                        getResources().getDimensionPixelSize(R.dimen.dex_entry_picture_min_size);
+                final int dexEntryPictureMinSize = getResources()
+                        .getDimensionPixelSize(R.dimen.dex_entry_picture_min_size);
                 final int dexEntryPictureSize = dexEntryPictureLayoutParams.height;
 
                 final int dexEntryPictureMarginBottom = dexEntryPictureLayoutParams.bottomMargin;
-                final int dexEntryPictureMaxMarginBottom =
-                        getResources().getDimensionPixelSize(R.dimen.dex_entry_picture_max_bottom_margin);
+                final int dexEntryPictureMaxMarginBottom = getResources()
+                        .getDimensionPixelSize(R.dimen.dex_entry_picture_max_bottom_margin);
 
-                NotifyingScrollView.OnScrollChangedListener onScrollChangedListener =
-                        new NotifyingScrollView.OnScrollChangedListener() {
+                final int dexEntryNamePaddingTop = dexEntryName.getPaddingTop();
+                final int dexEntryNameMaxPaddingTop = getResources()
+                        .getDimensionPixelSize(R.dimen.dex_entry_name_max_top_padding);
 
-                            private boolean isLimitHeightSet = false;
-                            private int limitHeight = 0;
-                            private Rect boundsRect;
+                NotifyingScrollView.OnScrollChangedListener onScrollChangedListener = new NotifyingScrollView
+                        .OnScrollChangedListener() {
 
+                    private boolean isLimitHeightSet = false;
+                    private int limitHeight = 0;
+                    private Rect boundsRect = new Rect();
 
-                            @Override
-                            public void onScrollChanged(ScrollView scrollView, int l, int t, int oldl, int oldt) {
-                                if (!isLimitHeightSet) {
-                                    limitHeight = dexEntryHead.getHeight() - toolBar.getHeight();
-                                    boundsRect = new Rect();
-                                    scrollView.getHitRect(boundsRect);
-                                    boundsRect.offset(0, toolBar.getHeight()); // Todo try till you get the offset
-                                    isLimitHeightSet = true;
-                                }
+                    @Override
+                    public void onScrollChanged(ScrollView scrollView, int l, int t, int oldl, int oldt) {
+                        if (!isLimitHeightSet) {
+                            limitHeight = dexEntryHead.getHeight() - toolBar.getHeight();
+                            isLimitHeightSet = true;
+                        }
 
-                                float ratio = (float) Math.min(Math.max(t, 0), limitHeight) / limitHeight;
-                                toolBarDrawableAlpha = (int) (ratio * 255);
-                                toolBarTypeColorDrawable.setAlpha(toolBarDrawableAlpha);
+                        scrollView.getDrawingRect(boundsRect);
+                        boundsRect.top += toolBar.getHeight();
 
-                                int dexEntryPictureNewSize =
-                                        Math.max(dexEntryPictureMinSize, (int) ((1 - ratio / 2) * dexEntryPictureSize));
-                                dexEntryPicture.getLayoutParams().height = dexEntryPictureNewSize;
-                                dexEntryPicture.getLayoutParams().width = dexEntryPictureNewSize;
-                                dexEntryPicture.requestLayout();
+                        float ratio = (float) Math.min(Math.max(t, 0), limitHeight) / limitHeight;
+                        toolBarDrawableAlpha = (int) (ratio * 255);
+                        toolBarTypeColorDrawable.setAlpha(toolBarDrawableAlpha);
 
-                                int dexEntryPictureNewBottomMargin =
-                                        Math.max(dexEntryPictureMarginBottom,
-                                                 Math.min(dexEntryPictureMaxMarginBottom,
-                                                          (int) ((ratio * 1.5) * dexEntryPictureMaxMarginBottom)));
-                                ((FrameLayout.LayoutParams) dexEntryPicture.getLayoutParams()).bottomMargin =
-                                        dexEntryPictureNewBottomMargin;
-                                dexEntryPicture.requestLayout();
+                        int dexEntryPictureNewSize = Math
+                                .max(dexEntryPictureMinSize, (int) ((1 - ratio / 2) * dexEntryPictureSize));
+                        dexEntryPicture.getLayoutParams().height = dexEntryPictureNewSize;
+                        dexEntryPicture.getLayoutParams().width = dexEntryPictureNewSize;
+                        dexEntryPicture.requestLayout();
 
-                                if (!dexEntryName.getLocalVisibleRect(boundsRect)) {
-                                    toolBar.setTitle(name);
-                                } else {
-                                    toolBar.setTitle(dexNumber);
-                                }
-                            }
-                        };
+                        int dexEntryPictureNewBottomMargin = Math.max(dexEntryPictureMarginBottom,
+                                Math.min(dexEntryPictureMaxMarginBottom,
+                                        (int) ((ratio * 1.5) * dexEntryPictureMaxMarginBottom)));
+                        ((FrameLayout.LayoutParams) dexEntryPicture
+                                .getLayoutParams()).bottomMargin = dexEntryPictureNewBottomMargin;
+                        dexEntryPicture.requestLayout();
+
+                        int dexEntryNameNewTopPadding = Math.max(dexEntryNamePaddingTop,
+                                Math.min(dexEntryNameMaxPaddingTop, (int) ((ratio) * dexEntryNameMaxPaddingTop)));
+                        dexEntryName.setPadding(dexEntryName.getPaddingLeft(), dexEntryNameNewTopPadding,
+                                dexEntryName.getPaddingRight(), dexEntryName.getPaddingBottom());
+
+                        Rect dexEntryNameBounds = new Rect();
+                        dexEntryName.getLocalVisibleRect(dexEntryNameBounds);
+
+                        if (Rect.intersects(boundsRect, dexEntryNameBounds)) {
+                            toolBar.setTitle(name);
+                        } else {
+                            toolBar.setTitle(dexNumber);
+                        }
+                    }
+                };
                 dexEntryScroller.setOnScrollChangedListener(onScrollChangedListener);
 
                 toolBar.setTitle(dexNumber);
@@ -228,8 +237,7 @@ public class DexEntryActivity extends ActionBarActivity {
                     Field field = res.getField("b" + dexNumber.substring(1, dexNumber.length()));
                     int drawableId = field.getInt(null);
                     dexEntryPicture.setImageDrawable(getResources().getDrawable(drawableId));
-                }
-                catch (IllegalAccessException | NoSuchFieldException e) {
+                } catch (IllegalAccessException | NoSuchFieldException e) {
                     dexEntryPicture.setImageDrawable(getResources().getDrawable(R.drawable.pokeball));
                 }
 

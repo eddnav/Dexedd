@@ -23,6 +23,8 @@
     <dimen name="dex_entry_picture_size">240dp</dimen>
     <dimen name="dex_entry_picture_bottom_margin">40dp</dimen>
     <dimen name="dex_entry_picture_max_bottom_margin">100dp</dimen>
+    <dimen name="dex_entry_name_top_padding">15dp</dimen>
+    <dimen name="dex_entry_name_max_top_padding">40dp</dimen>
     <dimen name="type_tag_width">60dp</dimen>
     <dimen name="type_tag_height">25dp</dimen>
     <dimen name="type_tag_radius">2dp</dimen>
