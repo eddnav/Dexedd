@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+
     <integer name="type_background_angle">270</integer>
+
 </resources>

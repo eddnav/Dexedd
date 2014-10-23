@@ -187,9 +187,9 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_dex, container, false);
 
-            // Get full face grid cell size
-            int dexGridCellWidth = getResources().getDimensionPixelSize(R.dimen.dex_grid_cell_width);
-            int dexGridCellSpacing = getResources().getDimensionPixelSize(R.dimen.dex_grid_cell_spacing);
+            // Get full cell size
+            int dexCellWidth = getResources().getDimensionPixelSize(R.dimen.dex_cell_width);
+            int dexCellSpacing = getResources().getDimensionPixelSize(R.dimen.dex_cell_spacing);
 
             // Get display width
             DisplayMetrics displaymetrics = new DisplayMetrics();
@@ -198,12 +198,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
             // Calculate number of columns relative to screen size
             dexGrid = (GridView) rootView.findViewById(R.id.dex_grid);
-            int numColumns = (int) Math.floor(width / (dexGridCellWidth + dexGridCellSpacing));
+            int numColumns = (int) Math.floor(width / (dexCellWidth + dexCellSpacing));
 
             Dex dex = Dex.create(getActivity().getApplicationContext());
             pokemon = dex.listPokemon(); // Todo add dummies to list to fill remaining spaces pokemon.size()/numColums -
 
-            DexAdapter adapter = new DexAdapter(getActivity().getApplicationContext(), R.layout.dex_grid_cell, pokemon);
+            DexAdapter adapter = new DexAdapter(getActivity().getApplicationContext(), R.layout.dex_cell, pokemon);
 
             // Set number of columns and appropriate column size
             dexGrid.setNumColumns(numColumns);
@@ -271,13 +271,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                 if (row == null) {
                     Holder holder = new Holder();
                     row = LayoutInflater.from(getContext()).inflate(resource, parent, false);
-                    holder.primaryType = (TypeTagView) row.findViewById(R.id.primary_type);
-                    holder.secondaryType = (TypeTagView) row.findViewById(R.id.secondary_type);
-                    holder.image = (ImageView) row.findViewById(R.id.image);
-                    holder.panel = (RelativeLayout) row.findViewById(R.id.panel);
-                    holder.dexNumber = (TextView) row.findViewById(R.id.dexNumber);
-                    holder.name = (TextView) row.findViewById(R.id.name);
-                    holder.catchButton = (ImageButton) row.findViewById(R.id.catch_button);
+                    holder.dexCell = (RelativeLayout) row.findViewById(R.id.dex_cell);
+                    holder.dexPrimaryType = (TypeTagView) row.findViewById(R.id.dex_primary_type);
+                    holder.dexSecondaryType = (TypeTagView) row.findViewById(R.id.dex_secondary_type);
+                    holder.dexPicture = (ImageView) row.findViewById(R.id.dex_picture);
+                    holder.dexPanel = (RelativeLayout) row.findViewById(R.id.dex_panel);
+                    holder.dexNumber = (TextView) row.findViewById(R.id.dex_number);
+                    holder.dexName = (TextView) row.findViewById(R.id.dex_name);
+                    holder.dexCatchButton = (ImageButton) row.findViewById(R.id.dex_catch_button);
                     row.setTag(holder);
                 }
 
@@ -299,12 +300,12 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                     }
                 };
 
-                holder.primaryType.setType(TypeUtil.Type.getTypeByValue(primaryType.getId()));
+                holder.dexPrimaryType.setType(TypeUtil.Type.getTypeByValue(primaryType.getId()));
 
                 if (secondaryType != null) {
-                    holder.secondaryType.setType(TypeUtil.Type.getTypeByValue(secondaryType.getId()));
+                    holder.dexSecondaryType.setType(TypeUtil.Type.getTypeByValue(secondaryType.getId()));
                 } else {
-                    holder.secondaryType.setType(TypeUtil.Type.NONE);
+                    holder.dexSecondaryType.setType(TypeUtil.Type.NONE);
                 }
 
                 try {
@@ -312,25 +313,24 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
                     Field field = res.getField("b" + dexNumber.substring(1, dexNumber.length()));
                     int drawableId = field.getInt(null);
                     ImageLoader.getInstance()
-                            .displayImage("drawable://" + drawableId, holder.image, displayImageOptions);
+                            .displayImage("drawable://" + drawableId, holder.dexPicture, displayImageOptions);
                 } catch (IllegalAccessException | NoSuchFieldException e) {
                     ImageLoader.getInstance()
-                            .displayImage("drawable://" + R.drawable.pokeball, holder.image, displayImageOptions);
+                            .displayImage("drawable://" + R.drawable.pokeball, holder.dexPicture, displayImageOptions);
                 }
 
-                holder.image.setOnClickListener(toEntry);
-                holder.panel.setOnClickListener(toEntry);
+                holder.dexCell.setOnClickListener(toEntry);
 
-                holder.name.setText(name);
+                holder.dexName.setText(name);
                 holder.dexNumber.setText(dexNumber);
 
                 if (catched) {
-                    holder.catchButton.setBackgroundResource(R.drawable.ic_catched);
+                    holder.dexCatchButton.setBackgroundResource(R.drawable.ic_catched);
                 } else {
-                    holder.catchButton.setBackgroundResource(R.drawable.ic_uncatched);
+                    holder.dexCatchButton.setBackgroundResource(R.drawable.ic_uncatched);
                 }
 
-                holder.catchButton.setOnClickListener(new View.OnClickListener() {
+                holder.dexCatchButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if (pokemon.getCatched()) {
@@ -349,13 +349,14 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
             }
 
             private class Holder {
-                TypeTagView primaryType;
-                TypeTagView secondaryType;
-                ImageView image;
-                RelativeLayout panel;
-                TextView name;
+                RelativeLayout dexCell;
+                TypeTagView dexPrimaryType;
+                TypeTagView dexSecondaryType;
+                ImageView dexPicture;
+                RelativeLayout dexPanel;
+                TextView dexName;
                 TextView dexNumber;
-                ImageButton catchButton;
+                ImageButton dexCatchButton;
             }
         }
     }

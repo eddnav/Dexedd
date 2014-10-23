@@ -158,48 +158,48 @@
     </style>
 
     <style name="DexEntryPicture">
-        <item name="android:layout_width">@dimen/dex_entry_species_picture_size</item>
-        <item name="android:layout_height">@dimen/dex_entry_species_picture_size</item>
+        <item name="android:layout_width">@dimen/dex_entry_picture_size</item>
+        <item name="android:layout_height">@dimen/dex_entry_picture_size</item>
         <item name="android:background">@drawable/dex_entry_species_picture_background</item>
     </style>
 
     <style name="DexGrid">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:columnWidth">@dimen/dex_grid_cell_width</item>
-        <item name="android:verticalSpacing">@dimen/dex_grid_cell_spacing</item>
-        <item name="android:horizontalSpacing">@dimen/dex_grid_cell_spacing</item>
+        <item name="android:columnWidth">@dimen/dex_cell_width</item>
+        <item name="android:verticalSpacing">@dimen/dex_cell_spacing</item>
+        <item name="android:horizontalSpacing">@dimen/dex_cell_spacing</item>
         <item name="android:clipToPadding">false</item>
         <item name="android:fastScrollEnabled">true</item>
         <item name="android:scrollbarStyle">outsideOverlay</item>
         <item name="android:gravity">fill</item>
     </style>
 
-    <style name="DexGridCell">
+    <style name="DexCell">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/dex_cell_background</item>
     </style>
 
-    <style name="DexGridCellImage">
+    <style name="DexCellPicture">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/dex_grid_cell_width</item>
+        <item name="android:layout_height">@dimen/dex_cell_width</item>
         <item name="android:scaleType">centerCrop</item>
-        <item name="android:background">@drawable/dex_grid_cell_image_background</item>
+        <item name="android:src">@drawable/pokeball</item>
     </style>
 
-    <style name="DexGridCellPanel">
+    <style name="DexCellPanel">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/dex_grid_cell_panel_height</item>
+        <item name="android:layout_height">@dimen/dex_cell_panel_height</item>
         <item name="android:layout_gravity">bottom</item>
-        <item name="android:background">@color/supplementary_dark</item>
     </style>
 
-    <style name="DexGridCellPanelName">
-        <item name="android:layout_width">@dimen/dex_grid_cell_panel_text_width</item>
+    <style name="DexCellPanelName">
+        <item name="android:layout_width">@dimen/dex_cell_panel_text_width</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingTop">@dimen/dex_grid_cell_panel_element_padding</item>
-        <item name="android:paddingRight">@dimen/dex_grid_cell_panel_element_half_padding</item>
-        <item name="android:paddingLeft">@dimen/dex_grid_cell_panel_element_padding</item>
+        <item name="android:paddingTop">@dimen/dex_cell_panel_element_padding</item>
+        <item name="android:paddingRight">@dimen/dex_cell_panel_element_half_padding</item>
+        <item name="android:paddingLeft">@dimen/dex_cell_panel_element_padding</item>
         <item name="android:layout_alignParentLeft">true</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:singleLine">true</item>
@@ -207,24 +207,24 @@
         <item name="android:textColor">@color/supplementary</item>
     </style>
 
-    <style name="DexGridCellPanelNumber">
-        <item name="android:layout_width">@dimen/dex_grid_cell_panel_text_width</item>
+    <style name="DexCellPanelNumber">
+        <item name="android:layout_width">@dimen/dex_cell_panel_text_width</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingRight">@dimen/dex_grid_cell_panel_element_half_padding</item>
-        <item name="android:paddingBottom">@dimen/dex_grid_cell_panel_element_padding</item>
-        <item name="android:paddingLeft">@dimen/dex_grid_cell_panel_element_padding</item>
+        <item name="android:paddingRight">@dimen/dex_cell_panel_element_half_padding</item>
+        <item name="android:paddingBottom">@dimen/dex_cell_panel_element_padding</item>
+        <item name="android:paddingLeft">@dimen/dex_cell_panel_element_padding</item>
         <item name="android:layout_alignParentLeft">true</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:singleLine">true</item>
         <item name="android:textColor">@color/supplementary</item>
     </style>
 
-    <style name="DexGridCellPanelCatchButton">
+    <style name="DexCellPanelCatchButton">
         <item name="android:background">@drawable/ic_uncatched</item>
-        <item name="android:layout_width">@dimen/dex_grid_cell_panel_catch_button_size</item>
-        <item name="android:layout_height">@dimen/dex_grid_cell_panel_catch_button_size</item>
-        <item name="android:layout_marginRight">@dimen/dex_grid_cell_panel_element_padding</item>
-        <item name="android:layout_marginLeft">@dimen/dex_grid_cell_panel_element_half_padding</item>
+        <item name="android:layout_width">@dimen/dex_cell_panel_catch_button_size</item>
+        <item name="android:layout_height">@dimen/dex_cell_panel_catch_button_size</item>
+        <item name="android:layout_marginRight">@dimen/dex_cell_panel_element_padding</item>
+        <item name="android:layout_marginLeft">@dimen/dex_cell_panel_element_half_padding</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:layout_alignParentRight">true</item>
     </style>

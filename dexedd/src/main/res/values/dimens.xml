@@ -11,14 +11,18 @@
     <!-- Component -->
     <dimen name="large_header_text_size">18sp</dimen>
     <dimen name="extra_large_header_text_size">30sp</dimen>
-    <dimen name="dex_entry_species_picture_size">180dp</dimen>
-    <dimen name="dex_grid_cell_panel_element_padding">16dp</dimen>
-    <dimen name="dex_grid_cell_panel_element_half_padding">8dp</dimen>
-    <dimen name="dex_grid_cell_width">150dp</dimen>
-    <dimen name="dex_grid_cell_spacing">1dp</dimen>
-    <dimen name="dex_grid_cell_panel_height">68dp</dimen>
-    <dimen name="dex_grid_cell_panel_text_width">112dp</dimen>
-    <dimen name="dex_grid_cell_panel_catch_button_size">40dp</dimen>
+    <dimen name="dex_cell_panel_element_padding">16dp</dimen>
+    <dimen name="dex_cell_panel_element_half_padding">8dp</dimen>
+    <dimen name="dex_cell_width">150dp</dimen>
+    <dimen name="dex_cell_spacing">1dp</dimen>
+    <dimen name="dex_cell_panel_height">68dp</dimen>
+    <dimen name="dex_cell_panel_text_width">112dp</dimen>
+    <dimen name="dex_cell_panel_catch_button_size">40dp</dimen>
+    <dimen name="dex_entry_head_size">240dp</dimen>
+    <dimen name="dex_entry_picture_min_size">140dp</dimen>
+    <dimen name="dex_entry_picture_size">240dp</dimen>
+    <dimen name="dex_entry_picture_bottom_margin">40dp</dimen>
+    <dimen name="dex_entry_picture_max_bottom_margin">100dp</dimen>
     <dimen name="type_tag_width">60dp</dimen>
     <dimen name="type_tag_height">25dp</dimen>
     <dimen name="type_tag_radius">2dp</dimen>

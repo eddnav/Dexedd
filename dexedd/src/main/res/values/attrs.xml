@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+
     <declare-styleable name="TypeTagView">
+
         <attr name="no_text" format="boolean" />
+
         <attr name="type" format="enum">
             <enum name="none" value="0" />
             <enum name="normal" value="1" />
@@ -24,5 +27,7 @@
             <enum name="dark" value="17" />
             <enum name="fairy" value="18" />
         </attr>
+
     </declare-styleable>
+
 </resources>

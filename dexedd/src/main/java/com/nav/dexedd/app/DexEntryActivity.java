@@ -1,5 +1,6 @@
 package com.nav.dexedd.app;
 
+import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -9,10 +10,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.*;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.ScrollView;
-import android.widget.TextView;
+import android.widget.*;
 
 import com.nav.dexedd.R;
 import com.nav.dexedd.component.ui.NotifyingScrollView;
@@ -84,8 +82,6 @@ public class DexEntryActivity extends ActionBarActivity {
      */
     public static class DexEntryFragment extends Fragment {
 
-        private static final String TOOL_BAR_DRAWABLE_ALPHA = "tool_bar_drawable_alpha";
-
         private FrameLayout dexEntryHead;
         private ImageView dexEntryPicture;
         private NotifyingScrollView dexEntryScroller;
@@ -106,6 +102,7 @@ public class DexEntryActivity extends ActionBarActivity {
             final ActionBar toolBar = ((ActionBarActivity) getActivity()).getSupportActionBar();
 
             View rootView = inflater.inflate(R.layout.fragment_dex_entry, container, false);
+
             dexEntryHead = (FrameLayout) rootView.findViewById(R.id.dex_entry_head);
             dexEntryPicture = (ImageView) rootView.findViewById(R.id.dex_entry_picture);
             dexEntryScroller = (NotifyingScrollView) rootView.findViewById(R.id.dex_entry_scroller);
@@ -114,6 +111,12 @@ public class DexEntryActivity extends ActionBarActivity {
             dexEntryFlavorText = (TextView) rootView.findViewById(R.id.dex_entry_flavor_text);
             dexEntryPrimaryType = (TypeTagView) rootView.findViewById(R.id.primary_type);
             dexEntrySecondaryType = (TypeTagView) rootView.findViewById(R.id.secondary_type);
+
+            dexEntryScroller.post(new Runnable() {
+                public void run() {
+                    dexEntryScroller.scrollTo(0, 0);
+                }
+            });
 
             if (getArguments() != null) {
 
@@ -132,10 +135,6 @@ public class DexEntryActivity extends ActionBarActivity {
                 final ColorDrawable toolBarTypeColorDrawable =
                         new ColorDrawable(getResources().getColor(
                                 TypeUtil.getTypeColorRes(TypeUtil.Type.getTypeByValue(primaryType.getId()))));
-
-                if(savedInstanceState != null) {
-                    toolBarDrawableAlpha = savedInstanceState.getInt(TOOL_BAR_DRAWABLE_ALPHA);
-                }
 
                 toolBarTypeColorDrawable.setAlpha(toolBarDrawableAlpha);
 
@@ -160,14 +159,58 @@ public class DexEntryActivity extends ActionBarActivity {
                     toolBarTypeColorDrawable.setCallback(drawableCallback);
                 }
 
+                FrameLayout.LayoutParams dexEntryPictureLayoutParams =
+                        (FrameLayout.LayoutParams) dexEntryPicture.getLayoutParams();
+
+                final int dexEntryPictureMinSize =
+                        getResources().getDimensionPixelSize(R.dimen.dex_entry_picture_min_size);
+                final int dexEntryPictureSize = dexEntryPictureLayoutParams.height;
+
+                final int dexEntryPictureMarginBottom = dexEntryPictureLayoutParams.bottomMargin;
+                final int dexEntryPictureMaxMarginBottom =
+                        getResources().getDimensionPixelSize(R.dimen.dex_entry_picture_max_bottom_margin);
+
                 NotifyingScrollView.OnScrollChangedListener onScrollChangedListener =
                         new NotifyingScrollView.OnScrollChangedListener() {
+
+                            private boolean isLimitHeightSet = false;
+                            private int limitHeight = 0;
+                            private Rect boundsRect;
+
+
                             @Override
                             public void onScrollChanged(ScrollView scrollView, int l, int t, int oldl, int oldt) {
-                                int headHeight = dexEntryHead.getHeight() - toolBar.getHeight();
-                                float ratio = (float) Math.min(Math.max(t, 0), headHeight) / headHeight;
+                                if (!isLimitHeightSet) {
+                                    limitHeight = dexEntryHead.getHeight() - toolBar.getHeight();
+                                    boundsRect = new Rect();
+                                    scrollView.getHitRect(boundsRect);
+                                    boundsRect.offset(0, toolBar.getHeight()); // Todo try till you get the offset
+                                    isLimitHeightSet = true;
+                                }
+
+                                float ratio = (float) Math.min(Math.max(t, 0), limitHeight) / limitHeight;
                                 toolBarDrawableAlpha = (int) (ratio * 255);
                                 toolBarTypeColorDrawable.setAlpha(toolBarDrawableAlpha);
+
+                                int dexEntryPictureNewSize =
+                                        Math.max(dexEntryPictureMinSize, (int) ((1 - ratio / 2) * dexEntryPictureSize));
+                                dexEntryPicture.getLayoutParams().height = dexEntryPictureNewSize;
+                                dexEntryPicture.getLayoutParams().width = dexEntryPictureNewSize;
+                                dexEntryPicture.requestLayout();
+
+                                int dexEntryPictureNewBottomMargin =
+                                        Math.max(dexEntryPictureMarginBottom,
+                                                 Math.min(dexEntryPictureMaxMarginBottom,
+                                                          (int) ((ratio * 1.5) * dexEntryPictureMaxMarginBottom)));
+                                ((FrameLayout.LayoutParams) dexEntryPicture.getLayoutParams()).bottomMargin =
+                                        dexEntryPictureNewBottomMargin;
+                                dexEntryPicture.requestLayout();
+
+                                if (!dexEntryName.getLocalVisibleRect(boundsRect)) {
+                                    toolBar.setTitle(name);
+                                } else {
+                                    toolBar.setTitle(dexNumber);
+                                }
                             }
                         };
                 dexEntryScroller.setOnScrollChangedListener(onScrollChangedListener);
@@ -206,12 +249,6 @@ public class DexEntryActivity extends ActionBarActivity {
             } else {
                 return rootView;
             }
-        }
-
-        @Override
-        public void onSaveInstanceState(Bundle outState) {
-            super.onSaveInstanceState(outState);
-            outState.putInt(TOOL_BAR_DRAWABLE_ALPHA, toolBarDrawableAlpha);
         }
     }
 }

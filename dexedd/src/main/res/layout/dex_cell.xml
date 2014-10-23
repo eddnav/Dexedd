@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/dex_cell"
+        style="@style/DexCell">
+
+    <FrameLayout
+            android:id="@+id/dex_cell_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <com.nav.dexedd.component.ui.SquareImageView
+                android:id="@+id/dex_picture"
+                android:contentDescription="@string/description_pokemon_picture"
+                style="@style/DexCellPicture" />
+
+        <LinearLayout
+                android:id="@+id/dex_types"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="top|end"
+                android:padding="5dp">
+
+            <com.nav.dexedd.component.ui.TypeTagView
+                    android:id="@+id/dex_primary_type"
+                    style="@style/TypeTagViewMini" />
+
+            <com.nav.dexedd.component.ui.TypeTagView
+                    android:id="@+id/dex_secondary_type"
+                    style="@style/TypeTagViewMini" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <RelativeLayout
+            android:id="@+id/dex_panel"
+            android:layout_below="@id/dex_cell_content"
+            style="@style/DexCellPanel">
+
+        <TextView
+                android:id="@+id/dex_name"
+                android:layout_toLeftOf="@+id/dex_catch_button"
+                android:layout_toStartOf="@id/dex_catch_button"
+                style="@style/DexCellPanelName" />
+
+        <TextView
+                android:id="@+id/dex_number"
+                android:layout_below="@id/dex_name"
+                android:layout_toLeftOf="@id/dex_catch_button"
+                android:layout_toStartOf="@id/dex_catch_button"
+                style="@style/DexCellPanelNumber" />
+
+        <ImageButton
+                android:id="@id/dex_catch_button"
+                android:contentDescription="@string/description_mark_as_catched"
+                style="@style/DexCellPanelCatchButton" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
