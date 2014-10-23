@@ -160,7 +160,7 @@
     <style name="DexEntryPicture">
         <item name="android:layout_width">@dimen/dex_entry_picture_size</item>
         <item name="android:layout_height">@dimen/dex_entry_picture_size</item>
-        <item name="android:background">@drawable/dex_entry_species_picture_background</item>
+        <item name="android:background">@drawable/dex_entry_picture_background</item>
     </style>
 
     <style name="DexGrid">
@@ -185,7 +185,6 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dex_cell_width</item>
         <item name="android:scaleType">centerCrop</item>
-        <item name="android:src">@drawable/pokeball</item>
     </style>
 
     <style name="DexCellPanel">

@@ -44,8 +44,10 @@
                 <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="90dp"
-                        android:layout_marginLeft="-100dp"
                         android:layout_marginRight="-100dp"
+                        android:layout_marginEnd="-100dp"
+                        android:layout_marginLeft="-100dp"
+                        android:layout_marginStart="-100dp"
                         android:background="@drawable/dex_entry_basic_panel_curved_edge" />
 
                 <RelativeLayout
@@ -63,7 +65,7 @@
                             android:id="@+id/dex_entry_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingTop="15dp"
+                            android:paddingTop="@dimen/dex_entry_name_top_padding"
                             android:gravity="center"
                             android:textStyle="bold"
                             style="@style/ExtraLargeHeader">
@@ -125,7 +127,9 @@
 
                         <TableRow
                                 android:minHeight="30dp"
-                                android:layout_marginBottom="5dp">
+                                android:layout_marginBottom="5dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
 
                             <TextView
                                     android:id="@+id/type_label"
@@ -159,8 +163,10 @@
                         </TableRow>
 
                         <TableRow
-                                android:minHeight="900dp"
-                                android:layout_marginBottom="5dp">
+                                android:minHeight="1900dp"
+                                android:layout_marginBottom="5dp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
 
                             <TextView
                                     android:id="@+id/weight_label"
