@@ -14,7 +14,7 @@
     <dimen name="dex_cell_panel_element_padding">16dp</dimen>
     <dimen name="dex_cell_panel_element_half_padding">8dp</dimen>
     <dimen name="dex_cell_width">150dp</dimen>
-    <dimen name="dex_cell_spacing">2dp</dimen>
+    <dimen name="dex_cell_spacing">2dp</dimen>|
     <dimen name="dex_cell_panel_height">68dp</dimen>
     <dimen name="dex_cell_panel_text_width">112dp</dimen>
     <dimen name="dex_cell_panel_catch_button_size">40dp</dimen>
