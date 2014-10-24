@@ -19,7 +19,7 @@
     <dimen name="dex_cell_panel_text_width">112dp</dimen>
     <dimen name="dex_cell_panel_catch_button_size">40dp</dimen>
     <dimen name="dex_entry_head_size">240dp</dimen>
-    <dimen name="dex_entry_picture_min_size">140dp</dimen>
+    <item name="dex_entry_picture_min_scale" format="float" type="dimen">0.7</item>
     <dimen name="dex_entry_picture_size">240dp</dimen>
     <dimen name="dex_entry_picture_bottom_margin">40dp</dimen>
     <dimen name="dex_entry_picture_max_bottom_margin">100dp</dimen>

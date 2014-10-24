@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.*;
 import android.widget.*;
 
@@ -161,10 +162,6 @@ public class DexEntryActivity extends ActionBarActivity {
                 FrameLayout.LayoutParams dexEntryPictureLayoutParams = (FrameLayout.LayoutParams) dexEntryPicture
                         .getLayoutParams();
 
-                final int dexEntryPictureMinSize = getResources()
-                        .getDimensionPixelSize(R.dimen.dex_entry_picture_min_size);
-                final int dexEntryPictureSize = dexEntryPictureLayoutParams.height;
-
                 final int dexEntryPictureMarginBottom = dexEntryPictureLayoutParams.bottomMargin;
                 final int dexEntryPictureMaxMarginBottom = getResources()
                         .getDimensionPixelSize(R.dimen.dex_entry_picture_max_bottom_margin);
@@ -172,6 +169,10 @@ public class DexEntryActivity extends ActionBarActivity {
                 final int dexEntryNamePaddingTop = dexEntryName.getPaddingTop();
                 final int dexEntryNameMaxPaddingTop = getResources()
                         .getDimensionPixelSize(R.dimen.dex_entry_name_max_top_padding);
+
+                TypedValue outValue = new TypedValue();
+                getResources().getValue(R.dimen.dex_entry_picture_min_scale, outValue, true);
+                final float dexEntryPicMinScale = outValue.getFloat();
 
                 NotifyingScrollView.OnScrollChangedListener onScrollChangedListener = new NotifyingScrollView
                         .OnScrollChangedListener() {
@@ -187,18 +188,16 @@ public class DexEntryActivity extends ActionBarActivity {
                             isLimitHeightSet = true;
                         }
 
-                        scrollView.getDrawingRect(boundsRect);
-                        boundsRect.top += toolBar.getHeight();
+                        scrollView.getHitRect(boundsRect);
 
                         float ratio = (float) Math.min(Math.max(t, 0), limitHeight) / limitHeight;
                         toolBarDrawableAlpha = (int) (ratio * 255);
                         toolBarTypeColorDrawable.setAlpha(toolBarDrawableAlpha);
 
-                        int dexEntryPictureNewSize = Math
-                                .max(dexEntryPictureMinSize, (int) ((1 - ratio / 2) * dexEntryPictureSize));
-                        dexEntryPicture.getLayoutParams().height = dexEntryPictureNewSize;
-                        dexEntryPicture.getLayoutParams().width = dexEntryPictureNewSize;
-                        dexEntryPicture.requestLayout();
+                        float dexEntryPictureNewScale = Math.max(dexEntryPicMinScale, ((1 - ratio / 2) * 1) );
+
+                        dexEntryPicture.setScaleX(dexEntryPictureNewScale);
+                        dexEntryPicture.setScaleY(dexEntryPictureNewScale);
 
                         int dexEntryPictureNewBottomMargin = Math.max(dexEntryPictureMarginBottom,
                                 Math.min(dexEntryPictureMaxMarginBottom,
@@ -212,10 +211,7 @@ public class DexEntryActivity extends ActionBarActivity {
                         dexEntryName.setPadding(dexEntryName.getPaddingLeft(), dexEntryNameNewTopPadding,
                                 dexEntryName.getPaddingRight(), dexEntryName.getPaddingBottom());
 
-                        Rect dexEntryNameBounds = new Rect();
-                        dexEntryName.getLocalVisibleRect(dexEntryNameBounds);
-
-                        if (Rect.intersects(boundsRect, dexEntryNameBounds)) {
+                        if (!dexEntryName.getLocalVisibleRect(boundsRect)) {
                             toolBar.setTitle(name);
                         } else {
                             toolBar.setTitle(dexNumber);
