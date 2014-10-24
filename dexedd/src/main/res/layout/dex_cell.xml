@@ -25,6 +25,7 @@
 
             <com.nav.dexedd.component.ui.TypeTagView
                     android:id="@+id/dex_primary_type"
+                    android:layout_marginBottom="1dp"
                     style="@style/TypeTagViewMini" />
 
             <com.nav.dexedd.component.ui.TypeTagView

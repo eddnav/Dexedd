@@ -203,7 +203,7 @@
         <item name="android:ellipsize">marquee</item>
         <item name="android:singleLine">true</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/supplementary</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="DexCellPanelNumber">
@@ -215,7 +215,7 @@
         <item name="android:layout_alignParentLeft">true</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:singleLine">true</item>
-        <item name="android:textColor">@color/supplementary</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="DexCellPanelCatchButton">

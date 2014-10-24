@@ -4,7 +4,7 @@
     <item android:state_pressed="false">
         <shape>
             <gradient
-                    android:startColor="@color/supplementary_medium"
+                    android:startColor="@color/supplementary_mid_dark"
                     android:centerColor="@color/supplementary_dark"
                     android:endColor="@color/supplementary_dark"
                     android:angle="@integer/type_background_angle" />
@@ -13,8 +13,8 @@
     <item android:state_pressed="true">
         <shape>
             <gradient
-                    android:startColor="@color/supplementary_medium"
-                    android:centerColor="@color/supplementary_medium"
+                    android:startColor="@color/supplementary_mid"
+                    android:centerColor="@color/supplementary_mid_dark"
                     android:endColor="@color/supplementary_dark"
                     android:angle="@integer/type_background_angle" />
         </shape>

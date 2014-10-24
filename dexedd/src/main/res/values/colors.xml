@@ -10,8 +10,9 @@
     <color name="primary_dark">#ab433e</color>
     <color name="primary_accent">#ff6f68</color>
     <color name="secondary">#191618</color>
-    <color name="supplementary">#c8c6c6</color>
-    <color name="supplementary_medium">#4c4a4a</color>
+    <color name="supplementary">#CCCCCC</color>
+    <color name="supplementary_mid">#595959</color>
+    <color name="supplementary_mid_dark">#ff3d3d3b</color>
     <color name="supplementary_dark">#252524</color>
 
     <!-- Type -->
