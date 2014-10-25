@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
 
     <!-- App -->
@@ -13,7 +12,13 @@
     <string name="title_dex">Dex</string>
     <string name="title_about">About</string>
     <string name="title_type">Type</string>
+    <string name="title_type_caps">TYPE</string>
     <string name="title_types">Types</string>
+    <string name="title_types_caps">TYPES</string>
+    <string name="title_ability">Ability</string>
+    <string name="title_ability_caps">ABILITY</string>
+    <string name="title_abilities">Abilities</string>
+    <string name="title_abilities_caps">ABILITIES</string>
 
     <!-- Pokémon -->
     <string name="pokemon">Pokémon</string>
@@ -41,7 +46,7 @@
     <string name="unknown">\?\?\?</string>
 
     <!-- Content description -->
-    <string name="description_pokemon_picture">A pokémon picture</string>
-    <string name="description_mark_as_catched">Mark this pokemon as catched</string>
+    <string name="description_pokemon_image">A pokémon image</string>
+    <string name="description_mark_as_catched">Mark this pokémon as catched</string>
 
 </resources>

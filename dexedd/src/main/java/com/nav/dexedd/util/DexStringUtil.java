@@ -8,8 +8,6 @@ package com.nav.dexedd.util;
  */
 public class DexStringUtil {
 
-    private static final String TAG = DexStringUtil.class.getSimpleName();
-
     public static String getFormattedDexNumber(Integer number) {
         if (number < 10) {
             return "#00" + number;

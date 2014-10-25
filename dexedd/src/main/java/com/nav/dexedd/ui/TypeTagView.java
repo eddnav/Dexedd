@@ -1,4 +1,4 @@
-package com.nav.dexedd.component.ui;
+package com.nav.dexedd.ui;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -19,7 +19,6 @@ import com.nav.dexedd.util.TypeUtil.*;
  */
 public class TypeTagView extends FrameLayout {
 
-    private Boolean noText;
     private TextView typeTagText;
 
     public TypeTagView(Context context, AttributeSet attrs) {
@@ -27,6 +26,7 @@ public class TypeTagView extends FrameLayout {
         TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.TypeTagView, 0, 0);
 
         Integer typeValue = 0;
+        Boolean noText;
         try {
             noText = a.getBoolean(R.styleable.TypeTagView_no_text, false);
             typeValue = a.getInt(R.styleable.TypeTagView_type, 0);

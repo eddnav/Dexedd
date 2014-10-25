@@ -17,6 +17,8 @@ public class Dexedd extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        // UIL config
         ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext()).build();
         ImageLoader.getInstance().init(config);
     }

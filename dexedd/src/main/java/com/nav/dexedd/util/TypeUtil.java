@@ -10,8 +10,6 @@ import com.nav.dexedd.R;
  */
 public class TypeUtil {
 
-    private static final String TAG = TypeUtil.class.getSimpleName();
-
     public static enum Type {
 
         NONE(0), NORMAL(1), FIGHTING(2), FLYING(3), POISON(4), GROUND(5), ROCK(6), BUG(7), GHOST(8), STEEL(9), FIRE(10),

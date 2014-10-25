@@ -14,21 +14,21 @@
     <dimen name="dex_cell_panel_element_padding">16dp</dimen>
     <dimen name="dex_cell_panel_element_half_padding">8dp</dimen>
     <dimen name="dex_cell_width">150dp</dimen>
-    <dimen name="dex_cell_spacing">2dp</dimen>|
+    <dimen name="dex_cell_spacing">2dp</dimen>
     <dimen name="dex_cell_panel_height">68dp</dimen>
     <dimen name="dex_cell_panel_text_width">112dp</dimen>
     <dimen name="dex_cell_panel_catch_button_size">40dp</dimen>
     <dimen name="dex_entry_head_size">240dp</dimen>
-    <item name="dex_entry_picture_min_scale" format="float" type="dimen">0.7</item>
-    <dimen name="dex_entry_picture_size">240dp</dimen>
-    <dimen name="dex_entry_picture_bottom_margin">40dp</dimen>
-    <dimen name="dex_entry_picture_max_bottom_margin">100dp</dimen>
+    <item name="dex_entry_image_min_scale" format="float" type="dimen">0.7</item>
+    <dimen name="dex_entry_image_size">240dp</dimen>
+    <dimen name="dex_entry_image_bottom_margin">40dp</dimen>
+    <dimen name="dex_entry_image_max_bottom_margin">100dp</dimen>
     <dimen name="dex_entry_name_top_padding">15dp</dimen>
     <dimen name="dex_entry_name_max_top_padding">40dp</dimen>
     <dimen name="type_tag_width">60dp</dimen>
     <dimen name="type_tag_height">25dp</dimen>
     <dimen name="type_tag_radius">2dp</dimen>
-    <dimen name="type_tag_stroke_width">1dp</dimen>
+    <dimen name="type_tag_stroke_width">0dp</dimen>
     <dimen name="type_tag_text_size">8dp</dimen>
     <dimen name="type_tag_mini_width">10dp</dimen>
     <dimen name="type_tag_mini_height">10dp</dimen>

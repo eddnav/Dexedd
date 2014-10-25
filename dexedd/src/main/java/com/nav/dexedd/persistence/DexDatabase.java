@@ -12,8 +12,6 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
  */
 public class DexDatabase extends SQLiteAssetHelper {
 
-    private static final String TAG = DexDatabase.class.getSimpleName();
-
     private static final String DATABASE_NAME = "dex.sqlite";
     private static final int DATABASE_VERSION = 1;
 

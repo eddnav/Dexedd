@@ -1,8 +1,6 @@
 package com.nav.dexedd.app;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,21 +11,15 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.*;
-import android.widget.*;
+import android.widget.GridView;
 
 import com.nav.dexedd.R;
-import com.nav.dexedd.component.ui.TypeTagView;
+import com.nav.dexedd.adapter.DexAdapter;
 import com.nav.dexedd.model.Pokemon;
-import com.nav.dexedd.model.Type;
 import com.nav.dexedd.persistence.access.Dex;
-import com.nav.dexedd.util.DexStringUtil;
-import com.nav.dexedd.util.TypeUtil;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
-import java.lang.reflect.Field;
 import java.util.List;
 
 /**
@@ -203,7 +195,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
             Dex dex = Dex.create(getActivity().getApplicationContext());
             pokemon = dex.listPokemon(); // Todo add dummies to list to fill remaining spaces pokemon.size()/numColums -
 
-            DexAdapter adapter = new DexAdapter(getActivity().getApplicationContext(), R.layout.dex_cell, pokemon);
+            DexAdapter adapter = DexAdapter.createDexAdapter(getActivity(), R.layout.dex_cell, pokemon);
 
             // Set number of columns and appropriate column size
             dexGrid.setNumColumns(numColumns);
@@ -212,7 +204,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
             //Set scroll pause listeners
             PauseOnScrollListener pauseOnScrollListener = new PauseOnScrollListener(ImageLoader.getInstance(), false,
-                    true);
+                                                                                    true);
             dexGrid.setOnScrollListener(pauseOnScrollListener);
 
             return rootView;
@@ -239,125 +231,10 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
             ((NavigationDrawerFragment.NavigationDrawerCallbacks) activity)
                     .onSectionAttached(getArguments().getInt(ARG_SECTION_NUMBER));
         }
+    }
 
-        @Override
-        public void onDestroy() {
-            super.onDestroy();
-        }
-
-        /**
-         * Adapter for the main Dex view.
-         */
-        public class DexAdapter extends ArrayAdapter<Pokemon> {
-
-            private DisplayImageOptions displayImageOptions = new DisplayImageOptions.Builder()
-                    .showImageOnLoading(R.drawable.pokeball).showImageForEmptyUri(R.drawable.pokeball)
-                    .showImageOnFail(R.drawable.pokeball).cacheInMemory(true)
-                    .displayer(new FadeInBitmapDisplayer(400, true, false, false)).build();
-
-            private int resource;
-
-            public DexAdapter(Context context, int resource, List<Pokemon> pokemon) {
-                super(context, resource, pokemon);
-                this.resource = resource;
-            }
-
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                final Pokemon pokemon = getItem(position);
-
-                View row = convertView;
-
-                if (row == null) {
-                    Holder holder = new Holder();
-                    row = LayoutInflater.from(getContext()).inflate(resource, parent, false);
-                    holder.dexCell = (RelativeLayout) row.findViewById(R.id.dex_cell);
-                    holder.dexPrimaryType = (TypeTagView) row.findViewById(R.id.dex_primary_type);
-                    holder.dexSecondaryType = (TypeTagView) row.findViewById(R.id.dex_secondary_type);
-                    holder.dexPicture = (ImageView) row.findViewById(R.id.dex_picture);
-                    holder.dexPanel = (RelativeLayout) row.findViewById(R.id.dex_panel);
-                    holder.dexNumber = (TextView) row.findViewById(R.id.dex_number);
-                    holder.dexName = (TextView) row.findViewById(R.id.dex_name);
-                    holder.dexCatchButton = (ImageButton) row.findViewById(R.id.dex_catch_button);
-                    row.setTag(holder);
-                }
-
-                Holder holder = (Holder) row.getTag();
-                final Integer id = pokemon.getId();
-                final Type primaryType = pokemon.getPrimaryType();
-                final Type secondaryType = pokemon.getSecondaryType();
-                final String dexNumber = DexStringUtil.getFormattedDexNumber(pokemon.getDexNumber());
-                final String name = pokemon.getName();
-                final Boolean catched = pokemon.getCatched();
-
-                View.OnClickListener toEntry = new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(getActivity(), DexEntryActivity.class);
-                        intent.putExtra(DexEntryActivity.POKEMON_ID, id);
-                        intent.putExtra(DexEntryActivity.DEX_ENTRY_TYPE_ID, primaryType.getId());
-                        startActivity(intent);
-                    }
-                };
-
-                holder.dexPrimaryType.setType(TypeUtil.Type.getTypeByValue(primaryType.getId()));
-
-                if (secondaryType != null) {
-                    holder.dexSecondaryType.setType(TypeUtil.Type.getTypeByValue(secondaryType.getId()));
-                } else {
-                    holder.dexSecondaryType.setType(TypeUtil.Type.NONE);
-                }
-
-                try {
-                    Class res = R.drawable.class;
-                    Field field = res.getField("b" + dexNumber.substring(1, dexNumber.length()));
-                    int drawableId = field.getInt(null);
-                    ImageLoader.getInstance()
-                            .displayImage("drawable://" + drawableId, holder.dexPicture, displayImageOptions);
-                } catch (IllegalAccessException | NoSuchFieldException e) {
-                    ImageLoader.getInstance()
-                            .displayImage("drawable://" + R.drawable.pokeball, holder.dexPicture, displayImageOptions);
-                }
-
-                holder.dexCell.setOnClickListener(toEntry);
-
-                holder.dexName.setText(name);
-                holder.dexNumber.setText(dexNumber);
-
-                if (catched) {
-                    holder.dexCatchButton.setBackgroundResource(R.drawable.ic_catched);
-                } else {
-                    holder.dexCatchButton.setBackgroundResource(R.drawable.ic_uncatched);
-                }
-
-                holder.dexCatchButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (pokemon.getCatched()) {
-                            Dex.setCatched(getContext().getApplicationContext(), id, false);
-                            pokemon.setCatched(false);
-                            view.setBackgroundResource(R.drawable.ic_uncatched);
-                        } else {
-                            Dex.setCatched(getContext().getApplicationContext(), id, true);
-                            pokemon.setCatched(true);
-                            view.setBackgroundResource(R.drawable.ic_catched);
-                        }
-                    }
-                });
-
-                return row;
-            }
-
-            private class Holder {
-                RelativeLayout dexCell;
-                TypeTagView dexPrimaryType;
-                TypeTagView dexSecondaryType;
-                ImageView dexPicture;
-                RelativeLayout dexPanel;
-                TextView dexName;
-                TextView dexNumber;
-                ImageButton dexCatchButton;
-            }
-        }
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }

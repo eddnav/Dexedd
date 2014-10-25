@@ -2,6 +2,7 @@
 
 <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/supplementary_dark">
@@ -15,18 +16,18 @@
             android:background="@drawable/type_background_unknown">
 
         <ImageView
-                android:id="@+id/dex_entry_picture"
+                android:id="@+id/dex_entry_image"
                 android:layout_height="180dp"
                 android:layout_width="180dp"
                 android:layout_marginTop="35dp"
-                android:layout_marginBottom="@dimen/dex_entry_picture_bottom_margin"
+                android:layout_marginBottom="@dimen/dex_entry_image_bottom_margin"
                 android:layout_gravity="center"
-                android:contentDescription="@string/description_pokemon_picture"
-                style="@style/DexEntryPicture" />
+                android:contentDescription="@string/description_pokemon_image"
+                style="@style/DexEntryImage" />
 
     </FrameLayout>
 
-    <com.nav.dexedd.component.ui.NotifyingScrollView
+    <com.nav.dexedd.ui.NotifyingScrollView
             android:id="@+id/dex_entry_scroller"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -98,112 +99,82 @@
 
             </FrameLayout>
 
-            <RelativeLayout
+            <LinearLayout
                     android:id="@+id/dex_entry_body"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@id/dex_entry_basic_panel"
+                    android:padding="@dimen/activity_uniform_margin"
+                    android:divider="@drawable/dex_entry_body_divider"
+                    android:showDividers="middle"
+                    android:orientation="vertical"
                     android:background="@color/supplementary_dark">
 
-                <LinearLayout
-                        android:id="@+id/dex_entry_navigation_panel"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                </LinearLayout>
-
                 <RelativeLayout
-                        android:id="@+id/dex_entry_general_extended_panel"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:paddingTop="30dp"
-                        android:layout_below="@id/dex_entry_navigation_panel">
+                        android:layout_height="wrap_content">
 
-                    <TableLayout
+                    <TextView
+                            android:id="@+id/type_label"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:stretchColumns="*">
-
-                        <TableRow
-                                android:minHeight="30dp"
-                                android:layout_marginBottom="5dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-
-                            <TextView
-                                    android:id="@+id/type_label"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:gravity="center"
-                                    android:text="@string/title_type"
-                                    android:textAppearance="@style/LargeHeader">
-                            </TextView>
+                            android:paddingBottom="10dp"
+                            android:text="@string/title_type_caps"
+                            android:textAppearance="@style/LargeHeader">
+                    </TextView>
 
 
-                            <LinearLayout
-                                    android:id="@+id/type_content"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="horizontal"
-                                    android:gravity="center">
+                    <LinearLayout
+                            android:id="@+id/type_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@id/type_label"
+                            android:orientation="horizontal">
 
-                                <com.nav.dexedd.component.ui.TypeTagView
-                                        android:id="@+id/primary_type"
-                                        android:layout_marginRight="5dp"
-                                        android:layout_marginEnd="5dp"
-                                        style="@style/TypeTagView" />
+                        <com.nav.dexedd.ui.TypeTagView
+                                android:id="@+id/primary_type"
+                                android:layout_marginRight="5dp"
+                                android:layout_marginEnd="5dp"
+                                style="@style/TypeTagView" />
 
-                                <com.nav.dexedd.component.ui.TypeTagView
-                                        android:id="@+id/secondary_type"
-                                        style="@style/TypeTagView" />
+                        <com.nav.dexedd.ui.TypeTagView
+                                android:id="@+id/secondary_type"
+                                style="@style/TypeTagView" />
 
-                            </LinearLayout>
-
-                        </TableRow>
-
-                        <TableRow
-                                android:minHeight="1900dp"
-                                android:layout_marginBottom="5dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
-
-                            <TextView
-                                    android:id="@+id/weight_label"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:gravity="center"
-                                    android:text="Weight"
-                                    android:textAppearance="@style/LargeHeader">
-                            </TextView>
-
-
-                            <LinearLayout
-                                    android:id="@+id/weight_content"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="horizontal"
-                                    android:gravity="center">
-
-                                <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="103 lbs"
-                                        android:layout_gravity="center"
-                                        style="@style/TextStandard" />
-
-                            </LinearLayout>
-
-                        </TableRow>
-
-                    </TableLayout>
+                    </LinearLayout>
 
                 </RelativeLayout>
 
-            </RelativeLayout>
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    <TextView
+                            android:id="@+id/abilities_label"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="10dp"
+                            android:text="@string/title_abilities_caps"
+                            android:textAppearance="@style/LargeHeader">
+                    </TextView>
+
+
+                    <LinearLayout
+                            android:id="@+id/abilities_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@id/abilities_label"
+                            android:orientation="vertical">
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
         </RelativeLayout>
 
-    </com.nav.dexedd.component.ui.NotifyingScrollView>
+    </com.nav.dexedd.ui.NotifyingScrollView>
 
 </FrameLayout>

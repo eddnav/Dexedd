@@ -1,4 +1,4 @@
-package com.nav.dexedd.component.ui;
+package com.nav.dexedd.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -12,8 +12,6 @@ import android.widget.ImageView;
  */
 public class SquareImageView extends ImageView {
 
-    private static final String TAG = SquareImageView.class.getSimpleName();
-
     public SquareImageView(Context context) {
         super(context);
     }
@@ -22,8 +20,8 @@ public class SquareImageView extends ImageView {
         super(context, attrs);
     }
 
-    public SquareImageView(Context context, AttributeSet attrs, int defStyle) {
-        super(context, attrs, defStyle);
+    public SquareImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
     }
 
     @Override

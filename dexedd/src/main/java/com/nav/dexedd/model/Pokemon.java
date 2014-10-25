@@ -8,8 +8,6 @@ package com.nav.dexedd.model;
  */
 public class Pokemon {
 
-    private static final String TAG = Pokemon.class.getSimpleName();
-
     private Integer id;
     private Integer dexNumber;
     private String name;

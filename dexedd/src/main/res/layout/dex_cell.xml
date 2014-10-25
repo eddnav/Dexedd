@@ -10,10 +10,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <com.nav.dexedd.component.ui.SquareImageView
-                android:id="@+id/dex_picture"
-                android:contentDescription="@string/description_pokemon_picture"
-                style="@style/DexCellPicture" />
+        <com.nav.dexedd.ui.SquareImageView
+                android:id="@+id/dex_image"
+                android:contentDescription="@string/description_pokemon_image"
+                style="@style/DexCellImage" />
 
         <LinearLayout
                 android:id="@+id/dex_types"
@@ -23,12 +23,12 @@
                 android:gravity="top|end"
                 android:padding="5dp">
 
-            <com.nav.dexedd.component.ui.TypeTagView
+            <com.nav.dexedd.ui.TypeTagView
                     android:id="@+id/dex_primary_type"
                     android:layout_marginBottom="1dp"
                     style="@style/TypeTagViewMini" />
 
-            <com.nav.dexedd.component.ui.TypeTagView
+            <com.nav.dexedd.ui.TypeTagView
                     android:id="@+id/dex_secondary_type"
                     style="@style/TypeTagViewMini" />
 

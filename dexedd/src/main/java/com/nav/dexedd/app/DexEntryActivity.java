@@ -14,18 +14,20 @@ import android.view.*;
 import android.widget.*;
 
 import com.nav.dexedd.R;
-import com.nav.dexedd.component.ui.NotifyingScrollView;
-import com.nav.dexedd.component.ui.TypeTagView;
+import com.nav.dexedd.ui.NotifyingScrollView;
+import com.nav.dexedd.ui.TypeTagView;
 import com.nav.dexedd.model.Pokemon;
 import com.nav.dexedd.model.Type;
 import com.nav.dexedd.persistence.access.DexEntry;
 import com.nav.dexedd.util.DexStringUtil;
 import com.nav.dexedd.util.TypeUtil;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 
 /**
- * Pokemon entry activity, manages fragments that show entry information.
+ * Dex entry activity, manages fragments that show entry information.
  *
  * @author Eduardo Naveda
  * @since 0.0.1
@@ -83,8 +85,10 @@ public class DexEntryActivity extends ActionBarActivity {
      */
     public static class DexEntryFragment extends Fragment {
 
+        private static final String TAG = DexEntryFragment.class.getSimpleName();
+
         private FrameLayout dexEntryHead;
-        private ImageView dexEntryPicture;
+        private ImageView dexEntryImage;
         private NotifyingScrollView dexEntryScroller;
         private TextView dexEntryName;
         private TextView dexEntryGenus;
@@ -92,9 +96,18 @@ public class DexEntryActivity extends ActionBarActivity {
         private TypeTagView dexEntryPrimaryType;
         private TypeTagView dexEntrySecondaryType;
 
+        /**
+         * Alpha level for the toolbar drawable
+         */
         private int toolBarDrawableAlpha = 0;
 
         public DexEntryFragment() {
+        }
+
+
+        @Override
+        public void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
         }
 
         @Override
@@ -105,7 +118,7 @@ public class DexEntryActivity extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_dex_entry, container, false);
 
             dexEntryHead = (FrameLayout) rootView.findViewById(R.id.dex_entry_head);
-            dexEntryPicture = (ImageView) rootView.findViewById(R.id.dex_entry_picture);
+            dexEntryImage = (ImageView) rootView.findViewById(R.id.dex_entry_image);
             dexEntryScroller = (NotifyingScrollView) rootView.findViewById(R.id.dex_entry_scroller);
             dexEntryName = (TextView) rootView.findViewById(R.id.dex_entry_name);
             dexEntryGenus = (TextView) rootView.findViewById(R.id.dex_entry_genus);
@@ -122,7 +135,7 @@ public class DexEntryActivity extends ActionBarActivity {
             if (getArguments() != null) {
 
                 final DexEntry dexEntry = DexEntry.create(getActivity().getApplicationContext(),
-                        getArguments().getInt(DexEntryActivity.POKEMON_ID));
+                                                          getArguments().getInt(DexEntryActivity.POKEMON_ID));
                 Pokemon pokemon = dexEntry.getPokemon();
 
                 final String dexNumber = DexStringUtil.getFormattedDexNumber(pokemon.getDexNumber());
@@ -133,8 +146,9 @@ public class DexEntryActivity extends ActionBarActivity {
                 final Type secondaryType = pokemon.getSecondaryType();
 
                 //  Setting up the toolbar
-                final ColorDrawable toolBarTypeColorDrawable = new ColorDrawable(getResources()
-                        .getColor(TypeUtil.getTypeColorRes(TypeUtil.Type.getTypeByValue(primaryType.getId()))));
+                final ColorDrawable toolBarTypeColorDrawable =
+                        new ColorDrawable(getResources().getColor(
+                                TypeUtil.getTypeColorRes(TypeUtil.Type.getTypeByValue(primaryType.getId()))));
 
                 toolBarTypeColorDrawable.setAlpha(toolBarDrawableAlpha);
 
@@ -159,19 +173,19 @@ public class DexEntryActivity extends ActionBarActivity {
                     toolBarTypeColorDrawable.setCallback(drawableCallback);
                 }
 
-                FrameLayout.LayoutParams dexEntryPictureLayoutParams = (FrameLayout.LayoutParams) dexEntryPicture
+                FrameLayout.LayoutParams dexEntryImageLayoutParams = (FrameLayout.LayoutParams) dexEntryImage
                         .getLayoutParams();
 
-                final int dexEntryPictureMarginBottom = dexEntryPictureLayoutParams.bottomMargin;
-                final int dexEntryPictureMaxMarginBottom = getResources()
-                        .getDimensionPixelSize(R.dimen.dex_entry_picture_max_bottom_margin);
+                final int dexEntryImageMarginBottom = dexEntryImageLayoutParams.bottomMargin;
+                final int dexEntryImageMaxMarginBottom = getResources()
+                        .getDimensionPixelSize(R.dimen.dex_entry_image_max_bottom_margin);
 
                 final int dexEntryNamePaddingTop = dexEntryName.getPaddingTop();
                 final int dexEntryNameMaxPaddingTop = getResources()
                         .getDimensionPixelSize(R.dimen.dex_entry_name_max_top_padding);
 
                 TypedValue outValue = new TypedValue();
-                getResources().getValue(R.dimen.dex_entry_picture_min_scale, outValue, true);
+                getResources().getValue(R.dimen.dex_entry_image_min_scale, outValue, true);
                 final float dexEntryPicMinScale = outValue.getFloat();
 
                 NotifyingScrollView.OnScrollChangedListener onScrollChangedListener = new NotifyingScrollView
@@ -194,22 +208,24 @@ public class DexEntryActivity extends ActionBarActivity {
                         toolBarDrawableAlpha = (int) (ratio * 255);
                         toolBarTypeColorDrawable.setAlpha(toolBarDrawableAlpha);
 
-                        float dexEntryPictureNewScale = Math.max(dexEntryPicMinScale, ((1 - ratio / 2) * 1) );
+                        float dexEntryImageNewScale = Math.max(dexEntryPicMinScale, ((1 - ratio / 2) * 1));
 
-                        dexEntryPicture.setScaleX(dexEntryPictureNewScale);
-                        dexEntryPicture.setScaleY(dexEntryPictureNewScale);
+                        dexEntryImage.setScaleX(dexEntryImageNewScale);
+                        dexEntryImage.setScaleY(dexEntryImageNewScale);
 
-                        int dexEntryPictureNewBottomMargin = Math.max(dexEntryPictureMarginBottom,
-                                Math.min(dexEntryPictureMaxMarginBottom,
-                                        (int) ((ratio * 1.5) * dexEntryPictureMaxMarginBottom)));
-                        ((FrameLayout.LayoutParams) dexEntryPicture
-                                .getLayoutParams()).bottomMargin = dexEntryPictureNewBottomMargin;
-                        dexEntryPicture.requestLayout();
+                        int dexEntryImageNewBottomMargin = Math.max(dexEntryImageMarginBottom,
+                                                                    Math.min(dexEntryImageMaxMarginBottom,
+                                                                             (int) ((ratio * 1.5) *
+                                                                                    dexEntryImageMaxMarginBottom)));
+                        ((FrameLayout.LayoutParams) dexEntryImage
+                                .getLayoutParams()).bottomMargin = dexEntryImageNewBottomMargin;
+                        dexEntryImage.requestLayout();
 
                         int dexEntryNameNewTopPadding = Math.max(dexEntryNamePaddingTop,
-                                Math.min(dexEntryNameMaxPaddingTop, (int) ((ratio) * dexEntryNameMaxPaddingTop)));
+                                                                 Math.min(dexEntryNameMaxPaddingTop,
+                                                                          (int) ((ratio) * dexEntryNameMaxPaddingTop)));
                         dexEntryName.setPadding(dexEntryName.getPaddingLeft(), dexEntryNameNewTopPadding,
-                                dexEntryName.getPaddingRight(), dexEntryName.getPaddingBottom());
+                                                dexEntryName.getPaddingRight(), dexEntryName.getPaddingBottom());
 
                         if (!dexEntryName.getLocalVisibleRect(boundsRect)) {
                             toolBar.setTitle(name);
@@ -222,19 +238,20 @@ public class DexEntryActivity extends ActionBarActivity {
 
                 toolBar.setTitle(dexNumber);
 
-                //head.setBackgroundColor(getResources().getColor(
-                //        TypeUtil.getTypeColorRes(TypeUtil.Type.getTypeByValue(primaryType.getId())))); // Flat color
-
                 dexEntryHead.setBackgroundResource(
                         TypeUtil.getTypeBackgroundRes(TypeUtil.Type.getTypeByValue(primaryType.getId())));
 
                 try {
-                    Class res = R.drawable.class;
-                    Field field = res.getField("b" + dexNumber.substring(1, dexNumber.length()));
-                    int drawableId = field.getInt(null);
-                    dexEntryPicture.setImageDrawable(getResources().getDrawable(drawableId));
-                } catch (IllegalAccessException | NoSuchFieldException e) {
-                    dexEntryPicture.setImageDrawable(getResources().getDrawable(R.drawable.pokeball));
+                    // get input stream
+                    InputStream inputStream = getActivity().getAssets()
+                            .open("images/pokemon/art/" + dexNumber.substring(1, dexNumber.length()) + ".png");
+                    // load image as Drawable
+                    Drawable drawable = Drawable.createFromStream(inputStream, null);
+                    // set image to ImageView
+                    dexEntryImage.setImageDrawable(drawable);
+                }
+                catch (IOException e) {
+                    e.printStackTrace();
                 }
 
                 dexEntryPrimaryType.setType(TypeUtil.Type.getTypeByValue(primaryType.getId()));

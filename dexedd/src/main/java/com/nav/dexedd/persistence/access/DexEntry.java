@@ -16,8 +16,6 @@ import com.nav.dexedd.persistence.DexDatabase;
  */
 public class DexEntry extends Access {
 
-    private static final String TAG = DexEntry.class.getSimpleName();
-
     public static enum Version {
 
         XY(24); // Todo add all versions

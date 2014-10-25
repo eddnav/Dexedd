@@ -13,8 +13,6 @@ import android.database.sqlite.SQLiteDatabase;
  */
 public abstract class Access {
 
-    private static final String TAG = Access.class.getSimpleName();
-
     protected static SQLiteDatabase database;
 
     private Context context;

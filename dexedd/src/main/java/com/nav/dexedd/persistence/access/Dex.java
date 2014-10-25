@@ -21,8 +21,6 @@ import java.util.List;
  */
 public class Dex extends Access {
 
-    private static final String TAG = Dex.class.getSimpleName();
-
     public static enum DexType {
 
         NATIONAL_DEX(1); // Todo add all dex
