@@ -136,14 +136,23 @@
         <item name="android:shadowRadius">1</item>
     </style>
 
+    <style name="TextLabel">
+        <item name="android:paddingBottom">@dimen/text_label_padding_bottom</item>
+    </style>
+
     <style name="LargeHeader">
-        <item name="android:textSize">@dimen/large_header_text_size</item>
-        <item name="android:textColor">@color/supplementary</item>
+        <item name="android:textSize">@dimen/header_text_size_large</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="ExtraLargeHeader">
-        <item name="android:textSize">@dimen/extra_large_header_text_size</item>
+        <item name="android:textSize">@dimen/header_text_size_extra_large</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="InfoDialog">
+        <item name="android:padding">@dimen/info_dialog_padding</item>
+        <item name="android:background">@drawable/info_dialog_background</item>
     </style>
 
     <style name="TypeTagView">

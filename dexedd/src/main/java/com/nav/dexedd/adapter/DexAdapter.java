@@ -12,7 +12,7 @@ import com.nav.dexedd.model.Pokemon;
 import com.nav.dexedd.model.Type;
 import com.nav.dexedd.persistence.access.Dex;
 import com.nav.dexedd.ui.TypeTagView;
-import com.nav.dexedd.util.DexStringUtil;
+import com.nav.dexedd.util.PokemonStringUtil;
 import com.nav.dexedd.util.TypeUtil;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -22,7 +22,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import java.util.List;
 
 /**
- * Adapter for Dex information.
+ * Adapter for dex information.
  *
  * @author Eduardo Naveda
  * @since 0.0.1
@@ -73,9 +73,10 @@ public class DexAdapter extends ArrayAdapter<Pokemon> {
 
         Holder holder = (Holder) row.getTag();
         final Integer id = pokemon.getId();
+        final Integer speciesId = pokemon.getSpeciesId();
         final Type primaryType = pokemon.getPrimaryType();
         final Type secondaryType = pokemon.getSecondaryType();
-        final String dexNumber = DexStringUtil.getFormattedDexNumber(pokemon.getDexNumber());
+        final String dexNumber = PokemonStringUtil.getFormattedDexNumber(pokemon.getDexNumber());
         final String name = pokemon.getName();
         final Boolean catched = pokemon.getCatched();
 
@@ -114,11 +115,11 @@ public class DexAdapter extends ArrayAdapter<Pokemon> {
             @Override
             public void onClick(View view) {
                 if (pokemon.getCatched()) {
-                    Dex.setCatched(getContext().getApplicationContext(), id, false);
+                    Dex.setCatched(getContext().getApplicationContext(), speciesId, false);
                     pokemon.setCatched(false);
                     view.setBackgroundResource(R.drawable.ic_uncatched);
                 } else {
-                    Dex.setCatched(getContext().getApplicationContext(), id, true);
+                    Dex.setCatched(getContext().getApplicationContext(), speciesId, true);
                     pokemon.setCatched(true);
                     view.setBackgroundResource(R.drawable.ic_catched);
                 }

@@ -30,9 +30,13 @@ public class TypeUtil {
             return NONE;
         }
 
-        @Override
-        public String toString() {
-            return type.toString();
+        public static Type getTypeByName(String typeName) {
+            for (Type type : Type.values()) {
+                if (type.toString().equalsIgnoreCase(typeName)) {
+                    return type;
+                }
+            }
+            return NONE;
         }
 
     }

@@ -1,8 +1,25 @@
-// todo add loading activity so it can visually load the database
-// todo add drawables for pre21
-// todo make logo
+// todo: change version temporarily for dex entry, this will only affect the location and flavor text
+// todo: change version-group/generation (?) temporarily for moves of a pokemon screen
+// todo: change dexes temporarily in dex view but will only change the number, link will be the same for the pokemon species
+// todo: all previous change dexes and versions todos will have a default defined in preferences
+// todo: filtering in overflow menu
+// todo: global search in the toolbar
+// todo: moves of a pokemon species <-- think how to do this correctly
+// todo: list all moves
+// todo: move entry
+// todo: list all items
+// todo: item dialog
+// todo: list all abilities
+// todo: ability dialog
+// todo: list all locations
+// todo: location entry
+// todo: add alpha thumbnails on scroll on dex
+// todo fix style to loading activity so it can visually load the database
+// todo add drawables for pre21 <-- consider this for scrollbar and overscroll
+// todo fix logo
 // todo get image assets
 // todo polish current assets
 // todo publish it at marriland, bulbapedia and several sites
 // todo work this month hard enough to make it for the ORAS release
 // todo add TAGs to inner members
+// recheck all code

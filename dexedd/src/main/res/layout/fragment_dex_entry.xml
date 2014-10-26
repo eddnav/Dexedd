@@ -2,7 +2,6 @@
 
 <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/supplementary_dark">
@@ -30,148 +29,172 @@
     <com.nav.dexedd.ui.NotifyingScrollView
             android:id="@+id/dex_entry_scroller"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
         <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="220dp">
+                android:layout_height="0dp">
 
             <FrameLayout
-                    android:id="@+id/dex_entry_basic_panel"
+                    android:id="@+id/dex_entry_image_proxy_wrapper"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="220dp">
 
                 <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="90dp"
-                        android:layout_marginRight="-100dp"
-                        android:layout_marginEnd="-100dp"
-                        android:layout_marginLeft="-100dp"
-                        android:layout_marginStart="-100dp"
-                        android:background="@drawable/dex_entry_basic_panel_curved_edge" />
+                        android:id="@+id/dex_entry_image_proxy"
+                        android:layout_width="180dp"
+                        android:layout_height="180dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_gravity="center">
 
-                <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:paddingRight="@dimen/activity_horizontal_margin"
-                        android:paddingEnd="@dimen/activity_horizontal_margin"
-                        android:paddingBottom="5dp"
-                        android:paddingLeft="@dimen/activity_horizontal_margin"
-                        android:paddingStart="@dimen/activity_horizontal_margin"
-                        android:background="@color/supplementary_dark">
-
-                    <TextView
-                            android:id="@+id/dex_entry_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingTop="@dimen/dex_entry_name_top_padding"
-                            android:gravity="center"
-                            android:textStyle="bold"
-                            style="@style/ExtraLargeHeader">
-                    </TextView>
-
-                    <TextView
-                            android:id="@+id/dex_entry_genus"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/dex_entry_name"
-                            android:layout_marginTop="-4dp"
-                            android:gravity="center"
-                            android:textColor="@color/supplementary" />
-
-                    <TextView
-                            android:id="@+id/dex_entry_flavor_text"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/dex_entry_genus"
-                            android:paddingTop="15dp"
-                            android:paddingRight="30dp"
-                            android:paddingEnd="30dp"
-                            android:paddingBottom="20dp"
-                            android:paddingLeft="20dp"
-                            android:paddingStart="20dp"
-                            android:gravity="center"
-                            style="@style/TextStandard" />
-
-                </RelativeLayout>
+                </FrameLayout>
 
             </FrameLayout>
 
-            <LinearLayout
-                    android:id="@+id/dex_entry_body"
+            <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@id/dex_entry_basic_panel"
-                    android:padding="@dimen/activity_uniform_margin"
-                    android:divider="@drawable/dex_entry_body_divider"
-                    android:showDividers="middle"
-                    android:orientation="vertical"
-                    android:background="@color/supplementary_dark">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/dex_entry_image_proxy_wrapper">
 
-                <RelativeLayout
+                <FrameLayout
+                        android:id="@+id/dex_entry_basic_panel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                    <TextView
-                            android:id="@+id/type_label"
+                    <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="90dp"
+                            android:layout_marginRight="-100dp"
+                            android:layout_marginEnd="-100dp"
+                            android:layout_marginLeft="-100dp"
+                            android:layout_marginStart="-100dp"
+                            android:background="@drawable/dex_entry_basic_panel_curved_edge" />
+
+                    <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:paddingBottom="10dp"
-                            android:text="@string/title_type_caps"
-                            android:textAppearance="@style/LargeHeader">
-                    </TextView>
+                            android:layout_marginTop="25dp"
+                            android:paddingRight="@dimen/activity_horizontal_margin"
+                            android:paddingEnd="@dimen/activity_horizontal_margin"
+                            android:paddingBottom="5dp"
+                            android:paddingLeft="@dimen/activity_horizontal_margin"
+                            android:paddingStart="@dimen/activity_horizontal_margin"
+                            android:background="@color/supplementary_dark">
 
+                        <TextView
+                                android:id="@+id/dex_entry_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="@dimen/dex_entry_name_top_padding"
+                                android:gravity="center"
+                                android:textStyle="bold"
+                                style="@style/ExtraLargeHeader">
+                        </TextView>
 
-                    <LinearLayout
-                            android:id="@+id/type_content"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_below="@id/type_label"
-                            android:orientation="horizontal">
+                        <TextView
+                                android:id="@+id/dex_entry_genus"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/dex_entry_name"
+                                android:layout_marginTop="-4dp"
+                                android:gravity="center"
+                                android:textColor="@color/supplementary" />
 
-                        <com.nav.dexedd.ui.TypeTagView
-                                android:id="@+id/primary_type"
-                                android:layout_marginRight="5dp"
-                                android:layout_marginEnd="5dp"
-                                style="@style/TypeTagView" />
+                        <TextView
+                                android:id="@+id/dex_entry_flavor_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/dex_entry_genus"
+                                android:paddingTop="15dp"
+                                android:paddingRight="30dp"
+                                android:paddingEnd="30dp"
+                                android:paddingBottom="20dp"
+                                android:paddingLeft="20dp"
+                                android:paddingStart="20dp"
+                                android:gravity="center"
+                                style="@style/TextStandard" />
 
-                        <com.nav.dexedd.ui.TypeTagView
-                                android:id="@+id/secondary_type"
-                                style="@style/TypeTagView" />
+                    </RelativeLayout>
 
-                    </LinearLayout>
+                </FrameLayout>
 
-                </RelativeLayout>
-
-                <RelativeLayout
+                <LinearLayout
+                        android:id="@+id/dex_entry_body"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="match_parent"
+                        android:layout_below="@id/dex_entry_basic_panel"
+                        android:padding="@dimen/activity_uniform_margin"
+                        android:divider="@drawable/dex_entry_body_divider"
+                        android:showDividers="middle"
+                        android:orientation="vertical"
+                        android:background="@color/supplementary_dark">
 
-                    <TextView
-                            android:id="@+id/abilities_label"
+                    <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="10dp"
-                            android:text="@string/title_abilities_caps"
-                            android:textAppearance="@style/LargeHeader">
-                    </TextView>
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:id="@+id/dex_type_label"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingBottom="10dp"
+                                android:text="@string/title_type_caps"
+                                android:textAppearance="@style/LargeHeader"
+                                style="@style/TextLabel">
+
+                        </TextView>
 
 
-                    <LinearLayout
-                            android:id="@+id/abilities_content"
+                        <LinearLayout
+                                android:id="@+id/dex_type_content"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_below="@id/dex_type_label"
+                                android:orientation="horizontal">
+
+                            <com.nav.dexedd.ui.TypeTagView
+                                    android:id="@+id/dex_primary_type"
+                                    android:layout_marginRight="5dp"
+                                    android:layout_marginEnd="5dp"
+                                    style="@style/TypeTagView" />
+
+                            <com.nav.dexedd.ui.TypeTagView
+                                    android:id="@+id/dex_secondary_type"
+                                    style="@style/TypeTagView" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_below="@id/abilities_label"
-                            android:orientation="vertical">
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:id="@+id/dex_abilities_label"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/title_abilities_caps"
+                                android:textAppearance="@style/LargeHeader"
+                                style="@style/TextLabel">
+                        </TextView>
 
 
-                    </LinearLayout>
+                        <LinearLayout
+                                android:id="@+id/dex_abilities_content"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_below="@id/dex_abilities_label"
+                                android:orientation="vertical">
 
-                </RelativeLayout>
+                        </LinearLayout>
 
-            </LinearLayout>
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </RelativeLayout>
 
         </RelativeLayout>
 

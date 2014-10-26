@@ -45,44 +45,71 @@ public class Dex extends Access {
         this.dexType = dexType;
     }
 
+    /**
+     * Creates a dex instance using the default dex type.
+     *
+     * @param context The application context.
+     *
+     * @return dex instance.
+     */
     public static Dex create(Context context) {
         database = DexDatabase.getInstance(context).getReadableDatabase();
         DexType dexType = DexType.NATIONAL_DEX; // Todo from preferences
         return new Dex(context, dexType);
     }
 
+    /**
+     * Creates a dex instance using a specific dex type.
+     *
+     * @param context The application context.
+     * @param dexType The dex type.
+     *
+     * @return dex instance.
+     */
     public static Dex create(Context context, DexType dexType) {
         database = DexDatabase.getInstance(context).getReadableDatabase();
         return new Dex(context, dexType);
     }
 
+    /**
+     * Fetches all Pokémon within the dex instance.
+     *
+     * @return a list of all the {@link com.nav.dexedd.model.Pokemon} within the dex.
+     */
     public List<Pokemon> listPokemon() {
-        String[] argsPokemon = {dexType.toString()};
-        String queryPokemon = getContext().getString(R.string.get_dex);
-        Cursor cursorPokemon = database.rawQuery(queryPokemon, argsPokemon);
+        String[] args = {dexType.toString()};
+        String query = getContext().getString(R.string.get_dex);
+        Cursor cursor = database.rawQuery(query, args);
         List<Pokemon> pokemon = new ArrayList<>();
-        while (cursorPokemon.moveToNext()) {
+        while (cursor.moveToNext()) {
             Pokemon pokemonItem = new Pokemon();
-            pokemonItem.setId(cursorPokemon.getInt(0));
-            pokemonItem.setDexNumber(cursorPokemon.getInt(1));
-            pokemonItem.setName(cursorPokemon.getString(2));
+            pokemonItem.setId(cursor.getInt(0));
+            pokemonItem.setSpeciesId(cursor.getInt(1));
+            pokemonItem.setDexNumber(cursor.getInt(2));
+            pokemonItem.setName(cursor.getString(3));
             Type primaryType = new Type();
-            primaryType.setId(cursorPokemon.getInt(3));
+            primaryType.setId(cursor.getInt(4));
             pokemonItem.setPrimaryType(primaryType);
-            Integer secondaryTypeId = cursorPokemon.getInt(4);
-            if (secondaryTypeId != null) {
+            Integer secondaryTypeId = cursor.getInt(5);
+            if (secondaryTypeId != 0) {
                 Type secondaryType = new Type();
                 secondaryType.setId(secondaryTypeId);
                 pokemonItem.setSecondaryType(secondaryType);
             }
-
-            pokemonItem.setCatched(cursorPokemon.getInt(5) == 1);
+            pokemonItem.setCatched(cursor.getInt(6) == 1);
             pokemon.add(pokemonItem);
         }
-        cursorPokemon.close();
+        cursor.close();
         return pokemon;
     }
 
+    /**
+     * Marks a Pokémon species as catched.
+     *
+     * @param context The application context.
+     * @param id      The pokemon species id.
+     * @param catched Mark as catched or not.
+     */
     public static void setCatched(Context context, Integer id, boolean catched) {
         SQLiteDatabase database = DexDatabase.getInstance(context).getReadableDatabase();
         String where = "id=?";

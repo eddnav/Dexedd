@@ -1,5 +1,7 @@
 package com.nav.dexedd.model;
 
+import java.util.List;
+
 /**
  * Pokémon model.
  *
@@ -9,12 +11,14 @@ package com.nav.dexedd.model;
 public class Pokemon {
 
     private Integer id;
+    private Integer speciesId;
     private Integer dexNumber;
     private String name;
     private String genus;
     private String flavorText;
     private Type primaryType;
     private Type secondaryType;
+    private List<Ability> abilities;
     private Boolean catched;
 
     public Integer getId() {
@@ -23,6 +27,14 @@ public class Pokemon {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getSpeciesId() {
+        return speciesId;
+    }
+
+    public void setSpeciesId(Integer speciesId) {
+        this.speciesId = speciesId;
     }
 
     public Integer getDexNumber() {
@@ -71,6 +83,14 @@ public class Pokemon {
 
     public void setSecondaryType(Type secondaryType) {
         this.secondaryType = secondaryType;
+    }
+
+    public List<Ability> getAbilities() {
+        return abilities;
+    }
+
+    public void setAbilities(List<Ability> abilities) {
+        this.abilities = abilities;
     }
 
     public Boolean getCatched() {

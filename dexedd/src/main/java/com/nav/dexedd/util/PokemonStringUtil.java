@@ -1,12 +1,12 @@
 package com.nav.dexedd.util;
 
 /**
- * General Dex related String methods.
+ * General Pokémon related String methods.
  *
  * @author Eduardo Naveda
  * @since 0.0.1
  */
-public class DexStringUtil {
+public class PokemonStringUtil {
 
     public static String getFormattedDexNumber(Integer number) {
         if (number < 10) {
@@ -18,5 +18,10 @@ public class DexStringUtil {
                 return "#" + number;
             }
         }
+    }
+
+    public static String cleanDexText(String text) {
+        String cleanText = text.replace("\n", " ");
+        return cleanText;
     }
 }

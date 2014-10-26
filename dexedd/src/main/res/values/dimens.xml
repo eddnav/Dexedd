@@ -9,8 +9,13 @@
     <dimen name="navigation_drawer_width">240dp</dimen>
 
     <!-- Component -->
-    <dimen name="large_header_text_size">18sp</dimen>
-    <dimen name="extra_large_header_text_size">30sp</dimen>
+
+    <dimen name="border_width_small">3dp</dimen>
+    <dimen name="border_width_standard">4dp</dimen>
+    <dimen name="text_label_padding_bottom">5dp</dimen>
+    <dimen name="header_text_size_large">18sp</dimen>
+    <dimen name="header_text_size_extra_large">30sp</dimen>
+    <dimen name="info_dialog_padding">15dp</dimen>
     <dimen name="dex_cell_panel_element_padding">16dp</dimen>
     <dimen name="dex_cell_panel_element_half_padding">8dp</dimen>
     <dimen name="dex_cell_width">150dp</dimen>

@@ -153,7 +153,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
     }
 
     /**
-     * Main Dex fragment.
+     * Main dex fragment.
      */
     public static class DexFragment extends Fragment {
 

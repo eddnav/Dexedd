@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <!-- App -->
@@ -46,7 +45,7 @@
     <string name="unknown">\?\?\?</string>
 
     <!-- Content description -->
-    <string name="description_pokemon_image">A pokémon image</string>
-    <string name="description_mark_as_catched">Mark this pokémon as catched</string>
+    <string name="description_pokemon_image">This is a Pókemon image</string>
+    <string name="description_mark_as_catched">Mark this Pokémon as catched</string>
 
 </resources>
