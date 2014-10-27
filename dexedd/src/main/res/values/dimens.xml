@@ -3,9 +3,9 @@
 <resources>
 
     <!-- Base -->
-    <dimen name="activity_uniform_margin">16dp</dimen>
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_margin_uniform">16dp</dimen>
+    <dimen name="activity_margin_horizontal">16dp</dimen>
+    <dimen name="activity_margin_vertical">16dp</dimen>
     <dimen name="navigation_drawer_width">240dp</dimen>
 
     <!-- Component -->
@@ -18,7 +18,8 @@
     <dimen name="text_label_padding_bottom">5dp</dimen>
     <dimen name="header_text_size_large">18sp</dimen>
     <dimen name="header_text_size_extra_large">30sp</dimen>
-    <dimen name="info_dialog_padding">15dp</dimen>
+    <dimen name="info_dialog_padding_horizontal">12dp</dimen>
+    <dimen name="info_dialog_padding_vertical">15dp</dimen>
     <dimen name="dex_cell_panel_element_padding">16dp</dimen>
     <dimen name="dex_cell_panel_element_half_padding">8dp</dimen>
     <dimen name="dex_cell_width">150dp</dimen>

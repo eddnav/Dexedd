@@ -151,7 +151,6 @@
     </style>
 
     <style name="InfoDialog">
-        <item name="android:padding">@dimen/info_dialog_padding</item>
         <item name="android:background">@drawable/info_dialog_background</item>
     </style>
 

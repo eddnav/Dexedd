@@ -31,7 +31,6 @@ public class PokemonTextUtil {
      * Formats dex numbers in a visually familiar manner.
      *
      * @param number The dex number to be formatted.
-     *
      * @return The formatted dex number.
      */
     public static String getFormattedDexNumber(Integer number) {
@@ -47,7 +46,7 @@ public class PokemonTextUtil {
     }
 
     public static String cleanDexText(String text) {
-        return text.replace("\n", " ");
+        return text.replace("\n\n", "<->").replace("\n", " ").replace("<->", "\n\n"); // todo optimize!
     }
 
     /**
@@ -56,7 +55,6 @@ public class PokemonTextUtil {
      *
      * @param context           Application context.
      * @param unprocessedString String to be processed.
-     *
      * @return Builder with special formatting ready to be set to a TextView.
      */
     public static SpannableStringBuilder processDexText(Context context, String unprocessedString) {
@@ -79,9 +77,8 @@ public class PokemonTextUtil {
                         processableExtract.substring(0, 1).toUpperCase() + processableExtract.substring(1);
                 builder.append(properProcessableExtract);
                 final StyleSpan bold = new StyleSpan(android.graphics.Typeface.BOLD);
-                final ForegroundColorSpan color =
-                        new ForegroundColorSpan(context.getResources().getColor(TypeUtil.getTypeColorRes(
-                                TypeUtil.Type.getTypeByName(processableExtract))));
+                final ForegroundColorSpan color = new ForegroundColorSpan(context.getResources()
+                        .getColor(TypeUtil.getTypeColorRes(TypeUtil.Type.getTypeByName(processableExtract))));
                 int start = builder.length() - matcher.group(renderGroup).length();
                 int end = builder.length();
                 builder.setSpan(bold, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

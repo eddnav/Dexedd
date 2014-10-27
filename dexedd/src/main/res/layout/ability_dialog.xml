@@ -4,19 +4,31 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:orientation="vertical"
+              android:paddingTop="@dimen/info_dialog_padding_vertical"
               style="@style/InfoDialog">
 
     <TextView
             android:id="@+id/ability_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/info_dialog_padding_horizontal"
+            android:paddingStart="@dimen/info_dialog_padding_horizontal"
+            android:paddingRight="@dimen/info_dialog_padding_horizontal"
+            android:paddingEnd="@dimen/info_dialog_padding_horizontal"
             android:textStyle="bold"
             android:textAppearance="@style/LargeHeader"
             style="@style/TextLabel" />
 
     <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:paddingRight="@dimen/info_dialog_padding_horizontal"
+            android:paddingEnd="@dimen/info_dialog_padding_horizontal"
+            android:paddingBottom="@dimen/info_dialog_padding_vertical"
+            android:paddingLeft="@dimen/info_dialog_padding_horizontal"
+            android:paddingStart="@dimen/info_dialog_padding_horizontal"
+            android:overScrollMode="never">
 
         <TextView
                 android:id="@+id/ability_effect"

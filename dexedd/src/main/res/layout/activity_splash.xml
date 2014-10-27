@@ -2,7 +2,7 @@
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:padding="@dimen/activity_uniform_margin"
+                android:padding="@dimen/activity_margin_uniform"
                 android:background="@color/primary"
                 tools:context="com.nav.dexedd.app.SplashActivity">
 

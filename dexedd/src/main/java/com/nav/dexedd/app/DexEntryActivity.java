@@ -274,12 +274,12 @@ public class DexEntryActivity extends ActionBarActivity {
                 dexEntryFlavorText.setText(flavorText);
 
                 try {
-                    // get input stream
+                    // Get input stream
                     InputStream inputStream = getActivity().getAssets()
                             .open("images/pokemon/art/" + dexNumber.substring(1, dexNumber.length()) + ".png");
-                    // load image as Drawable
+                    // Load image as Drawable
                     Drawable drawable = Drawable.createFromStream(inputStream, null);
-                    // set image to ImageView
+                    // Set image to ImageView
                     dexEntryImage.setImageDrawable(drawable);
                 }
                 catch (IOException e) {
@@ -327,7 +327,7 @@ public class DexEntryActivity extends ActionBarActivity {
                             }
                             abilityEffect.setText(PokemonTextUtil.processDexText(getActivity(),
                                                                                  ability.getEffect()));
-                            dialog.show();
+                            dialog.show(); // todo when this dialog gets moved to its rightful place, destroy the dialog on onDestroy
                         }
                     });
                     TextView abilityName = (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_name);

@@ -73,11 +73,11 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="25dp"
-                            android:paddingRight="@dimen/activity_horizontal_margin"
-                            android:paddingEnd="@dimen/activity_horizontal_margin"
+                            android:paddingRight="@dimen/activity_margin_horizontal"
+                            android:paddingEnd="@dimen/activity_margin_horizontal"
                             android:paddingBottom="5dp"
-                            android:paddingLeft="@dimen/activity_horizontal_margin"
-                            android:paddingStart="@dimen/activity_horizontal_margin"
+                            android:paddingLeft="@dimen/activity_margin_horizontal"
+                            android:paddingStart="@dimen/activity_margin_horizontal"
                             android:background="@color/supplementary_dark">
 
                         <TextView
@@ -122,7 +122,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_below="@id/dex_entry_basic_panel"
-                        android:padding="@dimen/activity_uniform_margin"
+                        android:padding="@dimen/activity_margin_uniform"
                         android:divider="@drawable/dex_entry_body_divider"
                         android:showDividers="middle"
                         android:orientation="vertical"
