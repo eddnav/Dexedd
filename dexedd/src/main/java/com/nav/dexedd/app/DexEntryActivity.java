@@ -21,7 +21,7 @@ import com.nav.dexedd.ui.TypeTagView;
 import com.nav.dexedd.model.Pokemon;
 import com.nav.dexedd.model.Type;
 import com.nav.dexedd.persistence.access.DexEntry;
-import com.nav.dexedd.util.PokemonStringUtil;
+import com.nav.dexedd.util.PokemonTextUtil;
 import com.nav.dexedd.util.TypeUtil;
 
 import java.io.IOException;
@@ -50,7 +50,9 @@ public class DexEntryActivity extends ActionBarActivity {
             dexEntryType = TypeUtil.Type.getTypeByValue(extras.getInt(DEX_ENTRY_TYPE_ID));
             pokemonId = extras.getInt(POKEMON_ID);
         }
+        // Set the proper theme for this Pokémon's type
         setTheme(TypeUtil.getTypeStyleRes(dexEntryType));
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dex_entry);
 
@@ -117,8 +119,6 @@ public class DexEntryActivity extends ActionBarActivity {
         @Override
         public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-            //todo explain this long process
-
             final ActionBar toolBar = ((ActionBarActivity) getActivity()).getSupportActionBar();
 
             View rootView = inflater.inflate(R.layout.fragment_dex_entry, container, false);
@@ -134,6 +134,7 @@ public class DexEntryActivity extends ActionBarActivity {
             dexEntrySecondaryType = (TypeTagView) rootView.findViewById(R.id.dex_secondary_type);
             dexEntryAbilitiesContent = (LinearLayout) rootView.findViewById(R.id.dex_abilities_content);
 
+            // Always set the scrolling to the top when creating a new view for this fragment
             dexEntryScroller.post(new Runnable() {
                 public void run() {
                     dexEntryScroller.scrollTo(0, 0);
@@ -146,7 +147,7 @@ public class DexEntryActivity extends ActionBarActivity {
                                                           getArguments().getInt(DexEntryActivity.POKEMON_ID));
                 Pokemon pokemon = dexEntry.getPokemon();
 
-                final String dexNumber = PokemonStringUtil.getFormattedDexNumber(pokemon.getDexNumber());
+                final String dexNumber = PokemonTextUtil.getFormattedDexNumber(pokemon.getDexNumber());
                 final String name = pokemon.getName();
                 final String genus = pokemon.getGenus();
                 final String flavorText = pokemon.getFlavorText();
@@ -163,6 +164,8 @@ public class DexEntryActivity extends ActionBarActivity {
 
                 toolBar.setBackgroundDrawable(toolBarTypeColorDrawable);
 
+                // Drawable callback for the toolbar drawable so it can register itself to the
+                // toolbar on each invalidation, this is only necessary for API level =< 17
                 Drawable.Callback drawableCallback = new Drawable.Callback() {
                     @Override
                     public void invalidateDrawable(Drawable drawable) {
@@ -178,6 +181,7 @@ public class DexEntryActivity extends ActionBarActivity {
                     }
                 };
 
+                // Registering the callback
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
                     toolBarTypeColorDrawable.setCallback(drawableCallback);
                 }
@@ -185,18 +189,24 @@ public class DexEntryActivity extends ActionBarActivity {
                 FrameLayout.LayoutParams dexEntryImageLayoutParams = (FrameLayout.LayoutParams) dexEntryImage
                         .getLayoutParams();
 
+                // Normal and max image bottom margins for the main dex entry image these are used to create
+                // some sort of parallax scrolling
                 final int dexEntryImageMarginBottom = dexEntryImageLayoutParams.bottomMargin;
                 final int dexEntryImageMaxMarginBottom = getResources()
                         .getDimensionPixelSize(R.dimen.dex_entry_image_max_bottom_margin);
 
+                // These top padding values are used for the same thing as the margins
                 final int dexEntryNamePaddingTop = dexEntryName.getPaddingTop();
                 final int dexEntryNameMaxPaddingTop = getResources()
                         .getDimensionPixelSize(R.dimen.dex_entry_name_max_top_padding);
 
+                // Same story with these normal and max scale values
                 TypedValue outValue = new TypedValue();
                 getResources().getValue(R.dimen.dex_entry_image_min_scale, outValue, true);
                 final float dexEntryPicMinScale = outValue.getFloat();
 
+                // An animation is created using the a variant of ScrollView that notifies the changes in its
+                // internal scrolling
                 NotifyingScrollView.OnScrollChangedListener onScrollChangedListener = new NotifyingScrollView
                         .OnScrollChangedListener() {
 
@@ -206,36 +216,43 @@ public class DexEntryActivity extends ActionBarActivity {
 
                     @Override
                     public void onScrollChanged(ScrollView scrollView, int l, int t, int oldl, int oldt) {
+
+                        // Sets the clamping height
                         if (!isLimitHeightSet) {
                             limitHeight = dexEntryHead.getHeight() - toolBar.getHeight();
                             isLimitHeightSet = true;
                         }
 
+                        // Get the ScrollView touchable bounds on the screen
                         scrollView.getHitRect(boundsRect);
 
+                        // Compute the a ratio relative to the limit height
                         float ratio = (float) Math.min(Math.max(t, 0), limitHeight) / limitHeight;
                         toolBarDrawableAlpha = (int) (ratio * 255);
                         toolBarTypeColorDrawable.setAlpha(toolBarDrawableAlpha);
 
+                        // Calculate new dex image scale relative to the ratio
                         float dexEntryImageNewScale = Math.max(dexEntryPicMinScale, ((1 - ratio / 2) * 1));
-
                         dexEntryImage.setScaleX(dexEntryImageNewScale);
                         dexEntryImage.setScaleY(dexEntryImageNewScale);
 
+                        // Calculate new image bottom margin relative to the ratio
                         int dexEntryImageNewBottomMargin = Math.max(dexEntryImageMarginBottom,
                                                                     Math.min(dexEntryImageMaxMarginBottom,
                                                                              (int) ((ratio * 1.5) *
                                                                                     dexEntryImageMaxMarginBottom)));
                         ((FrameLayout.LayoutParams) dexEntryImage
                                 .getLayoutParams()).bottomMargin = dexEntryImageNewBottomMargin;
-                        dexEntryImage.requestLayout();
+                        dexEntryImage.requestLayout(); // Request the layout with new parameters
 
+                        // Same thing as with the margin
                         int dexEntryNameNewTopPadding = Math.max(dexEntryNamePaddingTop,
                                                                  Math.min(dexEntryNameMaxPaddingTop,
                                                                           (int) ((ratio) * dexEntryNameMaxPaddingTop)));
                         dexEntryName.setPadding(dexEntryName.getPaddingLeft(), dexEntryNameNewTopPadding,
                                                 dexEntryName.getPaddingRight(), dexEntryName.getPaddingBottom());
 
+                        // Determine if the Pokémon name is on the screen so it's shown on the toolbar instead of the number
                         if (!dexEntryName.getLocalVisibleRect(boundsRect)) {
                             toolBar.setTitle(name);
                         } else {
@@ -243,13 +260,14 @@ public class DexEntryActivity extends ActionBarActivity {
                         }
                     }
                 };
+
+                // Set that overly complicated listener from above
                 dexEntryScroller.setOnScrollChangedListener(onScrollChangedListener);
 
                 toolBar.setTitle(dexNumber);
 
                 dexEntryHead.setBackgroundResource(
                         TypeUtil.getTypeBackgroundRes(TypeUtil.Type.getTypeByValue(primaryType.getId())));
-
 
                 dexEntryName.setText(name);
                 dexEntryGenus.setText(genus + " " + getResources().getString(R.string.pokemon));
@@ -268,6 +286,7 @@ public class DexEntryActivity extends ActionBarActivity {
                     e.printStackTrace();
                 }
 
+                // todo change images among the available ones for the species
                 dexEntryImageProxy.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -283,6 +302,7 @@ public class DexEntryActivity extends ActionBarActivity {
                     dexEntrySecondaryType.setType(TypeUtil.Type.NONE);
                 }
 
+                // Process and display the abilities for the dex entry Pokémon
                 for (final Ability ability : abilities) {
                     View dexEntryAbilityRowView =
                             inflater.inflate(R.layout.dex_entry_ability_row, dexEntryAbilitiesContent, false);
@@ -302,7 +322,11 @@ public class DexEntryActivity extends ActionBarActivity {
                             TextView abilityName = (TextView) abilityDialogView.findViewById(R.id.ability_name);
                             TextView abilityEffect = (TextView) abilityDialogView.findViewById(R.id.ability_effect);
                             abilityName.setText(ability.getName());
-                            abilityEffect.setText(ability.getEffect());
+                            if (ability.isHidden()) {
+                                abilityName.append(" (" + getString(R.string.ability_hidden) + ")");
+                            }
+                            abilityEffect.setText(PokemonTextUtil.processDexText(getActivity(),
+                                                                                 ability.getEffect()));
                             dialog.show();
                         }
                     });
@@ -310,323 +334,12 @@ public class DexEntryActivity extends ActionBarActivity {
                     TextView abilityFlavorText =
                             (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_flavor_text);
                     abilityName.setText(ability.getName());
+                    if (ability.isHidden()) {
+                        abilityName.append(" (" + getString(R.string.ability_hidden_short) + ")");
+                    }
                     abilityFlavorText.setText(ability.getFlavorText());
                     dexEntryAbilitiesContent.addView(dexEntryAbilityRowView);
                 }
-
-                for (final Ability ability : abilities) {
-                    View dexEntryAbilityRowView =
-                            inflater.inflate(R.layout.dex_entry_ability_row, dexEntryAbilitiesContent, false);
-                    dexEntryAbilityRowView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            View abilityDialogView = inflater.inflate(R.layout.ability_dialog, null);
-                            AlertDialog.Builder builder =
-                                    new AlertDialog.Builder(getActivity()).setView(abilityDialogView);
-                            final AlertDialog dialog = builder.create();
-                            abilityDialogView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            TextView abilityName = (TextView) abilityDialogView.findViewById(R.id.ability_name);
-                            TextView abilityEffect = (TextView) abilityDialogView.findViewById(R.id.ability_effect);
-                            abilityName.setText(ability.getName());
-                            abilityEffect.setText(ability.getEffect());
-                            dialog.show();
-                        }
-                    });
-                    TextView abilityName = (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_name);
-                    TextView abilityFlavorText =
-                            (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_flavor_text);
-                    abilityName.setText(ability.getName());
-                    abilityFlavorText.setText(ability.getFlavorText());
-                    dexEntryAbilitiesContent.addView(dexEntryAbilityRowView);
-                }
-
-
-                for (final Ability ability : abilities) {
-                    View dexEntryAbilityRowView =
-                            inflater.inflate(R.layout.dex_entry_ability_row, dexEntryAbilitiesContent, false);
-                    dexEntryAbilityRowView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            View abilityDialogView = inflater.inflate(R.layout.ability_dialog, null);
-                            AlertDialog.Builder builder =
-                                    new AlertDialog.Builder(getActivity()).setView(abilityDialogView);
-                            final AlertDialog dialog = builder.create();
-                            abilityDialogView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            TextView abilityName = (TextView) abilityDialogView.findViewById(R.id.ability_name);
-                            TextView abilityEffect = (TextView) abilityDialogView.findViewById(R.id.ability_effect);
-                            abilityName.setText(ability.getName());
-                            abilityEffect.setText(ability.getEffect());
-                            dialog.show();
-                        }
-                    });
-                    TextView abilityName = (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_name);
-                    TextView abilityFlavorText =
-                            (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_flavor_text);
-                    abilityName.setText(ability.getName());
-                    abilityFlavorText.setText(ability.getFlavorText());
-                    dexEntryAbilitiesContent.addView(dexEntryAbilityRowView);
-                }
-
-
-                for (final Ability ability : abilities) {
-                    View dexEntryAbilityRowView =
-                            inflater.inflate(R.layout.dex_entry_ability_row, dexEntryAbilitiesContent, false);
-                    dexEntryAbilityRowView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            View abilityDialogView = inflater.inflate(R.layout.ability_dialog, null);
-                            AlertDialog.Builder builder =
-                                    new AlertDialog.Builder(getActivity()).setView(abilityDialogView);
-                            final AlertDialog dialog = builder.create();
-                            abilityDialogView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            TextView abilityName = (TextView) abilityDialogView.findViewById(R.id.ability_name);
-                            TextView abilityEffect = (TextView) abilityDialogView.findViewById(R.id.ability_effect);
-                            abilityName.setText(ability.getName());
-                            abilityEffect.setText(ability.getEffect());
-                            dialog.show();
-                        }
-                    });
-                    TextView abilityName = (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_name);
-                    TextView abilityFlavorText =
-                            (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_flavor_text);
-                    abilityName.setText(ability.getName());
-                    abilityFlavorText.setText(ability.getFlavorText());
-                    dexEntryAbilitiesContent.addView(dexEntryAbilityRowView);
-                }
-
-                for (final Ability ability : abilities) {
-                    View dexEntryAbilityRowView =
-                            inflater.inflate(R.layout.dex_entry_ability_row, dexEntryAbilitiesContent, false);
-                    dexEntryAbilityRowView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            View abilityDialogView = inflater.inflate(R.layout.ability_dialog, null);
-                            AlertDialog.Builder builder =
-                                    new AlertDialog.Builder(getActivity()).setView(abilityDialogView);
-                            final AlertDialog dialog = builder.create();
-                            abilityDialogView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            TextView abilityName = (TextView) abilityDialogView.findViewById(R.id.ability_name);
-                            TextView abilityEffect = (TextView) abilityDialogView.findViewById(R.id.ability_effect);
-                            abilityName.setText(ability.getName());
-                            abilityEffect.setText(ability.getEffect());
-                            dialog.show();
-                        }
-                    });
-                    TextView abilityName = (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_name);
-                    TextView abilityFlavorText =
-                            (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_flavor_text);
-                    abilityName.setText(ability.getName());
-                    abilityFlavorText.setText(ability.getFlavorText());
-                    dexEntryAbilitiesContent.addView(dexEntryAbilityRowView);
-                }
-
-
-                for (final Ability ability : abilities) {
-                    View dexEntryAbilityRowView =
-                            inflater.inflate(R.layout.dex_entry_ability_row, dexEntryAbilitiesContent, false);
-                    dexEntryAbilityRowView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            View abilityDialogView = inflater.inflate(R.layout.ability_dialog, null);
-                            AlertDialog.Builder builder =
-                                    new AlertDialog.Builder(getActivity()).setView(abilityDialogView);
-                            final AlertDialog dialog = builder.create();
-                            abilityDialogView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            TextView abilityName = (TextView) abilityDialogView.findViewById(R.id.ability_name);
-                            TextView abilityEffect = (TextView) abilityDialogView.findViewById(R.id.ability_effect);
-                            abilityName.setText(ability.getName());
-                            abilityEffect.setText(ability.getEffect());
-                            dialog.show();
-                        }
-                    });
-                    TextView abilityName = (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_name);
-                    TextView abilityFlavorText =
-                            (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_flavor_text);
-                    abilityName.setText(ability.getName());
-                    abilityFlavorText.setText(ability.getFlavorText());
-                    dexEntryAbilitiesContent.addView(dexEntryAbilityRowView);
-                }
-
-                for (final Ability ability : abilities) {
-                    View dexEntryAbilityRowView =
-                            inflater.inflate(R.layout.dex_entry_ability_row, dexEntryAbilitiesContent, false);
-                    dexEntryAbilityRowView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            View abilityDialogView = inflater.inflate(R.layout.ability_dialog, null);
-                            AlertDialog.Builder builder =
-                                    new AlertDialog.Builder(getActivity()).setView(abilityDialogView);
-                            final AlertDialog dialog = builder.create();
-                            abilityDialogView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            TextView abilityName = (TextView) abilityDialogView.findViewById(R.id.ability_name);
-                            TextView abilityEffect = (TextView) abilityDialogView.findViewById(R.id.ability_effect);
-                            abilityName.setText(ability.getName());
-                            abilityEffect.setText(ability.getEffect());
-                            dialog.show();
-                        }
-                    });
-                    TextView abilityName = (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_name);
-                    TextView abilityFlavorText =
-                            (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_flavor_text);
-                    abilityName.setText(ability.getName());
-                    abilityFlavorText.setText(ability.getFlavorText());
-                    dexEntryAbilitiesContent.addView(dexEntryAbilityRowView);
-                }
-
-                for (final Ability ability : abilities) {
-                    View dexEntryAbilityRowView =
-                            inflater.inflate(R.layout.dex_entry_ability_row, dexEntryAbilitiesContent, false);
-                    dexEntryAbilityRowView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            View abilityDialogView = inflater.inflate(R.layout.ability_dialog, null);
-                            AlertDialog.Builder builder =
-                                    new AlertDialog.Builder(getActivity()).setView(abilityDialogView);
-                            final AlertDialog dialog = builder.create();
-                            abilityDialogView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            TextView abilityName = (TextView) abilityDialogView.findViewById(R.id.ability_name);
-                            TextView abilityEffect = (TextView) abilityDialogView.findViewById(R.id.ability_effect);
-                            abilityName.setText(ability.getName());
-                            abilityEffect.setText(ability.getEffect());
-                            dialog.show();
-                        }
-                    });
-                    TextView abilityName = (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_name);
-                    TextView abilityFlavorText =
-                            (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_flavor_text);
-                    abilityName.setText(ability.getName());
-                    abilityFlavorText.setText(ability.getFlavorText());
-                    dexEntryAbilitiesContent.addView(dexEntryAbilityRowView);
-                }
-
-                for (final Ability ability : abilities) {
-                    View dexEntryAbilityRowView =
-                            inflater.inflate(R.layout.dex_entry_ability_row, dexEntryAbilitiesContent, false);
-                    dexEntryAbilityRowView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            View abilityDialogView = inflater.inflate(R.layout.ability_dialog, null);
-                            AlertDialog.Builder builder =
-                                    new AlertDialog.Builder(getActivity()).setView(abilityDialogView);
-                            final AlertDialog dialog = builder.create();
-                            abilityDialogView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            TextView abilityName = (TextView) abilityDialogView.findViewById(R.id.ability_name);
-                            TextView abilityEffect = (TextView) abilityDialogView.findViewById(R.id.ability_effect);
-                            abilityName.setText(ability.getName());
-                            abilityEffect.setText(ability.getEffect());
-                            dialog.show();
-                        }
-                    });
-                    TextView abilityName = (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_name);
-                    TextView abilityFlavorText =
-                            (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_flavor_text);
-                    abilityName.setText(ability.getName());
-                    abilityFlavorText.setText(ability.getFlavorText());
-                    dexEntryAbilitiesContent.addView(dexEntryAbilityRowView);
-                }
-
-                for (final Ability ability : abilities) {
-                    View dexEntryAbilityRowView =
-                            inflater.inflate(R.layout.dex_entry_ability_row, dexEntryAbilitiesContent, false);
-                    dexEntryAbilityRowView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            View abilityDialogView = inflater.inflate(R.layout.ability_dialog, null);
-                            AlertDialog.Builder builder =
-                                    new AlertDialog.Builder(getActivity()).setView(abilityDialogView);
-                            final AlertDialog dialog = builder.create();
-                            abilityDialogView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            TextView abilityName = (TextView) abilityDialogView.findViewById(R.id.ability_name);
-                            TextView abilityEffect = (TextView) abilityDialogView.findViewById(R.id.ability_effect);
-                            abilityName.setText(ability.getName());
-                            abilityEffect.setText(ability.getEffect());
-                            dialog.show();
-                        }
-                    });
-                    TextView abilityName = (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_name);
-                    TextView abilityFlavorText =
-                            (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_flavor_text);
-                    abilityName.setText(ability.getName());
-                    abilityFlavorText.setText(ability.getFlavorText());
-                    dexEntryAbilitiesContent.addView(dexEntryAbilityRowView);
-                }
-
-                for (final Ability ability : abilities) {
-                    View dexEntryAbilityRowView =
-                            inflater.inflate(R.layout.dex_entry_ability_row, dexEntryAbilitiesContent, false);
-                    dexEntryAbilityRowView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            View abilityDialogView = inflater.inflate(R.layout.ability_dialog, null);
-                            AlertDialog.Builder builder =
-                                    new AlertDialog.Builder(getActivity()).setView(abilityDialogView);
-                            final AlertDialog dialog = builder.create();
-                            abilityDialogView.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            TextView abilityName = (TextView) abilityDialogView.findViewById(R.id.ability_name);
-                            TextView abilityEffect = (TextView) abilityDialogView.findViewById(R.id.ability_effect);
-                            abilityName.setText(ability.getName());
-                            abilityEffect.setText(ability.getEffect());
-                            dialog.show();
-                        }
-                    });
-                    TextView abilityName = (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_name);
-                    TextView abilityFlavorText =
-                            (TextView) dexEntryAbilityRowView.findViewById(R.id.ability_flavor_text);
-                    abilityName.setText(ability.getName());
-                    abilityFlavorText.setText(ability.getFlavorText());
-                    dexEntryAbilitiesContent.addView(dexEntryAbilityRowView);
-                }
-
                 return rootView;
             } else {
                 return rootView;

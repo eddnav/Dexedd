@@ -16,8 +16,6 @@
 
         <ImageView
                 android:id="@+id/dex_entry_image"
-                android:layout_height="180dp"
-                android:layout_width="180dp"
                 android:layout_marginTop="35dp"
                 android:layout_marginBottom="@dimen/dex_entry_image_bottom_margin"
                 android:layout_gravity="center"
@@ -138,7 +136,6 @@
                                 android:id="@+id/dex_type_label"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:paddingBottom="10dp"
                                 android:text="@string/title_type_caps"
                                 android:textAppearance="@style/LargeHeader"
                                 style="@style/TextLabel">
@@ -149,7 +146,7 @@
                         <LinearLayout
                                 android:id="@+id/dex_type_content"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:layout_below="@id/dex_type_label"
                                 android:orientation="horizontal">
 

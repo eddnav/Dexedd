@@ -12,7 +12,7 @@ import com.nav.dexedd.model.Pokemon;
 import com.nav.dexedd.model.Type;
 import com.nav.dexedd.persistence.access.Dex;
 import com.nav.dexedd.ui.TypeTagView;
-import com.nav.dexedd.util.PokemonStringUtil;
+import com.nav.dexedd.util.PokemonTextUtil;
 import com.nav.dexedd.util.TypeUtil;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -22,7 +22,7 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import java.util.List;
 
 /**
- * Adapter for dex information.
+ * Adapter for dexes.
  *
  * @author Eduardo Naveda
  * @since 0.0.1
@@ -46,8 +46,9 @@ public class DexAdapter extends ArrayAdapter<Pokemon> {
 
     public static DexAdapter createDexAdapter(Context context, int resource, List<Pokemon> pokemon) {
         DexAdapter dexAdapter = new DexAdapter(context, resource, pokemon);
-        ImageLoader imageLoader = ImageLoader.getInstance(); // I really despise method calls in constructors
-        dexAdapter.imageLoader = imageLoader;
+
+        // I really despise method calls in the constructor
+        dexAdapter.imageLoader = ImageLoader.getInstance();
         return dexAdapter;
     }
 
@@ -76,7 +77,7 @@ public class DexAdapter extends ArrayAdapter<Pokemon> {
         final Integer speciesId = pokemon.getSpeciesId();
         final Type primaryType = pokemon.getPrimaryType();
         final Type secondaryType = pokemon.getSecondaryType();
-        final String dexNumber = PokemonStringUtil.getFormattedDexNumber(pokemon.getDexNumber());
+        final String dexNumber = PokemonTextUtil.getFormattedDexNumber(pokemon.getDexNumber());
         final String name = pokemon.getName();
         final Boolean catched = pokemon.getCatched();
 
@@ -91,7 +92,8 @@ public class DexAdapter extends ArrayAdapter<Pokemon> {
         imageLoader.displayImage("assets://images/pokemon/art/" + dexNumber.substring(1, dexNumber.length()) + ".png",
                                  holder.dexImage, displayImageOptions);
 
-        View.OnClickListener toEntry = new View.OnClickListener() {
+        // To dex entry!
+        View.OnClickListener toDexEntry = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), DexEntryActivity.class);
@@ -100,7 +102,7 @@ public class DexAdapter extends ArrayAdapter<Pokemon> {
                 getContext().startActivity(intent);
             }
         };
-        holder.dexCell.setOnClickListener(toEntry);
+        holder.dexCell.setOnClickListener(toDexEntry);
 
         holder.dexName.setText(name);
         holder.dexNumber.setText(dexNumber);

@@ -16,6 +16,7 @@ public class DatabaseInitFragment extends Fragment {
 
     private static final String TAG = DatabaseInitFragment.class.getSimpleName();
 
+    // Activities using this fragment should implement this interface
     public static interface DatabaseInitCallbackable {
         void onPostExecute();
     }

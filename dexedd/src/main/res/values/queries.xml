@@ -17,7 +17,7 @@
         ON (ps.id = pdn.species_id AND pokedex_id = ?) INNER JOIN pokemon_species_flavor_text AS ft ON
         (ps.id = ft.species_id AND language_id = 9 AND version_id = ?) WHERE _id = ?</string>
 
-    <string name="get_abilities">SELECT pa.ability_id, name, flavor_text, short_effect, is_hidden, slot FROM
+    <string name="get_abilities">SELECT pa.ability_id, name, flavor_text, effect, is_hidden, slot FROM
         pokemon_abilities AS pa INNER JOIN abilities AS a ON pa.ability_id = a.id AND a.is_main_series = 1
         INNER JOIN ability_names AS an ON (pa.ability_id = an.ability_id AND an.local_language_id = 9)
         INNER JOIN ability_flavor_text AS aft ON (pa.ability_id = aft.ability_id AND aft.version_group_id = 15)

@@ -8,7 +8,7 @@ import com.nav.dexedd.model.Ability;
 import com.nav.dexedd.model.Pokemon;
 import com.nav.dexedd.model.Type;
 import com.nav.dexedd.persistence.DexDatabase;
-import com.nav.dexedd.util.PokemonStringUtil;
+import com.nav.dexedd.util.PokemonTextUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +83,7 @@ public class DexEntry extends Access {
         pokemon.setDexNumber(cursor.getInt(2));
         pokemon.setName(cursor.getString(3));
         pokemon.setGenus(cursor.getString(4));
-        pokemon.setFlavorText(PokemonStringUtil.cleanDexText(cursor.getString(5)));
+        pokemon.setFlavorText(PokemonTextUtil.cleanDexText(cursor.getString(5)));
         Type primaryType = new Type();
         primaryType.setId(cursor.getInt(6));
         pokemon.setPrimaryType(primaryType);
@@ -108,8 +108,8 @@ public class DexEntry extends Access {
             Ability ability = new Ability();
             ability.setId(cursor.getInt(0));
             ability.setName(cursor.getString(1));
-            ability.setFlavorText(PokemonStringUtil.cleanDexText(cursor.getString(2)));
-            ability.setEffect(PokemonStringUtil.cleanDexText(cursor.getString(3)));
+            ability.setFlavorText(PokemonTextUtil.cleanDexText(cursor.getString(2)));
+            ability.setEffect(PokemonTextUtil.cleanDexText(cursor.getString(3)));
             ability.setIsHidden(cursor.getInt(4) == 1);
             ability.setSlot(cursor.getInt(5));
             abilities.add(ability);

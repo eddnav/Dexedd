@@ -47,7 +47,7 @@ public class Ability {
         this.effect = effect;
     }
 
-    public Boolean getIsHidden() {
+    public Boolean isHidden() {
         return isHidden;
     }
 

@@ -1,18 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!-- Will have to wait to see if other rows look exactly the same before extracting to resource -->
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
+              android:layout_height="wrap_content"
               android:orientation="vertical"
               android:layout_marginTop="2dp"
               android:layout_marginBottom="2dp"
-              android:padding="5dp"
+              android:paddingTop="5dp"
+              android:paddingRight="10dp"
+              android:paddingEnd="10dp"
+              android:paddingBottom="5dp"
+              android:paddingLeft="10dp"
+              android:paddingStart="10dp"
               android:background="@drawable/dex_entry_panel_row_background">
 
     <TextView
             android:id="@+id/ability_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:textStyle="bold" />
 
     <TextView

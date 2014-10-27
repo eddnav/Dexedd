@@ -7,8 +7,8 @@
                 tools:context="com.nav.dexedd.app.SplashActivity">
 
     <ImageView
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="@dimen/splash_pokeball_size"
+            android:layout_height="@dimen/splash_pokeball_size"
             android:layout_centerInParent="true"
             android:src="@drawable/pokeball_white" />
 

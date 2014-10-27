@@ -7,6 +7,13 @@ import android.support.v7.app.ActionBarActivity;
 import com.nav.dexedd.R;
 import com.nav.dexedd.fragment.DatabaseInitFragment;
 
+/**
+ * Splash activity, it just loads the database for the first time so an initialization is simulated, and thus
+ * the user can see it visually.
+ *
+ * @author Eduardo Naveda
+ * @since 0.0.1
+ */
 public class SplashActivity extends ActionBarActivity implements DatabaseInitFragment.DatabaseInitCallbackable {
 
     private static final String TAG = SplashActivity.class.getSimpleName();
