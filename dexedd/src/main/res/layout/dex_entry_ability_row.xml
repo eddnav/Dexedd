@@ -14,6 +14,7 @@
               android:paddingBottom="5dp"
               android:paddingLeft="10dp"
               android:paddingStart="10dp"
+              android:fadingEdge="vertical"
               android:background="@drawable/dex_entry_panel_row_background">
 
     <TextView

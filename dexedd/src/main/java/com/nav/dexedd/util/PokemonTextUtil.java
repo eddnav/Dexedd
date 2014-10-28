@@ -46,7 +46,20 @@ public class PokemonTextUtil {
     }
 
     public static String cleanDexText(String text) {
-        return text.replace("\n\n", "<->").replace("\n", " ").replace("<->", "\n\n"); // todo optimize!
+        String cleanText = "";
+        for (int i = 0; i < text.length(); i++) {
+            String character = "" + text.charAt(i);
+            if (text.charAt(i) == '\n') {
+                if (text.charAt(i + 1) == '\n') {
+                    character = "\n\n";
+                    i++;
+                } else {
+                    character = " ";
+                }
+            }
+            cleanText = cleanText + character;
+        }
+        return cleanText;
     }
 
     /**
