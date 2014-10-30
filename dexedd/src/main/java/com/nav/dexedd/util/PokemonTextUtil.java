@@ -22,7 +22,11 @@ public class PokemonTextUtil {
      */
     private static final String PROCESSABLE_DEX_TEXT_PATTERN = "\\[(.*?)\\]\\{(.+?):(.+?)\\}";
 
-    private static final String PROCESSABLE_TYPE = "type";
+    /**
+     * Processable tag 'type'.
+     */
+    private static final String PROCESSABLE_TAG_TYPE = "type";
+
     /* private static final String PROCESSABLE_MECHANIC = "mechanic";
     private static final String PROCESSABLE_MOVE = "move";
     private static final String PROCESSABLE_ITEM = "item"; */ // Unused for now
@@ -45,6 +49,12 @@ public class PokemonTextUtil {
         }
     }
 
+    /**
+     * Clean formatted text from Veekun's db.
+     *
+     * @param text Text to be cleaned.
+     * @return Cleaned text.
+     */
     public static String cleanDexText(String text) {
         String cleanText = "";
         for (int i = 0; i < text.length(); i++) {
@@ -71,7 +81,7 @@ public class PokemonTextUtil {
      * @return Builder with special formatting ready to be set to a TextView.
      */
     public static SpannableStringBuilder processDexText(Context context, String unprocessedString) {
-        int renderGroup = 1;
+        int renderGroup;
         Pattern pattern = Pattern.compile(PROCESSABLE_DEX_TEXT_PATTERN);
         Matcher matcher = pattern.matcher(unprocessedString);
         SpannableStringBuilder builder = new SpannableStringBuilder();
@@ -85,12 +95,12 @@ public class PokemonTextUtil {
             String processableExtract = matcher.group(renderGroup);
 
             // Set type formatting for the found matches
-            if (matcher.group(2).equals(PROCESSABLE_TYPE)) {
+            if (matcher.group(2).equals(PROCESSABLE_TAG_TYPE)) {
                 String properProcessableExtract =
                         processableExtract.substring(0, 1).toUpperCase() + processableExtract.substring(1);
                 builder.append(properProcessableExtract);
-                final StyleSpan bold = new StyleSpan(android.graphics.Typeface.BOLD);
-                final ForegroundColorSpan color = new ForegroundColorSpan(context.getResources()
+                final StyleSpan bold = new StyleSpan(android.graphics.Typeface.BOLD); // Bold
+                final ForegroundColorSpan color = new ForegroundColorSpan(context.getResources() // Type color
                         .getColor(TypeUtil.getTypeColorRes(TypeUtil.Type.getTypeByName(processableExtract))));
                 int start = builder.length() - matcher.group(renderGroup).length();
                 int end = builder.length();
