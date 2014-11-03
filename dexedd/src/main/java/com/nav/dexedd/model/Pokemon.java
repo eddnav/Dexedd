@@ -19,6 +19,11 @@ public class Pokemon {
     private Type primaryType;
     private Type secondaryType;
     private List<Ability> abilities;
+    private Integer genderRatio;
+    private Integer catchRate;
+    private List<String> eggGroups;
+    private Double height;
+    private Double weight;
     private Boolean catched;
 
     public Integer getId() {
@@ -91,6 +96,46 @@ public class Pokemon {
 
     public void setAbilities(List<Ability> abilities) {
         this.abilities = abilities;
+    }
+
+    public Integer getGenderRatio() {
+        return genderRatio;
+    }
+
+    public void setGenderRatio(Integer genderRatio) {
+        this.genderRatio = genderRatio;
+    }
+
+    public Integer getCatchRate() {
+        return catchRate;
+    }
+
+    public void setCatchRate(Integer catchRate) {
+        this.catchRate = catchRate;
+    }
+
+    public List<String> getEggGroups() {
+        return eggGroups;
+    }
+
+    public void setEggGroups(List<String> eggGroups) {
+        this.eggGroups = eggGroups;
+    }
+
+    public Double getHeight() {
+        return height;
+    }
+
+    public void setHeight(Double height) {
+        this.height = height;
+    }
+
+    public Double getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Double weight) {
+        this.weight = weight;
     }
 
     public Boolean getCatched() {

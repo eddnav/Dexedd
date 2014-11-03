@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+            android:id="@+id/label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textAppearance="@style/LargeHeader" />
+
+    <FrameLayout
+            android:id="@+id/underline"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/label_underline_height"
+            android:layout_below="@id/label"
+            android:background="@drawable/label_underline" />
+
+</merge>

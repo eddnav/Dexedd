@@ -23,15 +23,15 @@ public class TypeTagView extends FrameLayout {
 
     public TypeTagView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        TypedArray a = context.getTheme().obtainStyledAttributes(attrs, R.styleable.TypeTagView, 0, 0);
+        TypedArray styledAttributes = context.getTheme().obtainStyledAttributes(attrs, R.styleable.TypeTagView, 0, 0);
 
         Integer typeValue = 0;
         Boolean noText;
         try {
-            noText = a.getBoolean(R.styleable.TypeTagView_no_text, false);
-            typeValue = a.getInt(R.styleable.TypeTagView_type, 0);
+            noText = styledAttributes.getBoolean(R.styleable.TypeTagView_no_text, false);
+            typeValue = styledAttributes.getInt(R.styleable.TypeTagView_type, 0);
         } finally {
-            a.recycle();
+            styledAttributes.recycle();
         }
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

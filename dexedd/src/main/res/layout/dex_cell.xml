@@ -3,7 +3,9 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/dex_cell"
-        style="@style/DexCell">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dex_cell_background">
 
     <FrameLayout
             android:id="@+id/dex_cell_content"
@@ -12,20 +14,22 @@
 
         <com.nav.dexedd.ui.SquareImageView
                 android:id="@+id/dex_image"
-                android:contentDescription="@string/description_pokemon_image"
-                style="@style/DexCellImage" />
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dex_cell_width"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/description_pokemon_image" />
 
         <LinearLayout
                 android:id="@+id/dex_types"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:padding="@dimen/dex_types_padding"
                 android:orientation="vertical"
-                android:gravity="top|end"
-                android:padding="5dp">
+                android:gravity="top|end">
 
             <com.nav.dexedd.ui.TypeTagView
                     android:id="@+id/dex_primary_type"
-                    android:layout_marginBottom="1dp"
+                    android:layout_marginBottom="@dimen/dex_types_separation"
                     style="@style/TypeTagViewMini" />
 
             <com.nav.dexedd.ui.TypeTagView
@@ -38,26 +42,53 @@
 
     <RelativeLayout
             android:id="@+id/dex_panel"
-            android:layout_below="@id/dex_cell_content"
-            style="@style/DexCellPanel">
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dex_cell_panel_height"
+            android:paddingRight="@dimen/dex_cell_panel_horizontal_padding"
+            android:paddingEnd="@dimen/dex_cell_panel_horizontal_padding"
+            android:paddingLeft="@dimen/dex_cell_panel_horizontal_padding"
+            android:paddingStart="@dimen/dex_cell_panel_horizontal_padding"
+            android:layout_below="@id/dex_cell_content">
 
         <TextView
                 android:id="@+id/dex_name"
+                android:layout_width="@dimen/dex_cell_panel_text_width"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/dex_cell_panel_element_padding"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_toLeftOf="@+id/dex_catch_button"
                 android:layout_toStartOf="@id/dex_catch_button"
-                style="@style/DexCellPanelName" />
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:textStyle="bold"
+                android:textColor="@color/white" />
 
         <TextView
                 android:id="@+id/dex_number"
+                android:layout_width="@dimen/dex_cell_panel_text_width"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dex_cell_panel_element_padding"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_below="@id/dex_name"
                 android:layout_toLeftOf="@id/dex_catch_button"
                 android:layout_toStartOf="@id/dex_catch_button"
-                style="@style/DexCellPanelNumber" />
+                android:ellipsize="marquee"
+                android:singleLine="true"
+                android:textColor="@color/white" />
 
         <ImageButton
                 android:id="@id/dex_catch_button"
-                android:contentDescription="@string/description_mark_as_catched"
-                style="@style/DexCellPanelCatchButton" />
+                android:layout_width="@dimen/dex_cell_panel_catch_button_size"
+                android:layout_height="@dimen/dex_cell_panel_catch_button_size"
+                android:layout_marginLeft="@dimen/dex_cell_panel_element_half_padding"
+                android:layout_marginStart="@dimen/dex_cell_panel_element_half_padding"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:background="@drawable/ic_uncatched"
+                android:contentDescription="@string/description_mark_as_catched" />
 
     </RelativeLayout>
 

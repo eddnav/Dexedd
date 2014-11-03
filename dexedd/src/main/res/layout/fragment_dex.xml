@@ -10,8 +10,15 @@
 
     <GridView
             android:id="@+id/dex_grid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_centerInParent="true"
             android:gravity="center"
-            style="@style/DexGrid" />
+            android:columnWidth="@dimen/dex_cell_width"
+            android:horizontalSpacing="@dimen/dex_cell_spacing"
+            android:verticalSpacing="@dimen/dex_cell_spacing"
+            android:clipToPadding="false"
+            android:fastScrollEnabled="true"
+            android:scrollbarStyle="outsideOverlay" />
 
 </RelativeLayout>

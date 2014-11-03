@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Generic -->
-    <color name="white">#ffff</color>
+    <color name="white">#ffffff</color>
     <color name="black">#000000</color>
 
     <!-- General -->

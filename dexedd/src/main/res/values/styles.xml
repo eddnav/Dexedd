@@ -165,31 +165,6 @@
         <item name="no_text">true</item>
     </style>
 
-    <style name="DexEntryImage">
-        <item name="android:layout_width">@dimen/dex_entry_image_size</item>
-        <item name="android:layout_height">@dimen/dex_entry_image_size</item>
-        <item name="android:background">@drawable/dex_entry_image_background</item>
-        <item name="android:src">@drawable/pokeball</item>
-    </style>
-
-    <style name="DexGrid">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:columnWidth">@dimen/dex_cell_width</item>
-        <item name="android:verticalSpacing">@dimen/dex_cell_spacing</item>
-        <item name="android:horizontalSpacing">@dimen/dex_cell_spacing</item>
-        <item name="android:clipToPadding">false</item>
-        <item name="android:fastScrollEnabled">true</item>
-        <item name="android:scrollbarStyle">outsideOverlay</item>
-        <item name="android:gravity">fill</item>
-    </style>
-
-    <style name="DexCell">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@drawable/dex_cell_background</item>
-    </style>
-
     <style name="DexCellImage">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/dex_cell_width</item>

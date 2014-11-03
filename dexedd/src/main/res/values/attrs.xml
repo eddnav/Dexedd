@@ -30,4 +30,11 @@
 
     </declare-styleable>
 
+
+    <declare-styleable name="LabelView">
+
+        <attr name="text" format="string" />
+
+    </declare-styleable>
+
 </resources>
