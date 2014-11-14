@@ -165,51 +165,12 @@
         <item name="no_text">true</item>
     </style>
 
-    <style name="DexCellImage">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/dex_cell_width</item>
-        <item name="android:scaleType">centerCrop</item>
-    </style>
-
-    <style name="DexCellPanel">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/dex_cell_panel_height</item>
-        <item name="android:layout_gravity">bottom</item>
-    </style>
-
-    <style name="DexCellPanelName">
-        <item name="android:layout_width">@dimen/dex_cell_panel_text_width</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingTop">@dimen/dex_cell_panel_element_padding</item>
-        <item name="android:paddingRight">@dimen/dex_cell_panel_element_half_padding</item>
-        <item name="android:paddingLeft">@dimen/dex_cell_panel_element_padding</item>
-        <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:ellipsize">marquee</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="DexCellPanelNumber">
-        <item name="android:layout_width">@dimen/dex_cell_panel_text_width</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:paddingRight">@dimen/dex_cell_panel_element_half_padding</item>
-        <item name="android:paddingBottom">@dimen/dex_cell_panel_element_padding</item>
-        <item name="android:paddingLeft">@dimen/dex_cell_panel_element_padding</item>
-        <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:ellipsize">marquee</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:textColor">@color/white</item>
-    </style>
-
-    <style name="DexCellPanelCatchButton">
-        <item name="android:background">@drawable/ic_uncatched</item>
-        <item name="android:layout_width">@dimen/dex_cell_panel_catch_button_size</item>
-        <item name="android:layout_height">@dimen/dex_cell_panel_catch_button_size</item>
-        <item name="android:layout_marginRight">@dimen/dex_cell_panel_element_padding</item>
-        <item name="android:layout_marginLeft">@dimen/dex_cell_panel_element_half_padding</item>
-        <item name="android:layout_centerVertical">true</item>
-        <item name="android:layout_alignParentRight">true</item>
+    <style name="PanelRow">
+        <item name="android:paddingTop">@dimen/dex_entry_panel_row_padding_vertical</item>
+        <item name="android:paddingRight">@dimen/dex_entry_panel_row_padding_horizontal</item>
+        <item name="android:paddingBottom">@dimen/dex_entry_panel_row_padding_vertical</item>
+        <item name="android:paddingLeft">@dimen/dex_entry_panel_row_padding_horizontal</item>
+        <item name="android:background">@drawable/dex_entry_panel_row_background</item>
     </style>
 
 </resources>

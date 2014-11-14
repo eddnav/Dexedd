@@ -107,13 +107,13 @@ public class Dex extends Access {
      * Marks a Pokémon species as catched.
      *
      * @param context The application context.
-     * @param id      The pokemon species id.
+     * @param speciesId      The Pokémon species id.
      * @param catched Mark as catched or not.
      */
-    public static void setCatched(Context context, Integer id, boolean catched) {
+    public static void setCatched(Context context, Integer speciesId, boolean catched) {
         SQLiteDatabase database = DexDatabase.getInstance(context).getReadableDatabase();
         String where = "id=?";
-        String[] args = {id.toString()};
+        String[] args = {speciesId.toString()};
         ContentValues contentValues = new ContentValues();
         contentValues.put("catched", catched);
         database.update("pokemon_species", contentValues, where, args);

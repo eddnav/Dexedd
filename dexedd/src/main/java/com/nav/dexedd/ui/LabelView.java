@@ -15,6 +15,7 @@ import com.nav.dexedd.R;
  * @author Eduardo Naveda
  * @since 0.0.1
  */
+@Deprecated
 public class LabelView extends RelativeLayout {
 
     private TextView label;

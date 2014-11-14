@@ -2,7 +2,6 @@
 
 <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:dexedd="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/supplementary_dark">
@@ -138,28 +137,30 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
-                        <com.nav.dexedd.ui.LabelView
-                                android:id="@+id/dex_type_label"
+                        <TextView
+                                android:id="@+id/dex_entry_type_label"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                dexedd:text="@string/title_type_caps"
+                                android:text="@string/title_type"
                                 style="@style/TextLabel" />
 
                         <LinearLayout
-                                android:id="@+id/dex_type_content"
+                                android:id="@+id/dex_entry_type_content"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@id/dex_type_label"
-                                android:orientation="horizontal">
+                                android:layout_below="@id/dex_entry_type_label"
+                                android:orientation="horizontal"
+                                android:gravity="center"
+                                style="@style/PanelRow">
 
                             <com.nav.dexedd.ui.TypeTagView
-                                    android:id="@+id/dex_primary_type"
+                                    android:id="@+id/dex_entry_primary_type"
                                     android:layout_marginRight="5dp"
                                     android:layout_marginEnd="5dp"
                                     style="@style/TypeTagView" />
 
                             <com.nav.dexedd.ui.TypeTagView
-                                    android:id="@+id/dex_secondary_type"
+                                    android:id="@+id/dex_entry_secondary_type"
                                     style="@style/TypeTagView" />
 
                         </LinearLayout>
@@ -170,19 +171,93 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
-                        <com.nav.dexedd.ui.LabelView
-                                android:id="@+id/dex_abilities_label"
+                        <TextView
+                                android:id="@+id/dex_entry_abilities_label"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                dexedd:text="@string/title_abilities_caps"
+                                android:text="@string/title_abilities"
                                 style="@style/TextLabel" />
 
                         <LinearLayout
-                                android:id="@+id/dex_abilities_content"
+                                android:id="@+id/dex_entry_abilities_content"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_below="@id/dex_abilities_label"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/dex_entry_abilities_label"
                                 android:orientation="vertical">
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:id="@+id/dex_entry_height_label"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/title_height"
+                                style="@style/TextLabel" />
+
+                        <LinearLayout
+                                android:id="@+id/dex_entry_height_content"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/dex_entry_height_label"
+                                android:orientation="horizontal"
+                                style="@style/PanelRow">
+
+                            <TextView
+                                    android:id="@+id/dex_entry_height_meters"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"/>
+
+                            <TextView
+                                    android:id="@+id/dex_entry_height_feet_inches"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"/>
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                        <TextView
+                                android:id="@+id/dex_entry_weight_label"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/title_weight"
+                                style="@style/TextLabel" />
+
+                        <LinearLayout
+                                android:id="@+id/dex_entry_weight_content"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/dex_entry_weight_label"
+                                android:orientation="horizontal"
+                                style="@style/PanelRow">
+
+                            <TextView
+                                    android:id="@+id/dex_entry_weight_kilograms"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"/>
+
+                            <TextView
+                                    android:id="@+id/dex_entry_weight_pounds"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:gravity="center"/>
 
                         </LinearLayout>
 

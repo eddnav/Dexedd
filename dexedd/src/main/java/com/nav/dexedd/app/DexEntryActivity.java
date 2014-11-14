@@ -21,6 +21,7 @@ import com.nav.dexedd.ui.TypeTagView;
 import com.nav.dexedd.model.Pokemon;
 import com.nav.dexedd.model.Type;
 import com.nav.dexedd.persistence.access.DexEntry;
+import com.nav.dexedd.util.ConversionUtil;
 import com.nav.dexedd.util.PokemonTextUtil;
 import com.nav.dexedd.util.TypeUtil;
 
@@ -101,6 +102,10 @@ public class DexEntryActivity extends ActionBarActivity {
         private TypeTagView dexEntryPrimaryType;
         private TypeTagView dexEntrySecondaryType;
         private LinearLayout dexEntryAbilitiesContent;
+        private TextView dexEntryHeightMeters;
+        private TextView dexEntryHeightFeetInches;
+        private TextView dexEntryWeightKilograms;
+        private TextView dexEntryWeightPounds;
 
         /**
          * Alpha level for the toolbar drawable
@@ -130,9 +135,13 @@ public class DexEntryActivity extends ActionBarActivity {
             dexEntryName = (TextView) rootView.findViewById(R.id.dex_entry_name);
             dexEntryGenus = (TextView) rootView.findViewById(R.id.dex_entry_genus);
             dexEntryFlavorText = (TextView) rootView.findViewById(R.id.dex_entry_flavor_text);
-            dexEntryPrimaryType = (TypeTagView) rootView.findViewById(R.id.dex_primary_type);
-            dexEntrySecondaryType = (TypeTagView) rootView.findViewById(R.id.dex_secondary_type);
-            dexEntryAbilitiesContent = (LinearLayout) rootView.findViewById(R.id.dex_abilities_content);
+            dexEntryPrimaryType = (TypeTagView) rootView.findViewById(R.id.dex_entry_primary_type);
+            dexEntrySecondaryType = (TypeTagView) rootView.findViewById(R.id.dex_entry_secondary_type);
+            dexEntryAbilitiesContent = (LinearLayout) rootView.findViewById(R.id.dex_entry_abilities_content);
+            dexEntryHeightMeters = (TextView) rootView.findViewById(R.id.dex_entry_height_meters);
+            dexEntryHeightFeetInches = (TextView) rootView.findViewById(R.id.dex_entry_height_feet_inches);
+            dexEntryWeightKilograms = (TextView) rootView.findViewById(R.id.dex_entry_weight_kilograms);
+            dexEntryWeightPounds = (TextView) rootView.findViewById(R.id.dex_entry_weight_pounds);
 
             // Always set the scrolling to the top when creating a new view for this fragment
             dexEntryScroller.post(new Runnable() {
@@ -340,6 +349,15 @@ public class DexEntryActivity extends ActionBarActivity {
                     abilityFlavorText.setText(ability.getFlavorText());
                     dexEntryAbilitiesContent.addView(dexEntryAbilityRowView);
                 }
+
+                // Height
+                dexEntryHeightMeters.setText(String.format("%.2f", pokemon.getHeight()) + "m");
+                dexEntryHeightFeetInches.setText(ConversionUtil.toFeetInches(pokemon.getHeight()));
+
+                // Weight
+                dexEntryWeightKilograms.setText(String.format("%.2f", pokemon.getWeight()) + "kg");
+                dexEntryWeightPounds.setText(String.format("%.2f", ConversionUtil.toPounds(pokemon.getWeight())) + "lb");
+
                 return rootView;
             } else {
                 return rootView;

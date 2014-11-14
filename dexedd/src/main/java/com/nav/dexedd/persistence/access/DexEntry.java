@@ -5,6 +5,7 @@ import android.database.Cursor;
 
 import com.nav.dexedd.R;
 import com.nav.dexedd.model.Ability;
+import com.nav.dexedd.model.EggGroup;
 import com.nav.dexedd.model.Pokemon;
 import com.nav.dexedd.model.Type;
 import com.nav.dexedd.persistence.DexDatabase;
@@ -38,33 +39,41 @@ public class DexEntry extends Access {
 
     }
 
-    private Integer id;
+    private Integer pokemonId;
     private Version version;
 
-    private DexEntry(Context context, Integer id, Version version) {
+    private DexEntry(Context context, Integer pokemonId, Version version) {
         super(context);
-        this.id = id;
+        this.pokemonId = pokemonId;
         this.version = version;
-    }
-
-    public static DexEntry create(Context context, Integer id) {
-        database = DexDatabase.getInstance(context).getReadableDatabase();
-        Version version = Version.XY; // Todo from preferences
-        return new DexEntry(context, id, version);
     }
 
     /**
      * Creates a dex entry.
      *
-     * @param context The application context.
-     * @param id      The Pokémon id.
-     * @param version The game version.
+     * @param context   The application context.
+     * @param pokemonId The Pokémon id.
      *
      * @return
      */
-    public static DexEntry create(Context context, Integer id, Version version) {
+    public static DexEntry create(Context context, Integer pokemonId) {
         database = DexDatabase.getInstance(context).getReadableDatabase();
-        return new DexEntry(context, id, version);
+        Version version = Version.XY; // Todo from preferences
+        return new DexEntry(context, pokemonId, version);
+    }
+
+    /**
+     * Creates a dex entry.
+     *
+     * @param context   The application context.
+     * @param pokemonId The Pokémon id.
+     * @param version   The game version.
+     *
+     * @return
+     */
+    public static DexEntry create(Context context, Integer pokemonId, Version version) {
+        database = DexDatabase.getInstance(context).getReadableDatabase();
+        return new DexEntry(context, pokemonId, version);
     }
 
     /**
@@ -73,7 +82,7 @@ public class DexEntry extends Access {
      * @return The {@link com.nav.dexedd.model.Pokemon} for the dex entry.
      */
     public Pokemon getPokemon() {
-        String[] args = {Dex.DexType.NATIONAL_DEX.toString(), version.toString(), id.toString()};
+        String[] args = {Dex.DexType.NATIONAL_DEX.toString(), version.toString(), pokemonId.toString()};
         String query = getContext().getString(R.string.get_dex_entry);
         Cursor cursor = database.rawQuery(query, args);
         cursor.moveToFirst();
@@ -94,13 +103,20 @@ public class DexEntry extends Access {
             pokemon.setSecondaryType(secondaryType);
         }
         pokemon.setAbilities(getAbilities(pokemon.getId()));
-        pokemon.setCatched(cursor.getInt(8) == 1);
+        pokemon.setGenderRatio(cursor.getInt(8));
+        pokemon.setCatchRate(cursor.getInt(9));
+        pokemon.setEggGroups(getEggGroups(pokemon.getSpeciesId()));
+        // Height from the data source is measured in decameters (dam), thus the conversion to meters
+        pokemon.setHeight((double) cursor.getInt(10) / 10);
+        // Weight from the data source is measured in hectograms (hg), thus the conversion to kilograms
+        pokemon.setWeight((double) cursor.getInt(11) / 10);
+        pokemon.setCatched(cursor.getInt(12) == 1);
         cursor.close();
         return pokemon;
     }
 
-    public List<Ability> getAbilities(Integer id) {
-        String[] args = {id.toString()};
+    public List<Ability> getAbilities(Integer pokemonId) {
+        String[] args = {pokemonId.toString()};
         String query = getContext().getString(R.string.get_abilities);
         Cursor cursor = database.rawQuery(query, args);
         List<Ability> abilities = new ArrayList<>();
@@ -116,5 +132,19 @@ public class DexEntry extends Access {
         }
         cursor.close();
         return abilities;
+    }
+
+    public List<EggGroup> getEggGroups(Integer speciesId) {
+        String[] args = {pokemonId.toString()};
+        String query = getContext().getString(R.string.get_egg_groups);
+        Cursor cursor = database.rawQuery(query, args);
+        List<EggGroup> eggGroups = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            EggGroup eggGroup = new EggGroup();
+            eggGroup.setId(cursor.getInt(0));
+            eggGroup.setName(cursor.getString(1));
+        }
+        cursor.close();
+        return eggGroups;
     }
 }

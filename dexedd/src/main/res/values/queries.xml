@@ -11,17 +11,22 @@
 
     <string name="get_dex_entry">SELECT p.id AS _id, ps.id, pokedex_number, name, genus, flavor_text,
         (SELECT type_id FROM pokemon_types AS pt WHERE pt.pokemon_id = p.id AND slot = 1) AS type1,
-        (SELECT type_id FROM pokemon_types AS pt WHERE pt.pokemon_id = p.id AND slot = 2) AS type2, catched
-        FROM pokemon_species AS ps INNER JOIN pokemon AS p ON (ps.id = p.id) INNER JOIN pokemon_species_names AS psn
-        ON (ps.id = pokemon_species_id AND local_language_id = 9) INNER JOIN pokemon_dex_numbers AS pdn
-        ON (ps.id = pdn.species_id AND pokedex_id = ?) INNER JOIN pokemon_species_flavor_text AS ft ON
-        (ps.id = ft.species_id AND language_id = 9 AND version_id = ?) WHERE _id = ?</string>
+        (SELECT type_id FROM pokemon_types AS pt WHERE pt.pokemon_id = p.id AND slot = 2) AS type2, gender_rate,
+        capture_rate, height, weight, catched FROM pokemon_species AS ps INNER JOIN pokemon AS p ON (ps.id = p.id)
+        INNER JOIN pokemon_species_names AS psn ON (ps.id = pokemon_species_id AND local_language_id = 9)
+        INNER JOIN pokemon_dex_numbers AS pdn  ON (ps.id = pdn.species_id AND pokedex_id = ?)
+        INNER JOIN pokemon_species_flavor_text AS ft ON (ps.id = ft.species_id AND language_id = 9 AND version_id = ?)
+        WHERE _id = ?</string>
 
-    <string name="get_abilities">SELECT pa.ability_id, name, flavor_text, effect, is_hidden, slot FROM
+    <string name="get_abilities">SELECT pa.ability_id as _id, name, flavor_text, effect, is_hidden, slot FROM
         pokemon_abilities AS pa INNER JOIN abilities AS a ON pa.ability_id = a.id AND a.is_main_series = 1
         INNER JOIN ability_names AS an ON (pa.ability_id = an.ability_id AND an.local_language_id = 9)
         INNER JOIN ability_flavor_text AS aft ON (pa.ability_id = aft.ability_id AND aft.version_group_id = 15)
         AND aft.language_id = 9 INNER JOIN ability_prose as ap ON (pa.ability_id = ap.ability_id
         AND ap.local_language_id = 9) WHERE pokemon_id = ? ORDER BY pa.slot</string>
+
+    <string name="get_egg_groups">SELECT id as _id, name FROM egg_groups
+        INNER JOIN egg_group_prose as egp ON id = egp.egg_group_id AND local_language_id = 9
+        INNER JOIN pokemon_egg_groups  as peg ON id = peg.egg_group_id WHERE species_id = ?</string>
 
 </resources>

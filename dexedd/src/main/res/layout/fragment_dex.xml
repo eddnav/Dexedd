@@ -19,6 +19,7 @@
             android:verticalSpacing="@dimen/dex_cell_spacing"
             android:clipToPadding="false"
             android:fastScrollEnabled="true"
+            android:fastScrollAlwaysVisible="true"
             android:scrollbarStyle="outsideOverlay" />
 
 </RelativeLayout>

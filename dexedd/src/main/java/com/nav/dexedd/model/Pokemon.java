@@ -21,7 +21,7 @@ public class Pokemon {
     private List<Ability> abilities;
     private Integer genderRatio;
     private Integer catchRate;
-    private List<String> eggGroups;
+    private List<EggGroup> eggGroups;
     private Double height;
     private Double weight;
     private Boolean catched;
@@ -114,11 +114,11 @@ public class Pokemon {
         this.catchRate = catchRate;
     }
 
-    public List<String> getEggGroups() {
+    public List<EggGroup> getEggGroups() {
         return eggGroups;
     }
 
-    public void setEggGroups(List<String> eggGroups) {
+    public void setEggGroups(List<EggGroup> eggGroups) {
         this.eggGroups = eggGroups;
     }
 

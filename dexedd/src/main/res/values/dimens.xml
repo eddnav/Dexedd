@@ -42,6 +42,8 @@
     <dimen name="dex_entry_name_top_padding">15dp</dimen>
     <dimen name="dex_entry_name_max_top_padding">40dp</dimen>
     <dimen name="dex_entry_body_divider_height">15dp</dimen>
+    <dimen name="dex_entry_panel_row_padding_horizontal">10dp</dimen>
+    <dimen name="dex_entry_panel_row_padding_vertical">5dp</dimen>
     <dimen name="type_tag_width">60dp</dimen>
     <dimen name="type_tag_height">25dp</dimen>
     <dimen name="type_tag_stroke_width">0dp</dimen>

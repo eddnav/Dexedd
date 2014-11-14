@@ -2,7 +2,6 @@ package com.nav.dexedd.app;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -217,7 +216,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
         }
 
         @Override
-        public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        public void onActivityCreated(Bundle savedInstanceState) {
             super.onActivityCreated(savedInstanceState);
             if (savedInstanceState != null) {
                 final Integer gridPosition = savedInstanceState.getInt(GRID_POSITION);
