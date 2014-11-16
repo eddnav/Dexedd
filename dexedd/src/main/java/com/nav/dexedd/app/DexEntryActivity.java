@@ -114,8 +114,7 @@ public class DexEntryActivity extends ActionBarActivity {
 
         public DexEntryFragment() {
         }
-
-
+        
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -351,12 +350,12 @@ public class DexEntryActivity extends ActionBarActivity {
                 }
 
                 // Height
-                dexEntryHeightMeters.setText(String.format("%.2f", pokemon.getHeight()) + "m");
+                dexEntryHeightMeters.setText(String.format("%.1f", pokemon.getHeight()) + "m");
                 dexEntryHeightFeetInches.setText(ConversionUtil.toFeetInches(pokemon.getHeight()));
 
                 // Weight
-                dexEntryWeightKilograms.setText(String.format("%.2f", pokemon.getWeight()) + "kg");
-                dexEntryWeightPounds.setText(String.format("%.2f", ConversionUtil.toPounds(pokemon.getWeight())) + "lb");
+                dexEntryWeightKilograms.setText(String.format("%.1f", pokemon.getWeight()) + "kg");
+                dexEntryWeightPounds.setText(String.format("%.1f", ConversionUtil.toPounds(pokemon.getWeight())) + "lb");
 
                 return rootView;
             } else {

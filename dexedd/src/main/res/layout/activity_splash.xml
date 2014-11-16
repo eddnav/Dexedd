@@ -10,6 +10,6 @@
             android:layout_width="@dimen/splash_pokeball_size"
             android:layout_height="@dimen/splash_pokeball_size"
             android:layout_centerInParent="true"
-            android:src="@drawable/pokeball_white" />
+            android:src="@drawable/pokeball" />
 
 </RelativeLayout>

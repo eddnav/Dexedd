@@ -150,7 +150,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/dex_entry_type_label"
                                 android:orientation="horizontal"
-                                android:gravity="center"
                                 style="@style/PanelRow">
 
                             <com.nav.dexedd.ui.TypeTagView

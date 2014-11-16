@@ -108,9 +108,11 @@ public class DexAdapter extends ArrayAdapter<Pokemon> {
         holder.dexNumber.setText(dexNumber);
 
         if (catched) {
-            holder.dexCatchButton.setBackgroundResource(R.drawable.ic_catched);
+            holder.dexCatchButton.setImageDrawable(
+                    getContext().getResources().getDrawable(R.drawable.ic_catched));
         } else {
-            holder.dexCatchButton.setBackgroundResource(R.drawable.ic_uncatched);
+            holder.dexCatchButton.setImageDrawable(
+                    getContext().getResources().getDrawable(R.drawable.ic_uncatched));
         }
 
         holder.dexCatchButton.setOnClickListener(new View.OnClickListener() {
@@ -119,11 +121,13 @@ public class DexAdapter extends ArrayAdapter<Pokemon> {
                 if (pokemon.getCatched()) {
                     Dex.setCatched(getContext().getApplicationContext(), speciesId, false);
                     pokemon.setCatched(false);
-                    view.setBackgroundResource(R.drawable.ic_uncatched);
+                    ((ImageButton) view).setImageDrawable(
+                            getContext().getResources().getDrawable(R.drawable.ic_uncatched));
                 } else {
                     Dex.setCatched(getContext().getApplicationContext(), speciesId, true);
                     pokemon.setCatched(true);
-                    view.setBackgroundResource(R.drawable.ic_catched);
+                    ((ImageButton) view).setImageDrawable(
+                            getContext().getResources().getDrawable(R.drawable.ic_catched));
                 }
             }
         });
