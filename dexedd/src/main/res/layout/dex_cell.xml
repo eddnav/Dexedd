@@ -89,6 +89,7 @@
                 android:layout_alignParentEnd="true"
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_uncatched"
+                android:scaleType="center"
                 android:contentDescription="@string/description_mark_as_catched" />
 
     </RelativeLayout>

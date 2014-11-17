@@ -181,12 +181,10 @@ public class DexEntryActivity extends ActionBarActivity {
                     }
 
                     @Override
-                    public void scheduleDrawable(Drawable who, Runnable what, long when) {
-                    }
+                    public void scheduleDrawable(Drawable who, Runnable what, long when) {}
 
                     @Override
-                    public void unscheduleDrawable(Drawable who, Runnable what) {
-                    }
+                    public void unscheduleDrawable(Drawable who, Runnable what) {}
                 };
 
                 // Registering the callback

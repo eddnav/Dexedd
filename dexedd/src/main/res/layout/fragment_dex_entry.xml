@@ -24,7 +24,7 @@
                 android:layout_marginBottom="@dimen/dex_entry_image_bottom_margin"
                 android:layout_gravity="center"
                 android:background="@drawable/dex_entry_image_background"
-                android:src="@drawable/pokeball"
+                android:src="@drawable/pokeball_background_white"
                 android:contentDescription="@string/description_pokemon_image" />
 
     </FrameLayout>

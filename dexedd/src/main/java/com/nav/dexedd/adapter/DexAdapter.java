@@ -32,8 +32,8 @@ public class DexAdapter extends ArrayAdapter<Pokemon> {
     private static final String TAG = DexAdapter.class.getSimpleName();
 
     private DisplayImageOptions displayImageOptions = new DisplayImageOptions.Builder()
-            .showImageOnLoading(R.drawable.pokeball).showImageForEmptyUri(R.drawable.pokeball)
-            .showImageOnFail(R.drawable.pokeball).cacheInMemory(true)
+            .showImageOnLoading(R.drawable.pokeball_background_gray).showImageForEmptyUri(R.drawable.pokeball_background_gray)
+            .showImageOnFail(R.drawable.pokeball_background_gray).cacheInMemory(true)
             .displayer(new FadeInBitmapDisplayer(400, true, false, false)).build();
 
     private int resource;
