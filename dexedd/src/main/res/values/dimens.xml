@@ -18,6 +18,7 @@
     <dimen name="curved_edge_height">90dp</dimen>
     <dimen name="curved_edge_stretching_margin">-100dp</dimen>
     <dimen name="text_label_padding_bottom">5dp</dimen>
+    <dimen name="progress_bar_height">3dp</dimen>
     <dimen name="header_text_size_large">18sp</dimen>
     <dimen name="header_text_size_extra_large">30sp</dimen>
     <dimen name="info_dialog_padding_horizontal">12dp</dimen>

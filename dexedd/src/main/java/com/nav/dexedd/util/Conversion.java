@@ -6,7 +6,7 @@ package com.nav.dexedd.util;
  * @author Eduardo Naveda
  * @since 0.0.1
  */
-public class ConversionUtil {
+public class Conversion {
 
     private static final double INCHES_PER_METER = 39.3701;
     private static final double INCHES_PER_FOOT = 12;

@@ -48,9 +48,9 @@ public class Dex extends Access {
     /**
      * Creates a dex instance using the default dex type.
      *
-     * @param context The application context.
+     * @param context The application context
      *
-     * @return dex instance.
+     * @return dex instance
      */
     public static Dex create(Context context) {
         database = DexDatabase.getInstance(context).getReadableDatabase();
@@ -61,10 +61,10 @@ public class Dex extends Access {
     /**
      * Creates a dex instance using a specific dex type.
      *
-     * @param context The application context.
-     * @param dexType The dex type.
+     * @param context The application context
+     * @param dexType The dex type
      *
-     * @return dex instance.
+     * @return dex instance
      */
     public static Dex create(Context context, DexType dexType) {
         database = DexDatabase.getInstance(context).getReadableDatabase();
@@ -74,7 +74,7 @@ public class Dex extends Access {
     /**
      * Fetches all Pokémon within the dex instance.
      *
-     * @return a list of all the {@link com.nav.dexedd.model.Pokemon} within the dex.
+     * @return a list of all the {@link com.nav.dexedd.model.Pokemon} within the dex
      */
     public List<Pokemon> listPokemon() {
         String[] args = {dexType.toString()};
@@ -106,9 +106,9 @@ public class Dex extends Access {
     /**
      * Marks a Pokémon species as catched.
      *
-     * @param context The application context.
-     * @param speciesId      The Pokémon species id.
-     * @param catched Mark as catched or not.
+     * @param context The application context
+     * @param speciesId      The Pokémon species id
+     * @param catched Mark as catched or not
      */
     public static void setCatched(Context context, Integer speciesId, boolean catched) {
         SQLiteDatabase database = DexDatabase.getInstance(context).getReadableDatabase();

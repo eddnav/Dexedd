@@ -8,21 +8,21 @@ import com.nav.dexedd.R;
  * @author Eduardo Naveda
  * @since 0.0.1
  */
-public class TypeUtil {
+public class Type {
 
-    public static enum Type {
+    public static enum TypeValue {
 
         NONE(0), NORMAL(1), FIGHTING(2), FLYING(3), POISON(4), GROUND(5), ROCK(6), BUG(7), GHOST(8), STEEL(9), FIRE(10),
         WATER(11), GRASS(12), ELECTRIC(13), PSYCHIC(14), ICE(15), DRAGON(16), DARK(17), FAIRY(18), UNKNOWN(10001);
 
         private int type;
 
-        Type(Integer type) {
+        TypeValue(Integer type) {
             this.type = type;
         }
 
-        public static Type getTypeByValue(Integer typeValue) {
-            for (Type type : Type.values()) {
+        public static TypeValue getTypeValueByValue(Integer typeValue) {
+            for (TypeValue type : TypeValue.values()) {
                 if (type.type == typeValue) {
                     return type;
                 }
@@ -30,8 +30,8 @@ public class TypeUtil {
             return NONE;
         }
 
-        public static Type getTypeByName(String typeName) {
-            for (Type type : Type.values()) {
+        public static TypeValue getTypeValueByName(String typeName) {
+            for (TypeValue type : TypeValue.values()) {
                 if (type.toString().equalsIgnoreCase(typeName)) {
                     return type;
                 }
@@ -41,7 +41,14 @@ public class TypeUtil {
 
     }
 
-    public static int getTypeNameRes(Type type) {
+    /**
+     * Returns the resource id for a given {@link Type Type} enum.
+     *
+     * @param type a Pokémon {@link Type Type} enum
+     *
+     * @return The type resource id
+     */
+    public static int getTypeNameRes(TypeValue type) {
         switch (type) {
             case NONE:
                 return R.string.none;
@@ -86,8 +93,15 @@ public class TypeUtil {
         }
     }
 
-    public static int getTypeColorRes(Type type) {
-        switch (type) {
+    /**
+     * Returns the color resource id for a given {@link com.nav.dexedd.util.Type.TypeValue TypeValue} enum.
+     *
+     * @param typeValue a Pokémon {@link com.nav.dexedd.util.Type.TypeValue TypeValue} enum
+     *
+     * @return The type color resource id
+     */
+    public static int getTypeColorRes(TypeValue typeValue) {
+        switch (typeValue) {
             case NONE:
                 return R.color.none;
             case NORMAL:
@@ -131,8 +145,15 @@ public class TypeUtil {
         }
     }
 
-    public static int getTypeBackgroundRes(Type type) {
-        switch (type) {
+    /**
+     * Returns the background resource id for a given {@link com.nav.dexedd.util.Type.TypeValue TypeValue} enum.
+     *
+     * @param typeValue a Pokémon {@link com.nav.dexedd.util.Type.TypeValue TypeValue} enum
+     *
+     * @return The type background resource id
+     */
+    public static int getTypeBackgroundRes(TypeValue typeValue) {
+        switch (typeValue) {
             case NONE:
                 return R.drawable.type_background_none;
             case NORMAL:
@@ -176,8 +197,15 @@ public class TypeUtil {
         }
     }
 
-    public static int getTypeStyleRes(Type type) {
-        switch (type) {
+    /**
+     * Returns the theme resource id for a given {@link com.nav.dexedd.util.Type.TypeValue TypeValue} enum.
+     *
+     * @param typeValue a Pokémon {@link com.nav.dexedd.util.Type.TypeValue TypeValue} enum
+     *
+     * @return The type theme resource id
+     */
+    public static int getTypeStyleRes(TypeValue typeValue) {
+        switch (typeValue) {
             case NONE:
                 return R.style.Theme_DexThemeNone;
             case NORMAL:

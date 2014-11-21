@@ -14,6 +14,18 @@
     <color name="supplementary_mid_dark">#ff3d3d3b</color>
     <color name="supplementary_dark">#252524</color>
 
+    <!-- Gender -->
+    <color name="male">#7eb4f0</color>
+    <color name="female">#df80a7</color>
+
+    <!-- Stat -->
+    <color name="hp">#ff5959</color>
+    <color name="attack">#f5ac78</color>
+    <color name="defense">#fae078</color>
+    <color name="special_attack">#9db7f5</color>
+    <color name="special_defense">#a7db8d</color>
+    <color name="speed">#fa92b2</color>
+
     <!-- Type -->
     <color name="none">#1d1d1d</color>
     <color name="none_dark">#161616</color>

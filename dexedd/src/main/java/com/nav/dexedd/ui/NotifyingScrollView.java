@@ -35,6 +35,16 @@ public class NotifyingScrollView extends ScrollView {
         onScrollChangedListener = listener;
     }
 
+    /**
+     * Fix the over scroll "bounce glitch" by forcing max over scroll values to 0.
+     */
+    @Override
+    protected boolean overScrollBy(int deltaX, int deltaY, int scrollX, int scrollY, int scrollRangeX, int scrollRangeY,
+                                   int maxOverScrollX, int maxOverScrollY, boolean isTouchEvent) {
+        return super.overScrollBy(deltaX, deltaY, scrollX, scrollY, scrollRangeX, scrollRangeY, 0,
+                                  0, isTouchEvent);
+    }
+
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);

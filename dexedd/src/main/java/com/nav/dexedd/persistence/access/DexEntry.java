@@ -9,7 +9,7 @@ import com.nav.dexedd.model.EggGroup;
 import com.nav.dexedd.model.Pokemon;
 import com.nav.dexedd.model.Type;
 import com.nav.dexedd.persistence.DexDatabase;
-import com.nav.dexedd.util.PokemonTextUtil;
+import com.nav.dexedd.util.PokemonText;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,8 +51,8 @@ public class DexEntry extends Access {
     /**
      * Creates a dex entry.
      *
-     * @param context   The application context.
-     * @param pokemonId The Pokémon id.
+     * @param context   The application context
+     * @param pokemonId The Pokémon id
      *
      * @return
      */
@@ -65,9 +65,9 @@ public class DexEntry extends Access {
     /**
      * Creates a dex entry.
      *
-     * @param context   The application context.
-     * @param pokemonId The Pokémon id.
-     * @param version   The game version.
+     * @param context   The application context
+     * @param pokemonId The Pokémon id
+     * @param version   The game version
      *
      * @return
      */
@@ -79,7 +79,7 @@ public class DexEntry extends Access {
     /**
      * Get a the Pokémon information for this dex entry.
      *
-     * @return The {@link com.nav.dexedd.model.Pokemon} for the dex entry.
+     * @return The {@link com.nav.dexedd.model.Pokemon} for the dex entry
      */
     public Pokemon getPokemon() {
         String[] args = {Dex.DexType.NATIONAL_DEX.toString(), version.toString(), pokemonId.toString()};
@@ -92,7 +92,7 @@ public class DexEntry extends Access {
         pokemon.setDexNumber(cursor.getInt(2));
         pokemon.setName(cursor.getString(3));
         pokemon.setGenus(cursor.getString(4));
-        pokemon.setFlavorText(PokemonTextUtil.cleanDexText(cursor.getString(5)));
+        pokemon.setFlavorText(PokemonText.cleanDexText(cursor.getString(5)));
         Type primaryType = new Type();
         primaryType.setId(cursor.getInt(6));
         pokemon.setPrimaryType(primaryType);
@@ -103,9 +103,9 @@ public class DexEntry extends Access {
             pokemon.setSecondaryType(secondaryType);
         }
         pokemon.setAbilities(getAbilities(pokemon.getId()));
-        pokemon.setGenderRatio(cursor.getInt(8));
-        pokemon.setCatchRate(cursor.getInt(9));
+        pokemon.setCatchRate(cursor.getInt(8));
         pokemon.setEggGroups(getEggGroups(pokemon.getSpeciesId()));
+        pokemon.setGenderRatio(cursor.getDouble(9));
         // Height from the data source is measured in decameters (dam), thus the conversion to meters
         pokemon.setHeight((double) cursor.getInt(10) / 10);
         // Weight from the data source is measured in hectograms (hg), thus the conversion to kilograms
@@ -124,8 +124,8 @@ public class DexEntry extends Access {
             Ability ability = new Ability();
             ability.setId(cursor.getInt(0));
             ability.setName(cursor.getString(1));
-            ability.setFlavorText(PokemonTextUtil.cleanDexText(cursor.getString(2)));
-            ability.setEffect(PokemonTextUtil.cleanDexText(cursor.getString(3)));
+            ability.setFlavorText(PokemonText.cleanDexText(cursor.getString(2)));
+            ability.setEffect(PokemonText.cleanDexText(cursor.getString(3)));
             ability.setIsHidden(cursor.getInt(4) == 1);
             ability.setSlot(cursor.getInt(5));
             abilities.add(ability);
@@ -143,6 +143,7 @@ public class DexEntry extends Access {
             EggGroup eggGroup = new EggGroup();
             eggGroup.setId(cursor.getInt(0));
             eggGroup.setName(cursor.getString(1));
+            eggGroups.add(eggGroup);
         }
         cursor.close();
         return eggGroups;

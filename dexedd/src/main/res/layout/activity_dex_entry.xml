@@ -13,6 +13,6 @@
 
     </FrameLayout>
 
-    <include layout="@layout/main_toolbar_transparent" />
+    <include layout="@layout/main_tool_bar_transparent" />
 
 </FrameLayout>

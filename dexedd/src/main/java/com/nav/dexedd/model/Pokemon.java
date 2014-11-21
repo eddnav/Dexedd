@@ -10,6 +10,13 @@ import java.util.List;
  */
 public class Pokemon {
 
+    /**
+     * Top for gender ratio calculations.
+     *
+     * @see com.nav.dexedd.model.Pokemon#genderRatio
+     */
+    private static final Double GENDER_RATIO_TOP = 8.0;
+
     private Integer id;
     private Integer speciesId;
     private Integer dexNumber;
@@ -19,11 +26,19 @@ public class Pokemon {
     private Type primaryType;
     private Type secondaryType;
     private List<Ability> abilities;
-    private Integer genderRatio;
-    private Integer catchRate;
-    private List<EggGroup> eggGroups;
     private Double height;
     private Double weight;
+
+    /**
+     * Todo: study the catch rates and implement the formulae
+     */
+    private Integer catchRate;
+    private List<EggGroup> eggGroups;
+
+    /**
+     * Gender ratio represents the number of females in {@link com.nav.dexedd.model.Pokemon#GENDER_RATIO_TOP GENDER_RATIO_TOP}.
+     */
+    private Double genderRatio;
     private Boolean catched;
 
     public Integer getId() {
@@ -98,30 +113,6 @@ public class Pokemon {
         this.abilities = abilities;
     }
 
-    public Integer getGenderRatio() {
-        return genderRatio;
-    }
-
-    public void setGenderRatio(Integer genderRatio) {
-        this.genderRatio = genderRatio;
-    }
-
-    public Integer getCatchRate() {
-        return catchRate;
-    }
-
-    public void setCatchRate(Integer catchRate) {
-        this.catchRate = catchRate;
-    }
-
-    public List<EggGroup> getEggGroups() {
-        return eggGroups;
-    }
-
-    public void setEggGroups(List<EggGroup> eggGroups) {
-        this.eggGroups = eggGroups;
-    }
-
     public Double getHeight() {
         return height;
     }
@@ -136,6 +127,44 @@ public class Pokemon {
 
     public void setWeight(Double weight) {
         this.weight = weight;
+    }
+
+    public Integer getCatchRate() {
+        return catchRate;
+    }
+
+    public void setCatchRate(Integer catchRate) {
+        this.catchRate = catchRate;
+    }
+
+    public List<EggGroup> getEggGroups() {
+        return eggGroups;
+    }
+
+    public String getEggGroupsAsString(String separator) {
+        int i = 1;
+        String eggGroupsString = "";
+        for (EggGroup eggGroup : eggGroups) {
+            if (i < eggGroups.size()) {
+                eggGroupsString = eggGroupsString + eggGroup.getName() + " " + separator + " ";
+            } else {
+                eggGroupsString = eggGroupsString + eggGroup.getName();
+            }
+            i++;
+        }
+        return eggGroupsString;
+    }
+
+    public void setEggGroups(List<EggGroup> eggGroups) {
+        this.eggGroups = eggGroups;
+    }
+
+    public Double getGenderRatio() {
+        return genderRatio / GENDER_RATIO_TOP * 100;
+    }
+
+    public void setGenderRatio(Double genderRatio) {
+        this.genderRatio = genderRatio;
     }
 
     public Boolean getCatched() {

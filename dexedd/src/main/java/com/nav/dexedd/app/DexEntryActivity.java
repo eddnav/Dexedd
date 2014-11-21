@@ -19,11 +19,8 @@ import com.nav.dexedd.model.Ability;
 import com.nav.dexedd.ui.NotifyingScrollView;
 import com.nav.dexedd.ui.TypeTagView;
 import com.nav.dexedd.model.Pokemon;
-import com.nav.dexedd.model.Type;
 import com.nav.dexedd.persistence.access.DexEntry;
-import com.nav.dexedd.util.ConversionUtil;
-import com.nav.dexedd.util.PokemonTextUtil;
-import com.nav.dexedd.util.TypeUtil;
+import com.nav.dexedd.util.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,19 +42,19 @@ public class DexEntryActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Bundle extras = getIntent().getExtras();
-        TypeUtil.Type dexEntryType = null;
+        Type.TypeValue dexEntryType = null;
         int pokemonId = 0;
         if (extras != null) {
-            dexEntryType = TypeUtil.Type.getTypeByValue(extras.getInt(DEX_ENTRY_TYPE_ID));
+            dexEntryType = Type.TypeValue.getTypeValueByValue(extras.getInt(DEX_ENTRY_TYPE_ID));
             pokemonId = extras.getInt(POKEMON_ID);
         }
         // Set the proper theme for this Pokémon's type
-        setTheme(TypeUtil.getTypeStyleRes(dexEntryType));
+        setTheme(Type.getTypeStyleRes(dexEntryType));
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dex_entry);
 
-        Toolbar dexToolBar = (Toolbar) findViewById(R.id.dex_toolbar);
+        Toolbar dexToolBar = (Toolbar) findViewById(R.id.dexedd_tool_bar);
         setSupportActionBar(dexToolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -92,6 +89,7 @@ public class DexEntryActivity extends ActionBarActivity {
 
         private static final String TAG = DexEntryFragment.class.getSimpleName();
 
+        private ActionBar toolBar;
         private FrameLayout dexEntryHead;
         private ImageView dexEntryImage;
         private FrameLayout dexEntryImageProxy;
@@ -106,15 +104,25 @@ public class DexEntryActivity extends ActionBarActivity {
         private TextView dexEntryHeightFeetInches;
         private TextView dexEntryWeightKilograms;
         private TextView dexEntryWeightPounds;
+        private TextView dexEntryCatchRate;
+        private TextView dexEntryEggGroups;
+        private ProgressBar dexEntryGenderRatio;
+        private TextView dexEntryMaleRatio;
+        private TextView dexEntryFemaleRatio;
 
         /**
-         * Alpha level for the toolbar drawable
+         * Tool bar drawable.
+         */
+        private ColorDrawable toolBarTypeColorDrawable;
+
+        /**
+         * Alpha level for the tool bar drawable.
          */
         private int toolBarDrawableAlpha = 0;
 
         public DexEntryFragment() {
         }
-        
+
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -123,7 +131,7 @@ public class DexEntryActivity extends ActionBarActivity {
         @Override
         public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-            final ActionBar toolBar = ((ActionBarActivity) getActivity()).getSupportActionBar();
+            toolBar = ((ActionBarActivity) getActivity()).getSupportActionBar();
 
             View rootView = inflater.inflate(R.layout.fragment_dex_entry, container, false);
 
@@ -141,6 +149,11 @@ public class DexEntryActivity extends ActionBarActivity {
             dexEntryHeightFeetInches = (TextView) rootView.findViewById(R.id.dex_entry_height_feet_inches);
             dexEntryWeightKilograms = (TextView) rootView.findViewById(R.id.dex_entry_weight_kilograms);
             dexEntryWeightPounds = (TextView) rootView.findViewById(R.id.dex_entry_weight_pounds);
+            dexEntryCatchRate = (TextView) rootView.findViewById(R.id.dex_entry_catch_rate_text);
+            dexEntryEggGroups = (TextView) rootView.findViewById(R.id.dex_entry_egg_groups_text);
+            dexEntryGenderRatio = (ProgressBar) rootView.findViewById(R.id.dex_entry_gender_ratio);
+            dexEntryMaleRatio = (TextView) rootView.findViewById(R.id.dex_entry_male_ratio);
+            dexEntryFemaleRatio = (TextView) rootView.findViewById(R.id.dex_entry_female_ratio);
 
             // Always set the scrolling to the top when creating a new view for this fragment
             dexEntryScroller.post(new Runnable() {
@@ -155,125 +168,22 @@ public class DexEntryActivity extends ActionBarActivity {
                                                           getArguments().getInt(DexEntryActivity.POKEMON_ID));
                 Pokemon pokemon = dexEntry.getPokemon();
 
-                final String dexNumber = PokemonTextUtil.getFormattedDexNumber(pokemon.getDexNumber());
+                final String dexNumber = PokemonText.getFormattedDexNumber(pokemon.getDexNumber());
                 final String name = pokemon.getName();
                 final String genus = pokemon.getGenus();
                 final String flavorText = pokemon.getFlavorText();
-                final Type primaryType = pokemon.getPrimaryType();
-                final Type secondaryType = pokemon.getSecondaryType();
+                final com.nav.dexedd.model.Type primaryType = pokemon.getPrimaryType();
+                final com.nav.dexedd.model.Type secondaryType = pokemon.getSecondaryType();
                 final List<Ability> abilities = pokemon.getAbilities();
 
-                //  Setting up the toolbar
-                final ColorDrawable toolBarTypeColorDrawable =
-                        new ColorDrawable(getResources().getColor(
-                                TypeUtil.getTypeColorRes(TypeUtil.Type.getTypeByValue(primaryType.getId()))));
+                //  Setting up the tool bar
+                initToolBar(dexNumber, primaryType);
 
-                toolBarTypeColorDrawable.setAlpha(toolBarDrawableAlpha);
-
-                toolBar.setBackgroundDrawable(toolBarTypeColorDrawable);
-
-                // Drawable callback for the toolbar drawable so it can register itself to the
-                // toolbar on each invalidation, this is only necessary for API level =< 17
-                Drawable.Callback drawableCallback = new Drawable.Callback() {
-                    @Override
-                    public void invalidateDrawable(Drawable drawable) {
-                        toolBar.setBackgroundDrawable(drawable);
-                    }
-
-                    @Override
-                    public void scheduleDrawable(Drawable who, Runnable what, long when) {}
-
-                    @Override
-                    public void unscheduleDrawable(Drawable who, Runnable what) {}
-                };
-
-                // Registering the callback
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                    toolBarTypeColorDrawable.setCallback(drawableCallback);
-                }
-
-                FrameLayout.LayoutParams dexEntryImageLayoutParams = (FrameLayout.LayoutParams) dexEntryImage
-                        .getLayoutParams();
-
-                // Normal and max image bottom margins for the main dex entry image these are used to create
-                // some sort of parallax scrolling
-                final int dexEntryImageMarginBottom = dexEntryImageLayoutParams.bottomMargin;
-                final int dexEntryImageMaxMarginBottom = getResources()
-                        .getDimensionPixelSize(R.dimen.dex_entry_image_max_bottom_margin);
-
-                // These top padding values are used for the same thing as the margins
-                final int dexEntryNamePaddingTop = dexEntryName.getPaddingTop();
-                final int dexEntryNameMaxPaddingTop = getResources()
-                        .getDimensionPixelSize(R.dimen.dex_entry_name_max_top_padding);
-
-                // Same story with these normal and max scale values
-                TypedValue outValue = new TypedValue();
-                getResources().getValue(R.dimen.dex_entry_image_min_scale, outValue, true);
-                final float dexEntryPicMinScale = outValue.getFloat();
-
-                // An animation is created using the a variant of ScrollView that notifies the changes in its
-                // internal scrolling
-                NotifyingScrollView.OnScrollChangedListener onScrollChangedListener = new NotifyingScrollView
-                        .OnScrollChangedListener() {
-
-                    private boolean isLimitHeightSet = false;
-                    private int limitHeight = 0;
-                    private Rect boundsRect = new Rect();
-
-                    @Override
-                    public void onScrollChanged(ScrollView scrollView, int l, int t, int oldl, int oldt) {
-
-                        // Sets the clamping height
-                        if (!isLimitHeightSet) {
-                            limitHeight = dexEntryHead.getHeight() - toolBar.getHeight();
-                            isLimitHeightSet = true;
-                        }
-
-                        // Get the ScrollView touchable bounds on the screen
-                        scrollView.getHitRect(boundsRect);
-
-                        // Compute the a ratio relative to the limit height
-                        float ratio = (float) Math.min(Math.max(t, 0), limitHeight) / limitHeight;
-                        toolBarDrawableAlpha = (int) (ratio * 255);
-                        toolBarTypeColorDrawable.setAlpha(toolBarDrawableAlpha);
-
-                        // Calculate new dex image scale relative to the ratio
-                        float dexEntryImageNewScale = Math.max(dexEntryPicMinScale, ((1 - ratio / 2) * 1));
-                        dexEntryImage.setScaleX(dexEntryImageNewScale);
-                        dexEntryImage.setScaleY(dexEntryImageNewScale);
-
-                        // Calculate new image bottom margin relative to the ratio
-                        int dexEntryImageNewBottomMargin = Math.max(dexEntryImageMarginBottom,
-                                                                    Math.min(dexEntryImageMaxMarginBottom,
-                                                                             (int) ((ratio * 1.5) *
-                                                                                    dexEntryImageMaxMarginBottom)));
-                        ((FrameLayout.LayoutParams) dexEntryImage
-                                .getLayoutParams()).bottomMargin = dexEntryImageNewBottomMargin;
-                        dexEntryImage.requestLayout(); // Request the layout with new parameters
-
-                        // Same thing as with the margin
-                        int dexEntryNameNewTopPadding = Math.max(dexEntryNamePaddingTop,
-                                                                 Math.min(dexEntryNameMaxPaddingTop,
-                                                                          (int) ((ratio) * dexEntryNameMaxPaddingTop)));
-                        dexEntryName.setPadding(dexEntryName.getPaddingLeft(), dexEntryNameNewTopPadding,
-                                                dexEntryName.getPaddingRight(), dexEntryName.getPaddingBottom());
-
-                        // Determine if the Pokémon name is on the screen so it's shown on the toolbar instead of the number
-                        if (!dexEntryName.getLocalVisibleRect(boundsRect)) {
-                            toolBar.setTitle(name);
-                        } else {
-                            toolBar.setTitle(dexNumber);
-                        }
-                    }
-                };
-
-                // Set that overly complicated listener from above
-                dexEntryScroller.setOnScrollChangedListener(onScrollChangedListener);
-
-                toolBar.setTitle(dexNumber);
+                // Setting up the parallax scrolling effect
+                initParallaxScrolling(dexNumber, name);
 
                 dexEntryHead.setBackgroundResource(
-                        TypeUtil.getTypeBackgroundRes(TypeUtil.Type.getTypeByValue(primaryType.getId())));
+                        Type.getTypeBackgroundRes(Type.TypeValue.getTypeValueByValue(primaryType.getId())));
 
                 dexEntryName.setText(name);
                 dexEntryGenus.setText(genus + " " + getResources().getString(R.string.pokemon));
@@ -300,12 +210,14 @@ public class DexEntryActivity extends ActionBarActivity {
                     }
                 });
 
-                dexEntryPrimaryType.setType(TypeUtil.Type.getTypeByValue(primaryType.getId()));
+
+                // Set type views
+                dexEntryPrimaryType.setType(Type.TypeValue.getTypeValueByValue(primaryType.getId()));
 
                 if (secondaryType != null) {
-                    dexEntrySecondaryType.setType(TypeUtil.Type.getTypeByValue(secondaryType.getId()));
+                    dexEntrySecondaryType.setType(Type.TypeValue.getTypeValueByValue(secondaryType.getId()));
                 } else {
-                    dexEntrySecondaryType.setType(TypeUtil.Type.NONE);
+                    dexEntrySecondaryType.setType(Type.TypeValue.NONE);
                 }
 
                 // Process and display the abilities for the dex entry Pokémon
@@ -331,8 +243,8 @@ public class DexEntryActivity extends ActionBarActivity {
                             if (ability.isHidden()) {
                                 abilityName.append(" (" + getString(R.string.ability_hidden) + ")");
                             }
-                            abilityEffect.setText(PokemonTextUtil.processDexText(getActivity(),
-                                                                                 ability.getEffect()));
+                            abilityEffect.setText(PokemonText.processDexText(getActivity(),
+                                                                             ability.getEffect()));
                             dialog.show(); // todo when this dialog gets moved to its rightful place, destroy the dialog on onDestroy
                         }
                     });
@@ -348,17 +260,168 @@ public class DexEntryActivity extends ActionBarActivity {
                 }
 
                 // Height
-                dexEntryHeightMeters.setText(String.format("%.1f", pokemon.getHeight()) + "m");
-                dexEntryHeightFeetInches.setText(ConversionUtil.toFeetInches(pokemon.getHeight()));
+                dexEntryHeightMeters.setText(
+                        String.format(getString(R.string.standard_number_format), pokemon.getHeight()) +
+                        getString(R.string.meter_unit));
+                dexEntryHeightFeetInches.setText(Conversion.toFeetInches(pokemon.getHeight()));
 
                 // Weight
-                dexEntryWeightKilograms.setText(String.format("%.1f", pokemon.getWeight()) + "kg");
-                dexEntryWeightPounds.setText(String.format("%.1f", ConversionUtil.toPounds(pokemon.getWeight())) + "lb");
+                dexEntryWeightKilograms.setText(
+                        String.format(getString(R.string.standard_number_format), pokemon.getWeight()) +
+                        getString(R.string.kilogram_unit));
+                dexEntryWeightPounds.setText(String.format(getString(R.string.standard_number_format),
+                                                           Conversion.toPounds(pokemon.getWeight())) +
+                                             getString(R.string.pound_unit));
+
+                // Catch rate
+                dexEntryCatchRate.setText(pokemon.getCatchRate().toString());
+
+                // Egg groups
+                dexEntryEggGroups.setText(pokemon.getEggGroupsAsString("•"));
+
+                // Hatch counter
+                // Todo: hatch counter
+
+                // Gender rate
+                Double genderRatio = pokemon.getGenderRatio();
+                dexEntryGenderRatio.setProgress(100 - genderRatio.intValue());
+                dexEntryMaleRatio.setText(String.format(getString(R.string.standard_number_format), 100 - genderRatio) + "%");
+                dexEntryFemaleRatio.setText(String.format(getString(R.string.standard_number_format), genderRatio) + "%");
 
                 return rootView;
             } else {
                 return rootView;
             }
+        }
+
+        /**
+         * Sets the tool bar drawable and text.
+         *
+         * @param dexNumber   The Pokémon's dex number
+         * @param primaryType The Pokémon's primary type, used to get the actual drawable
+         */
+        private void initToolBar(String dexNumber, com.nav.dexedd.model.Type primaryType) {
+            toolBarTypeColorDrawable =
+                    new ColorDrawable(getResources().getColor(
+                            Type.getTypeColorRes(Type.TypeValue.getTypeValueByValue(primaryType.getId()))));
+
+            toolBarTypeColorDrawable.setAlpha(toolBarDrawableAlpha);
+
+            toolBar.setBackgroundDrawable(toolBarTypeColorDrawable);
+
+            // Drawable callback for the tool bar drawable so it can register itself to the
+            // tool bar on each invalidation, this is only necessary for API level =< 17
+            Drawable.Callback drawableCallback = new Drawable.Callback() {
+                @Override
+                public void invalidateDrawable(Drawable drawable) {
+                    toolBar.setBackgroundDrawable(drawable);
+                }
+
+                @Override
+                public void scheduleDrawable(Drawable who, Runnable what, long when) {
+                }
+
+                @Override
+                public void unscheduleDrawable(Drawable who, Runnable what) {
+                }
+            };
+
+            // Registering the callback
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                toolBarTypeColorDrawable.setCallback(drawableCallback);
+            }
+
+            toolBar.setTitle(dexNumber);
+        }
+
+        /**
+         * Sets up the parallax scrolling-like behavior.
+         *
+         * @param dexNumber The Pokémon's dex number, needed to change the tool bar text on scroll changes
+         * @param name      The Pokémon's name, needed to change the tool bar text on scroll changes
+         */
+        private void initParallaxScrolling(String dexNumber, String name) {
+
+            final String _name = name;
+            final String _dexNumber = dexNumber;
+
+            FrameLayout.LayoutParams dexEntryImageLayoutParams = (FrameLayout.LayoutParams) dexEntryImage
+                    .getLayoutParams();
+
+            // Normal and max image bottom margins for the main dex entry image these are used to create
+            // some sort of parallax scrolling
+            final int dexEntryImageMarginBottom = dexEntryImageLayoutParams.bottomMargin;
+            final int dexEntryImageMaxMarginBottom = getResources()
+                    .getDimensionPixelSize(R.dimen.dex_entry_image_max_bottom_margin);
+
+            // These top padding values are used for the same thing as the margins
+            final int dexEntryNamePaddingTop = dexEntryName.getPaddingTop();
+            final int dexEntryNameMaxPaddingTop = getResources()
+                    .getDimensionPixelSize(R.dimen.dex_entry_name_max_top_padding);
+
+            // Same story with these normal and max scale values
+            TypedValue outValue = new TypedValue();
+            getResources().getValue(R.dimen.dex_entry_image_min_scale, outValue, true);
+            final float dexEntryPicMinScale = outValue.getFloat();
+
+            // An animation is created using the a variant of ScrollView that notifies the changes in its
+            // internal scrolling
+            NotifyingScrollView.OnScrollChangedListener onScrollChangedListener = new NotifyingScrollView
+                    .OnScrollChangedListener() {
+
+                private boolean isLimitHeightSet = false;
+                private int limitHeight = 0;
+                private Rect boundsRect = new Rect();
+
+                @Override
+                public void onScrollChanged(ScrollView scrollView, int l, int t, int oldl, int oldt) {
+
+                    // Sets the clamping height
+                    if (!isLimitHeightSet) {
+                        limitHeight = dexEntryHead.getHeight() - toolBar.getHeight();
+                        isLimitHeightSet = true;
+                    }
+
+                    // Get the ScrollView touchable bounds on the screen
+                    scrollView.getHitRect(boundsRect);
+
+                    // Compute the a ratio relative to the limit height
+                    float ratio = (float) Math.min(Math.max(t, 0), limitHeight) / limitHeight;
+                    toolBarDrawableAlpha = (int) (ratio * 255);
+                    toolBarTypeColorDrawable.setAlpha(toolBarDrawableAlpha);
+
+                    // Calculate new dex image scale relative to the ratio
+                    float dexEntryImageNewScale = Math.max(dexEntryPicMinScale, ((1 - ratio / 2) * 1));
+                    dexEntryImage.setScaleX(dexEntryImageNewScale);
+                    dexEntryImage.setScaleY(dexEntryImageNewScale);
+
+                    // Calculate new image bottom margin relative to the ratio
+                    int dexEntryImageNewBottomMargin = Math.max(dexEntryImageMarginBottom,
+                                                                Math.min(dexEntryImageMaxMarginBottom,
+                                                                         (int) ((ratio * 1.5) *
+                                                                                dexEntryImageMaxMarginBottom)));
+                    ((FrameLayout.LayoutParams) dexEntryImage
+                            .getLayoutParams()).bottomMargin = dexEntryImageNewBottomMargin;
+                    dexEntryImage.requestLayout(); // Request the layout with new parameters
+
+                    // Same thing as with the margin
+                    int dexEntryNameNewTopPadding = Math.max(dexEntryNamePaddingTop,
+                                                             Math.min(dexEntryNameMaxPaddingTop,
+                                                                      (int) ((ratio) * dexEntryNameMaxPaddingTop)));
+                    dexEntryName.setPadding(dexEntryName.getPaddingLeft(), dexEntryNameNewTopPadding,
+                                            dexEntryName.getPaddingRight(), dexEntryName.getPaddingBottom());
+
+                    // Determine if the Pokémon name is on the screen so it's shown on the tool bar instead of the number
+                    if (!dexEntryName.getLocalVisibleRect(boundsRect)) {
+                        toolBar.setTitle(_name);
+                    } else {
+                        toolBar.setTitle(_dexNumber);
+                    }
+                }
+            };
+
+            // Set that overly complicated listener from above
+            dexEntryScroller.setOnScrollChangedListener(onScrollChangedListener);
         }
     }
 }

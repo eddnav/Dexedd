@@ -16,10 +16,24 @@
     <string name="title_abilities">Abilities</string>
     <string name="title_height">Height</string>
     <string name="title_weight">Weight</string>
+    <string name="title_catch_rate">Catch rate</string>
+    <string name="title_egg_groups">Egg groups</string>
+    <string name="title_gender_ratio">Gender ratio</string>
+
+    <!-- Unit -->
+    <string name="meter_unit">m</string>
+    <string name="kilogram_unit">kg</string>
+    <string name="pound_unit">lb</string>
 
     <!-- Etc -->
+    <string name="standard_number_format">%.1f</string>
+    <string name="mars">♂</string>
+    <string name="venus">♀</string>
     <string name="ability_hidden">Hidden</string>
     <string name="ability_hidden_short">H</string>
+
+    <!-- Word -->
+    <string name="and">and</string>
 
     <!-- Pokémon -->
     <string name="pokemon">Pokémon</string>

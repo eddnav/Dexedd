@@ -9,11 +9,10 @@ import android.widget.*;
 import com.nav.dexedd.R;
 import com.nav.dexedd.app.DexEntryActivity;
 import com.nav.dexedd.model.Pokemon;
-import com.nav.dexedd.model.Type;
 import com.nav.dexedd.persistence.access.Dex;
 import com.nav.dexedd.ui.TypeTagView;
-import com.nav.dexedd.util.PokemonTextUtil;
-import com.nav.dexedd.util.TypeUtil;
+import com.nav.dexedd.util.PokemonText;
+import com.nav.dexedd.util.Type;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -75,34 +74,22 @@ public class DexAdapter extends ArrayAdapter<Pokemon> {
         Holder holder = (Holder) row.getTag();
         final Integer id = pokemon.getId();
         final Integer speciesId = pokemon.getSpeciesId();
-        final Type primaryType = pokemon.getPrimaryType();
-        final Type secondaryType = pokemon.getSecondaryType();
-        final String dexNumber = PokemonTextUtil.getFormattedDexNumber(pokemon.getDexNumber());
+        final com.nav.dexedd.model.Type primaryType = pokemon.getPrimaryType();
+        final com.nav.dexedd.model.Type secondaryType = pokemon.getSecondaryType();
+        final String dexNumber = PokemonText.getFormattedDexNumber(pokemon.getDexNumber());
         final String name = pokemon.getName();
         final Boolean catched = pokemon.getCatched();
 
-        holder.dexPrimaryType.setType(TypeUtil.Type.getTypeByValue(primaryType.getId()));
+        holder.dexPrimaryType.setType(Type.TypeValue.getTypeValueByValue(primaryType.getId()));
 
         if (secondaryType != null) {
-            holder.dexSecondaryType.setType(TypeUtil.Type.getTypeByValue(secondaryType.getId()));
+            holder.dexSecondaryType.setType(Type.TypeValue.getTypeValueByValue(secondaryType.getId()));
         } else {
-            holder.dexSecondaryType.setType(TypeUtil.Type.NONE);
+            holder.dexSecondaryType.setType(Type.TypeValue.NONE);
         }
 
         imageLoader.displayImage("assets://images/pokemon/art/" + dexNumber.substring(1, dexNumber.length()) + ".png",
                                  holder.dexImage, displayImageOptions);
-
-        // To dex entry!
-        View.OnClickListener toDexEntry = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getContext(), DexEntryActivity.class);
-                intent.putExtra(DexEntryActivity.POKEMON_ID, id);
-                intent.putExtra(DexEntryActivity.DEX_ENTRY_TYPE_ID, primaryType.getId());
-                getContext().startActivity(intent);
-            }
-        };
-        holder.dexCell.setOnClickListener(toDexEntry);
 
         holder.dexName.setText(name);
         holder.dexNumber.setText(dexNumber);
@@ -131,6 +118,18 @@ public class DexAdapter extends ArrayAdapter<Pokemon> {
                 }
             }
         });
+
+        // To dex entry!
+        View.OnClickListener toDexEntry = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), DexEntryActivity.class);
+                intent.putExtra(DexEntryActivity.POKEMON_ID, id);
+                intent.putExtra(DexEntryActivity.DEX_ENTRY_TYPE_ID, primaryType.getId());
+                getContext().startActivity(intent);
+            }
+        };
+        holder.dexCell.setOnClickListener(toDexEntry);
 
         return row;
     }

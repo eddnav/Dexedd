@@ -57,7 +57,7 @@ public class MainActivity extends ActionBarActivity implements NavigationDrawerF
 
         setContentView(R.layout.activity_main);
 
-        Toolbar dexToolBar = (Toolbar) findViewById(R.id.dex_toolbar);
+        Toolbar dexToolBar = (Toolbar) findViewById(R.id.dexedd_tool_bar);
         setSupportActionBar(dexToolBar);
 
         navigationDrawerFragment = (NavigationDrawerFragment) getSupportFragmentManager()

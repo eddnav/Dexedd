@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  * @author Eduardo Naveda
  * @since 0.0.1
  */
-public class PokemonTextUtil {
+public class PokemonText {
 
     /**
      * Processable pattern.
@@ -34,8 +34,9 @@ public class PokemonTextUtil {
     /**
      * Formats dex numbers in a visually familiar manner.
      *
-     * @param number The dex number to be formatted.
-     * @return The formatted dex number.
+     * @param number The dex number to be formatted
+     *
+     * @return The formatted dex number
      */
     public static String getFormattedDexNumber(Integer number) {
         if (number < 10) {
@@ -52,8 +53,9 @@ public class PokemonTextUtil {
     /**
      * Clean formatted text from Veekun's db.
      *
-     * @param text Text to be cleaned.
-     * @return Cleaned text.
+     * @param text Text to be cleaned
+     *
+     * @return Cleaned text
      */
     public static String cleanDexText(String text) {
         String cleanText = "";
@@ -76,9 +78,10 @@ public class PokemonTextUtil {
      * Processes Pokémon text such as ability entries which use special processable patterns for formatting
      * (such as type, mechanics and moves), ie: [badly poisoned]{mechanic:badly-poisoned}.
      *
-     * @param context           Application context.
-     * @param unprocessedString String to be processed.
-     * @return Builder with special formatting ready to be set to a TextView.
+     * @param context           Application context
+     * @param unprocessedString String to be processed
+     *
+     * @return Builder with special formatting ready to be set to a TextView
      */
     public static SpannableStringBuilder processDexText(Context context, String unprocessedString) {
         int renderGroup;
@@ -101,7 +104,9 @@ public class PokemonTextUtil {
                 builder.append(properProcessableExtract);
                 final StyleSpan bold = new StyleSpan(android.graphics.Typeface.BOLD); // Bold
                 final ForegroundColorSpan color = new ForegroundColorSpan(context.getResources() // Type color
-                        .getColor(TypeUtil.getTypeColorRes(TypeUtil.Type.getTypeByName(processableExtract))));
+                                                                                  .getColor(Type.getTypeColorRes(
+                                                                                          Type.TypeValue.getTypeValueByName(
+                                                                                                  processableExtract))));
                 int start = builder.length() - matcher.group(renderGroup).length();
                 int end = builder.length();
                 builder.setSpan(bold, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
