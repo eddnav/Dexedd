@@ -24,4 +24,5 @@
 // todo add TAGs to inner members
 // todo slice into includes the dex entry body parts
 // todo document pokemon object <--- URGENT
+// todo restructure dex entry to make it more modular <--- URGENT
 // recheck all code

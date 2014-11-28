@@ -16,6 +16,8 @@ import android.widget.*;
 
 import com.nav.dexedd.R;
 import com.nav.dexedd.model.Ability;
+import com.nav.dexedd.model.Stat;
+import com.nav.dexedd.model.Stats;
 import com.nav.dexedd.ui.NotifyingScrollView;
 import com.nav.dexedd.ui.TypeTagView;
 import com.nav.dexedd.model.Pokemon;
@@ -106,9 +108,17 @@ public class DexEntryActivity extends ActionBarActivity {
         private TextView dexEntryWeightPounds;
         private TextView dexEntryCatchRate;
         private TextView dexEntryEggGroups;
-        private ProgressBar dexEntryGenderRatio;
+        private LinearLayout dexEntryGenderRatioContent;
+        private ProgressBar dexEntryGenderRatioBar;
         private TextView dexEntryMaleRatio;
         private TextView dexEntryFemaleRatio;
+        private ProgressBar dexEntryHealthPointsBar;
+        private ProgressBar dexEntryAttackBar;
+        private ProgressBar dexEntryDefenseBar;
+        private ProgressBar dexEntrySpecialAttackBar;
+        private ProgressBar dexEntrySpecialDefenseBar;
+        private ProgressBar dexEntrySpeedBar;
+
 
         /**
          * Tool bar drawable.
@@ -151,9 +161,16 @@ public class DexEntryActivity extends ActionBarActivity {
             dexEntryWeightPounds = (TextView) rootView.findViewById(R.id.dex_entry_weight_pounds);
             dexEntryCatchRate = (TextView) rootView.findViewById(R.id.dex_entry_catch_rate_text);
             dexEntryEggGroups = (TextView) rootView.findViewById(R.id.dex_entry_egg_groups_text);
-            dexEntryGenderRatio = (ProgressBar) rootView.findViewById(R.id.dex_entry_gender_ratio);
+            dexEntryGenderRatioBar = (ProgressBar) rootView.findViewById(R.id.dex_entry_gender_ratio_bar);
+            dexEntryGenderRatioContent = (LinearLayout) rootView.findViewById(R.id.dex_entry_gender_ratio_content);
             dexEntryMaleRatio = (TextView) rootView.findViewById(R.id.dex_entry_male_ratio);
             dexEntryFemaleRatio = (TextView) rootView.findViewById(R.id.dex_entry_female_ratio);
+            dexEntryHealthPointsBar = (ProgressBar) rootView.findViewById(R.id.dex_entry_health_points_bar);
+            dexEntryAttackBar = (ProgressBar) rootView.findViewById(R.id.dex_entry_attack_bar);
+            dexEntryDefenseBar = (ProgressBar) rootView.findViewById(R.id.dex_entry_defense_bar);
+            dexEntrySpecialAttackBar = (ProgressBar) rootView.findViewById(R.id.dex_entry_special_attack_bar);
+            dexEntrySpecialDefenseBar = (ProgressBar) rootView.findViewById(R.id.dex_entry_special_defense_bar);
+            dexEntrySpeedBar = (ProgressBar) rootView.findViewById(R.id.dex_entry_speed_bar);
 
             // Always set the scrolling to the top when creating a new view for this fragment
             dexEntryScroller.post(new Runnable() {
@@ -175,6 +192,7 @@ public class DexEntryActivity extends ActionBarActivity {
                 final com.nav.dexedd.model.Type primaryType = pokemon.getPrimaryType();
                 final com.nav.dexedd.model.Type secondaryType = pokemon.getSecondaryType();
                 final List<Ability> abilities = pokemon.getAbilities();
+                final Stats stats = pokemon.getStats();
 
                 //  Setting up the tool bar
                 initToolBar(dexNumber, primaryType);
@@ -284,9 +302,36 @@ public class DexEntryActivity extends ActionBarActivity {
 
                 // Gender rate
                 Double genderRatio = pokemon.getGenderRatio();
-                dexEntryGenderRatio.setProgress(100 - genderRatio.intValue());
-                dexEntryMaleRatio.setText(String.format(getString(R.string.standard_number_format), 100 - genderRatio) + "%");
-                dexEntryFemaleRatio.setText(String.format(getString(R.string.standard_number_format), genderRatio) + "%");
+                if (genderRatio < 0) {
+                    dexEntryGenderRatioContent.getChildAt(0).setVisibility(View.GONE);
+                    dexEntryGenderRatioContent.getChildAt(1).setVisibility(View.GONE);
+                    dexEntryGenderRatioContent.getChildAt(2).setVisibility(View.VISIBLE);
+                } else {
+                    dexEntryGenderRatioBar.setProgress(100 - genderRatio.intValue());
+                    dexEntryMaleRatio.setText(
+                            String.format(getString(R.string.standard_number_format), 100 - genderRatio) + "%");
+                    dexEntryFemaleRatio
+                            .setText(String.format(getString(R.string.standard_number_format), genderRatio) + "%");
+                }
+
+                // Stats
+                dexEntryHealthPointsBar.setProgress(
+                        Double.valueOf(((double) stats.getHealthPoints().getBase() / Stat.MAX_STAT_VALUE) * 100)
+                                .intValue());
+                dexEntryAttackBar.setProgress(
+                        Double.valueOf(((double) stats.getAttack().getBase() / Stat.MAX_STAT_VALUE) * 100).intValue());
+                dexEntryDefenseBar.setProgress(
+                        Double.valueOf(((double) stats.getDefense().getBase() / Stat.MAX_STAT_VALUE) * 100).intValue());
+                dexEntrySpecialAttackBar.setProgress(
+                        Double.valueOf(((double) stats.getSpecialAttack().getBase() / Stat.MAX_STAT_VALUE) * 100)
+                                .intValue());
+                dexEntrySpecialDefenseBar.setProgress(
+                        Double.valueOf(((double) stats.getSpecialDefense().getBase() / Stat.MAX_STAT_VALUE) * 100)
+                                .intValue());
+                dexEntrySpeedBar
+                        .setProgress(
+                                Double.valueOf(((double) stats.getSpeed().getBase() / Stat.MAX_STAT_VALUE) * 100)
+                                        .intValue());
 
                 return rootView;
             } else {

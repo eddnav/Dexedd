@@ -19,6 +19,7 @@
     <string name="title_catch_rate">Catch rate</string>
     <string name="title_egg_groups">Egg groups</string>
     <string name="title_gender_ratio">Gender ratio</string>
+    <string name="title_stats">Stats</string>
 
     <!-- Unit -->
     <string name="meter_unit">m</string>
@@ -27,6 +28,7 @@
 
     <!-- Etc -->
     <string name="standard_number_format">%.1f</string>
+    <string name="genderless">Genderless</string>
     <string name="mars">♂</string>
     <string name="venus">♀</string>
     <string name="ability_hidden">Hidden</string>
@@ -59,6 +61,20 @@
     <string name="dark">Dark</string>
     <string name="fairy">Fairy</string>
     <string name="unknown">\?\?\?</string>
+
+    <!-- Stat -->
+    <string name="health_points">Health points</string>
+    <string name="health_points_short">hp</string>
+    <string name="attack">Attack</string>
+    <string name="attack_short">atk</string>
+    <string name="defense">Defense</string>
+    <string name="defense_short">def</string>
+    <string name="special_attack">Special attack</string>
+    <string name="special_attack_short">satk</string>
+    <string name="special_defense">Special defense</string>
+    <string name="special_defense_short">sdef</string>
+    <string name="speed">Speed</string>
+    <string name="speed_short">spd</string>
 
     <!-- Content description -->
     <string name="description_pokemon_image">This is a Pókemon image</string>

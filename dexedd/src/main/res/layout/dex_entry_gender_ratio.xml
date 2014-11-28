@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+            android:id="@+id/dex_entry_gender_ratio_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_gender_ratio"
+            style="@style/TextLabel" />
+
+    <LinearLayout
+            android:id="@+id/dex_entry_gender_ratio_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dex_entry_gender_ratio_label"
+            android:orientation="vertical"
+            style="@style/PanelRow">
+
+        <ProgressBar
+                android:id="@+id/dex_entry_gender_ratio_bar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/progress_bar_height"
+                android:layout_marginTop="@dimen/progress_bar_margin_vertical"
+                android:layout_marginBottom="@dimen/progress_bar_margin_vertical"
+                android:progressDrawable="@drawable/gender_ratio_bar"
+                style="@style/ProgressBarStandard" />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textColor="@color/male"
+                    android:text="@string/mars"
+                    android:gravity="center" />
+
+            <TextView
+                    android:id="@+id/dex_entry_male_ratio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center" />
+
+            <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textStyle="bold"
+                    android:textColor="@color/female"
+                    android:text="@string/venus"
+                    android:gravity="center" />
+
+            <TextView
+                    android:id="@+id/dex_entry_female_ratio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center" />
+
+        </LinearLayout>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/genderless"
+                android:visibility="gone"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

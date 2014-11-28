@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+            android:id="@+id/dex_entry_catch_rate_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_catch_rate"
+            style="@style/TextLabel" />
+
+    <LinearLayout
+            android:id="@+id/dex_entry_catch_rate_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dex_entry_catch_rate_label"
+            android:orientation="horizontal"
+            style="@style/PanelRow">
+
+        <TextView
+                android:id="@+id/dex_entry_catch_rate_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+
+    </LinearLayout>
+
+</RelativeLayout>

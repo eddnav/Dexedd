@@ -4,10 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 
 import com.nav.dexedd.R;
-import com.nav.dexedd.model.Ability;
-import com.nav.dexedd.model.EggGroup;
-import com.nav.dexedd.model.Pokemon;
-import com.nav.dexedd.model.Type;
+import com.nav.dexedd.model.*;
 import com.nav.dexedd.persistence.DexDatabase;
 import com.nav.dexedd.util.PokemonText;
 
@@ -39,6 +36,7 @@ public class DexEntry extends Access {
 
     }
 
+
     private Integer pokemonId;
     private Version version;
 
@@ -54,7 +52,7 @@ public class DexEntry extends Access {
      * @param context   The application context
      * @param pokemonId The Pokémon id
      *
-     * @return
+     * @return A dex entry object
      */
     public static DexEntry create(Context context, Integer pokemonId) {
         database = DexDatabase.getInstance(context).getReadableDatabase();
@@ -69,7 +67,7 @@ public class DexEntry extends Access {
      * @param pokemonId The Pokémon id
      * @param version   The game version
      *
-     * @return
+     * @return A dex entry object
      */
     public static DexEntry create(Context context, Integer pokemonId, Version version) {
         database = DexDatabase.getInstance(context).getReadableDatabase();
@@ -77,7 +75,7 @@ public class DexEntry extends Access {
     }
 
     /**
-     * Get a the Pokémon information for this dex entry.
+     * Get the Pokémon information for this dex entry.
      *
      * @return The {@link com.nav.dexedd.model.Pokemon} for the dex entry
      */
@@ -110,11 +108,19 @@ public class DexEntry extends Access {
         pokemon.setHeight((double) cursor.getInt(10) / 10);
         // Weight from the data source is measured in hectograms (hg), thus the conversion to kilograms
         pokemon.setWeight((double) cursor.getInt(11) / 10);
+        pokemon.setStats(getStats(pokemon.getId()));
         pokemon.setCatched(cursor.getInt(12) == 1);
         cursor.close();
         return pokemon;
     }
 
+    /**
+     * Get a Pokémon's abilities.
+     *
+     * @param pokemonId The Pokémon id
+     *
+     * @return The ability list for the Pokémon
+     */
     public List<Ability> getAbilities(Integer pokemonId) {
         String[] args = {pokemonId.toString()};
         String query = getContext().getString(R.string.get_abilities);
@@ -134,6 +140,13 @@ public class DexEntry extends Access {
         return abilities;
     }
 
+    /**
+     * Get a Pokémon's egg groups.
+     *
+     * @param speciesId The Pokémon species id
+     *
+     * @return The egg group list for the Pokémon species
+     */
     public List<EggGroup> getEggGroups(Integer speciesId) {
         String[] args = {pokemonId.toString()};
         String query = getContext().getString(R.string.get_egg_groups);
@@ -147,5 +160,25 @@ public class DexEntry extends Access {
         }
         cursor.close();
         return eggGroups;
+    }
+
+    /**
+     * Get a Pokémon's stats.
+     *
+     * @param pokemonId The Pokémon id
+     *
+     * @return The Stats object for the Pokémon
+     */
+    public Stats getStats(Integer pokemonId) {
+        String[] args = {pokemonId.toString()};
+        String query = getContext().getString(R.string.get_stats);
+        Cursor cursor = database.rawQuery(query, args);
+        Stats stats = new Stats();
+        while (cursor.moveToNext()) {
+            Stat stat = new Stat(cursor.getInt(0), cursor.getInt(1), cursor.getInt(2));
+            stats.setStat(stat, stat.getId());
+        }
+        cursor.close();
+        return stats;
     }
 }

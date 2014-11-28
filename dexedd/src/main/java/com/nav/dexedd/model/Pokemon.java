@@ -40,6 +40,8 @@ public class Pokemon {
      */
     private Double genderRatio;
     private Boolean catched;
+    private Stats stats;
+
 
     public Integer getId() {
         return id;
@@ -167,6 +169,14 @@ public class Pokemon {
         this.genderRatio = genderRatio;
     }
 
+    public Stats getStats() {
+        return stats;
+    }
+
+    public void setStats(Stats stats) {
+        this.stats = stats;
+    }
+
     public Boolean getCatched() {
         return catched;
     }
@@ -174,4 +184,6 @@ public class Pokemon {
     public void setCatched(Boolean catched) {
         this.catched = catched;
     }
+
+
 }

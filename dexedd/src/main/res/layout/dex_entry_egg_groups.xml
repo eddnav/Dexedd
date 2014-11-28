@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+            android:id="@+id/dex_entry_egg_groups_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_egg_groups"
+            style="@style/TextLabel" />
+
+    <LinearLayout
+            android:id="@+id/dex_entry_egg_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/dex_entry_egg_groups_label"
+            android:orientation="horizontal"
+            style="@style/PanelRow">
+
+        <TextView
+                android:id="@+id/dex_entry_egg_groups_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center" />
+
+    </LinearLayout>
+
+</RelativeLayout>
