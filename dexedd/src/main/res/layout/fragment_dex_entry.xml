@@ -29,7 +29,7 @@
 
     </FrameLayout>
 
-    <com.nav.dexedd.ui.NotifyingScrollView
+    <com.nav.dexedd.ui.BetterScrollView
             android:id="@+id/dex_entry_scroller"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -156,6 +156,6 @@
 
         </RelativeLayout>
 
-    </com.nav.dexedd.ui.NotifyingScrollView>
+    </com.nav.dexedd.ui.BetterScrollView>
 
 </FrameLayout>

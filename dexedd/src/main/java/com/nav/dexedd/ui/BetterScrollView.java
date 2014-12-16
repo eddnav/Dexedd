@@ -5,22 +5,22 @@ import android.util.AttributeSet;
 import android.widget.ScrollView;
 
 /**
- * Clasic Android extension of ScrollView that exposes the protected OnScrollChanged callback.
+ * Classic Android extension of ScrollView that exposes the protected OnScrollChanged callback and more utility fixes.
  *
  * @author Eduardo Naveda
  * @since 0.0.1
  */
-public class NotifyingScrollView extends ScrollView {
+public class BetterScrollView extends ScrollView {
 
-    public NotifyingScrollView(Context context) {
+    public BetterScrollView(Context context) {
         super(context);
     }
 
-    public NotifyingScrollView(Context context, AttributeSet attrs) {
+    public BetterScrollView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public NotifyingScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public BetterScrollView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

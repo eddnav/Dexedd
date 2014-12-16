@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import butterknife.ButterKnife;
+import butterknife.InjectView;
 import com.nav.dexedd.R;
 import com.nav.dexedd.app.DexEntryActivity;
 import com.nav.dexedd.model.Pokemon;
@@ -31,7 +33,8 @@ public class DexAdapter extends ArrayAdapter<Pokemon> {
     private static final String TAG = DexAdapter.class.getSimpleName();
 
     private DisplayImageOptions displayImageOptions = new DisplayImageOptions.Builder()
-            .showImageOnLoading(R.drawable.pokeball_background_gray).showImageForEmptyUri(R.drawable.pokeball_background_gray)
+            .showImageOnLoading(R.drawable.pokeball_background_gray)
+            .showImageForEmptyUri(R.drawable.pokeball_background_gray)
             .showImageOnFail(R.drawable.pokeball_background_gray).cacheInMemory(true)
             .displayer(new FadeInBitmapDisplayer(400, true, false, false)).build();
 
@@ -58,16 +61,8 @@ public class DexAdapter extends ArrayAdapter<Pokemon> {
         View row = convertView;
 
         if (row == null) {
-            Holder holder = new Holder();
             row = LayoutInflater.from(getContext()).inflate(resource, parent, false);
-            holder.dexCell = (RelativeLayout) row.findViewById(R.id.dex_cell);
-            holder.dexPrimaryType = (TypeTagView) row.findViewById(R.id.dex_primary_type);
-            holder.dexSecondaryType = (TypeTagView) row.findViewById(R.id.dex_secondary_type);
-            holder.dexImage = (ImageView) row.findViewById(R.id.dex_image);
-            holder.dexPanel = (RelativeLayout) row.findViewById(R.id.dex_panel);
-            holder.dexNumber = (TextView) row.findViewById(R.id.dex_number);
-            holder.dexName = (TextView) row.findViewById(R.id.dex_name);
-            holder.dexCatchButton = (ImageButton) row.findViewById(R.id.dex_catch_button);
+            Holder holder = new Holder(row);
             row.setTag(holder);
         }
 
@@ -135,13 +130,16 @@ public class DexAdapter extends ArrayAdapter<Pokemon> {
     }
 
     private class Holder {
-        RelativeLayout dexCell;
-        TypeTagView dexPrimaryType;
-        TypeTagView dexSecondaryType;
-        ImageView dexImage;
-        RelativeLayout dexPanel;
-        TextView dexName;
-        TextView dexNumber;
-        ImageButton dexCatchButton;
+        @InjectView(R.id.dex_cell) RelativeLayout dexCell;
+        @InjectView(R.id.dex_primary_type) TypeTagView dexPrimaryType;
+        @InjectView(R.id.dex_secondary_type) TypeTagView dexSecondaryType;
+        @InjectView(R.id.dex_image) ImageView dexImage;
+        @InjectView(R.id.dex_name) TextView dexName;
+        @InjectView(R.id.dex_number) TextView dexNumber;
+        @InjectView(R.id.dex_catch_button) ImageButton dexCatchButton;
+
+        public Holder(View view) {
+            ButterKnife.inject(this, view);
+        }
     }
 }
