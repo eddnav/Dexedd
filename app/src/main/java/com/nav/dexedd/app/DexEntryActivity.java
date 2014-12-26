@@ -94,32 +94,32 @@ public class DexEntryActivity extends ActionBarActivity {
 
         private static final String TAG = DexEntryFragment.class.getSimpleName();
 
-        private @InjectView(R.id.dex_entry_image) ImageView dexEntryImage;
-        private @InjectView(R.id.dex_entry_head) FrameLayout dexEntryHead;
-        private @InjectView(R.id.dex_entry_image_proxy) FrameLayout dexEntryImageProxy;
-        private @InjectView(R.id.dex_entry_name) TextView dexEntryName;
-        private @InjectView(R.id.dex_entry_genus) TextView dexEntryGenus;
-        private @InjectView(R.id.dex_entry_flavor_text) TextView dexEntryFlavorText;
-        private @InjectView(R.id.dex_entry_primary_type) TypeTagView dexEntryPrimaryType;
-        private @InjectView(R.id.dex_entry_secondary_type) TypeTagView dexEntrySecondaryType;
-        private @InjectView(R.id.dex_entry_abilities_content) LinearLayout dexEntryAbilitiesContent;
-        private @InjectView(R.id.dex_entry_height_meters) TextView dexEntryHeightMeters;
-        private @InjectView(R.id.dex_entry_height_feet_inches) TextView dexEntryHeightFeetInches;
-        private @InjectView(R.id.dex_entry_weight_kilograms) TextView dexEntryWeightKilograms;
-        private @InjectView(R.id.dex_entry_weight_pounds) TextView dexEntryWeightPounds;
-        private @InjectView(R.id.dex_entry_catch_rate_text) TextView dexEntryCatchRateText;
-        private @InjectView(R.id.dex_entry_egg_groups_text) TextView dexEntryEggGroupsText;
-        private @InjectView(R.id.dex_entry_gender_ratio_bar) ProgressBar dexEntryGenderRatioBar;
-        private @InjectView(R.id.dex_entry_male_ratio) TextView dexEntryMaleRatio;
-        private @InjectView(R.id.dex_entry_female_ratio) TextView dexEntryFemaleRatio;
-        private @InjectView(R.id.dex_entry_gender_ratio_content) LinearLayout dexEntryGenderRatioContent;
-        private @InjectView(R.id.dex_entry_health_points_bar) ProgressBar dexEntryHealthPointsBar;
-        private @InjectView(R.id.dex_entry_attack_bar) ProgressBar dexEntryAttackBar;
-        private @InjectView(R.id.dex_entry_defense_bar) ProgressBar dexEntryDefenseBar;
-        private @InjectView(R.id.dex_entry_special_attack_bar) ProgressBar dexEntrySpecialAttackBar;
-        private @InjectView(R.id.dex_entry_special_defense_bar) ProgressBar dexEntrySpecialDefenseBar;
-        private @InjectView(R.id.dex_entry_speed_bar) ProgressBar dexEntrySpeedBar;
-        private @InjectView(R.id.dex_entry_scroller) BetterScrollView dexEntryScroller;
+        @InjectView(R.id.dex_entry_image) ImageView dexEntryImage;
+        @InjectView(R.id.dex_entry_head) FrameLayout dexEntryHead;
+        @InjectView(R.id.dex_entry_image_proxy) FrameLayout dexEntryImageProxy;
+        @InjectView(R.id.dex_entry_name) TextView dexEntryName;
+        @InjectView(R.id.dex_entry_genus) TextView dexEntryGenus;
+        @InjectView(R.id.dex_entry_flavor_text) TextView dexEntryFlavorText;
+        @InjectView(R.id.dex_entry_primary_type) TypeTagView dexEntryPrimaryType;
+        @InjectView(R.id.dex_entry_secondary_type) TypeTagView dexEntrySecondaryType;
+        @InjectView(R.id.dex_entry_abilities_content) LinearLayout dexEntryAbilitiesContent;
+        @InjectView(R.id.dex_entry_height_meters) TextView dexEntryHeightMeters;
+        @InjectView(R.id.dex_entry_height_feet_inches) TextView dexEntryHeightFeetInches;
+        @InjectView(R.id.dex_entry_weight_kilograms) TextView dexEntryWeightKilograms;
+        @InjectView(R.id.dex_entry_weight_pounds) TextView dexEntryWeightPounds;
+        @InjectView(R.id.dex_entry_catch_rate_text) TextView dexEntryCatchRateText;
+        @InjectView(R.id.dex_entry_egg_groups_text) TextView dexEntryEggGroupsText;
+        @InjectView(R.id.dex_entry_gender_ratio_bar) ProgressBar dexEntryGenderRatioBar;
+        @InjectView(R.id.dex_entry_male_ratio) TextView dexEntryMaleRatio;
+        @InjectView(R.id.dex_entry_female_ratio) TextView dexEntryFemaleRatio;
+        @InjectView(R.id.dex_entry_gender_ratio_content) LinearLayout dexEntryGenderRatioContent;
+        @InjectView(R.id.dex_entry_health_points_bar) ProgressBar dexEntryHealthPointsBar;
+        @InjectView(R.id.dex_entry_attack_bar) ProgressBar dexEntryAttackBar;
+        @InjectView(R.id.dex_entry_defense_bar) ProgressBar dexEntryDefenseBar;
+        @InjectView(R.id.dex_entry_special_attack_bar) ProgressBar dexEntrySpecialAttackBar;
+        @InjectView(R.id.dex_entry_special_defense_bar) ProgressBar dexEntrySpecialDefenseBar;
+        @InjectView(R.id.dex_entry_speed_bar) ProgressBar dexEntrySpeedBar;
+        @InjectView(R.id.dex_entry_scroller) BetterScrollView dexEntryScroller;
 
         private ActionBar toolBar;
 

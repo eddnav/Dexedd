@@ -129,7 +129,7 @@ public class DexAdapter extends ArrayAdapter<Pokemon> {
         return row;
     }
 
-    private class Holder {
+    class Holder {
         @InjectView(R.id.dex_cell) RelativeLayout dexCell;
         @InjectView(R.id.dex_primary_type) TypeTagView dexPrimaryType;
         @InjectView(R.id.dex_secondary_type) TypeTagView dexSecondaryType;
