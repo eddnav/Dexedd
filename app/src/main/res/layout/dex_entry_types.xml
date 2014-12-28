@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/dex_entry_type_content"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="horizontal"
-              android:gravity="center">
+    android:id="@+id/dex_entry_type_content"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal">
 
     <com.nav.dexedd.ui.TypeTagView
-            android:id="@+id/dex_entry_primary_type"
-            android:layout_marginRight="5dp"
-            android:layout_marginEnd="5dp"
-            style="@style/TypeTagView" />
+        android:id="@+id/dex_entry_primary_type"
+        style="@style/TypeTagView"
+        android:layout_marginRight="5dp" />
 
     <com.nav.dexedd.ui.TypeTagView
-            android:id="@+id/dex_entry_secondary_type"
-            style="@style/TypeTagView" />
+        android:id="@+id/dex_entry_secondary_type"
+        style="@style/TypeTagView" />
 
 </LinearLayout>

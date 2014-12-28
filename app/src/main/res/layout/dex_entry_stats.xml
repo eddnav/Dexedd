@@ -1,131 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <TextView
-            android:id="@+id/dex_entry_stats_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/title_stats"
-            style="@style/TextLabel" />
+        android:id="@+id/dex_entry_stats_label"
+        style="@style/TextLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_stats" />
 
     <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/dex_entry_stats_label"
-            style="@style/PanelRow">
+        style="@style/PanelRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dex_entry_stats_label">
 
 
-        <TableRow
-                android:gravity="center">
+        <TableRow android:gravity="center">
 
             <TextView
-                    android:layout_weight="0.05"
-                    android:text="@string/health_points_short" />
+                android:layout_weight="0.05"
+                android:text="@string/health_points_short" />
 
             <ProgressBar
-                    android:id="@+id/dex_entry_health_points_bar"
-                    android:layout_height="@dimen/progress_bar_height"
-                    android:layout_weight="0.95"
-                    android:layout_marginTop="@dimen/progress_bar_margin_vertical"
-                    android:layout_marginBottom="@dimen/progress_bar_margin_vertical"
-                    android:progressDrawable="@drawable/health_points_bar"
-                    style="@style/ProgressBarStandard" />
+                android:id="@+id/dex_entry_health_points_bar"
+                style="@style/ProgressBarStandard"
+                android:layout_height="@dimen/progress_bar_height"
+                android:layout_marginBottom="@dimen/progress_bar_margin_vertical"
+                android:layout_marginTop="@dimen/progress_bar_margin_vertical"
+                android:layout_weight="0.95"
+                android:progressDrawable="@drawable/health_points_bar" />
         </TableRow>
 
 
-        <TableRow
-                android:gravity="center">
+        <TableRow android:gravity="center">
 
             <TextView
-                    android:layout_weight="0.05"
-                    android:text="@string/attack_short" />
+                android:layout_weight="0.05"
+                android:text="@string/attack_short" />
 
             <ProgressBar
-                    android:id="@+id/dex_entry_attack_bar"
-                    android:layout_height="@dimen/progress_bar_height"
-                    android:layout_weight="0.95"
-                    android:layout_marginTop="@dimen/progress_bar_margin_vertical"
-                    android:layout_marginBottom="@dimen/progress_bar_margin_vertical"
-                    android:progressDrawable="@drawable/attack_bar"
-                    style="@style/ProgressBarStandard" />
+                android:id="@+id/dex_entry_attack_bar"
+                style="@style/ProgressBarStandard"
+                android:layout_height="@dimen/progress_bar_height"
+                android:layout_marginBottom="@dimen/progress_bar_margin_vertical"
+                android:layout_marginTop="@dimen/progress_bar_margin_vertical"
+                android:layout_weight="0.95"
+                android:progressDrawable="@drawable/attack_bar" />
         </TableRow>
 
 
-        <TableRow
-                android:gravity="center">
+        <TableRow android:gravity="center">
 
             <TextView
-                    android:layout_weight="0.05"
-                    android:text="@string/defense_short" />
+                android:layout_weight="0.05"
+                android:text="@string/defense_short" />
 
             <ProgressBar
-                    android:id="@+id/dex_entry_defense_bar"
-                    android:layout_height="@dimen/progress_bar_height"
-                    android:layout_weight="0.95"
-                    android:layout_marginTop="@dimen/progress_bar_margin_vertical"
-                    android:layout_marginBottom="@dimen/progress_bar_margin_vertical"
-                    android:progressDrawable="@drawable/defense_bar"
-                    style="@style/ProgressBarStandard" />
+                android:id="@+id/dex_entry_defense_bar"
+                style="@style/ProgressBarStandard"
+                android:layout_height="@dimen/progress_bar_height"
+                android:layout_marginBottom="@dimen/progress_bar_margin_vertical"
+                android:layout_marginTop="@dimen/progress_bar_margin_vertical"
+                android:layout_weight="0.95"
+                android:progressDrawable="@drawable/defense_bar" />
         </TableRow>
 
 
-        <TableRow
-                android:gravity="center">
+        <TableRow android:gravity="center">
 
             <TextView
-                    android:layout_weight="0.05"
-                    android:text="@string/special_attack_short" />
+                android:layout_weight="0.05"
+                android:text="@string/special_attack_short" />
 
             <ProgressBar
-                    android:id="@+id/dex_entry_special_attack_bar"
-                    android:layout_height="@dimen/progress_bar_height"
-                    android:layout_weight="0.95"
-                    android:layout_marginTop="@dimen/progress_bar_margin_vertical"
-                    android:layout_marginBottom="@dimen/progress_bar_margin_vertical"
-                    android:progressDrawable="@drawable/special_attack_bar"
-                    style="@style/ProgressBarStandard" />
+                android:id="@+id/dex_entry_special_attack_bar"
+                style="@style/ProgressBarStandard"
+                android:layout_height="@dimen/progress_bar_height"
+                android:layout_marginBottom="@dimen/progress_bar_margin_vertical"
+                android:layout_marginTop="@dimen/progress_bar_margin_vertical"
+                android:layout_weight="0.95"
+                android:progressDrawable="@drawable/special_attack_bar" />
         </TableRow>
 
 
-        <TableRow
-                android:gravity="center">
+        <TableRow android:gravity="center">
 
             <TextView
-                    android:layout_weight="0.05"
-                    android:text="@string/special_defense_short" />
+                android:layout_weight="0.05"
+                android:text="@string/special_defense_short" />
 
             <ProgressBar
-                    android:id="@+id/dex_entry_special_defense_bar"
-                    android:layout_height="@dimen/progress_bar_height"
-                    android:layout_weight="0.95"
-                    android:layout_marginTop="@dimen/progress_bar_margin_vertical"
-                    android:layout_marginBottom="@dimen/progress_bar_margin_vertical"
-                    android:progressDrawable="@drawable/special_defense_bar"
-                    style="@style/ProgressBarStandard" />
+                android:id="@+id/dex_entry_special_defense_bar"
+                style="@style/ProgressBarStandard"
+                android:layout_height="@dimen/progress_bar_height"
+                android:layout_marginBottom="@dimen/progress_bar_margin_vertical"
+                android:layout_marginTop="@dimen/progress_bar_margin_vertical"
+                android:layout_weight="0.95"
+                android:progressDrawable="@drawable/special_defense_bar" />
         </TableRow>
 
 
-        <TableRow
-                android:gravity="center">
+        <TableRow android:gravity="center">
 
             <TextView
-                    android:layout_weight="0.05"
-                    android:text="@string/speed_short" />
+                android:layout_weight="0.05"
+                android:text="@string/speed_short" />
 
             <ProgressBar
-                    android:id="@+id/dex_entry_speed_bar"
-                    android:layout_height="@dimen/progress_bar_height"
-                    android:layout_weight="0.95"
-                    android:layout_marginTop="@dimen/progress_bar_margin_vertical"
-                    android:layout_marginBottom="@dimen/progress_bar_margin_vertical"
-                    android:progressDrawable="@drawable/speed_bar"
-                    style="@style/ProgressBarStandard" />
+                android:id="@+id/dex_entry_speed_bar"
+                style="@style/ProgressBarStandard"
+                android:layout_height="@dimen/progress_bar_height"
+                android:layout_marginBottom="@dimen/progress_bar_margin_vertical"
+                android:layout_marginTop="@dimen/progress_bar_margin_vertical"
+                android:layout_weight="0.95"
+                android:progressDrawable="@drawable/speed_bar" />
         </TableRow>
-        
+
     </TableLayout>
 
 </RelativeLayout>

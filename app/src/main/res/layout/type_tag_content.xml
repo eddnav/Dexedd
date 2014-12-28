@@ -3,11 +3,11 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:gravity="center"
-            style="@style/TextShadowed" />
+        style="@style/TextShadowed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
 </merge>

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/activity_margin_uniform"
-                android:background="@color/primary"
-                tools:context="com.nav.dexedd.app.SplashActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/primary"
+    android:padding="@dimen/activity_margin_uniform"
+    tools:context="com.nav.dexedd.activity.SplashActivity">
 
     <ImageView
-            android:layout_width="@dimen/splash_pokeball_size"
-            android:layout_height="@dimen/splash_pokeball_size"
-            android:layout_centerInParent="true"
-            android:src="@drawable/pokeball" />
+        android:layout_width="@dimen/splash_pokeball_size"
+        android:layout_height="@dimen/splash_pokeball_size"
+        android:layout_centerInParent="true"
+        android:src="@drawable/pokeball" />
 
 </RelativeLayout>

@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        tools:context="com.edd.dexedd.DexFragment">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.edd.dexedd.DexFragment">
 
     <com.nav.dexedd.ui.BetterGridView
-            android:id="@+id/dex_grid"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:columnWidth="@dimen/dex_cell_width"
-            android:horizontalSpacing="@dimen/dex_cell_spacing"
-            android:verticalSpacing="@dimen/dex_cell_spacing"
-            android:clipToPadding="false"
-            android:fastScrollEnabled="true"
-            android:fastScrollAlwaysVisible="true"
-            android:scrollbarStyle="outsideOverlay" />
+        android:id="@+id/dex_grid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:clipToPadding="false"
+        android:columnWidth="@dimen/dex_cell_width"
+        android:fastScrollAlwaysVisible="true"
+        android:fastScrollEnabled="true"
+        android:gravity="center"
+        android:horizontalSpacing="@dimen/dex_cell_spacing"
+        android:scrollbarStyle="outsideOverlay"
+        android:verticalSpacing="@dimen/dex_cell_spacing" />
 
 </RelativeLayout>

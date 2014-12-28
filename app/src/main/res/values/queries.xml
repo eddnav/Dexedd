@@ -2,34 +2,209 @@
 
 <resources>
 
-    <string name="get_dex">SELECT p.id AS _id, ps.id, pokedex_number, name,
-        (SELECT type_id FROM pokemon_types AS pt WHERE pt.pokemon_id = p.id AND slot = 1) AS type1,
-        (SELECT type_id FROM pokemon_types AS pt WHERE pt.pokemon_id = p.id AND slot = 2) AS type2, catched
-        FROM pokemon_species AS ps INNER JOIN pokemon AS p ON (ps.id = p.id) INNER JOIN pokemon_species_names ON
-        (ps.id = pokemon_species_id AND local_language_id = 9) INNER JOIN pokemon_dex_numbers AS pdn
-        ON (ps.id = pdn.species_id AND pokedex_id = ?)</string>
+    <string name="get_dex">
+        SELECT p.id                  AS pokemon_id,
+               ps.id                 AS species_id,
+               pokedex_number,
+               name,
+               (SELECT type_id
+                FROM   pokemon_types AS pt
+                WHERE  pt.pokemon_id = p.id
+                       AND slot = 1) AS type1,
+               (SELECT type_id
+                FROM   pokemon_types AS pt
+                WHERE  pt.pokemon_id = p.id
+                       AND slot = 2) AS type2,
 
-    <string name="get_dex_entry">SELECT p.id AS _id, ps.id, pokedex_number, name, genus, flavor_text,
-        (SELECT type_id FROM pokemon_types AS pt WHERE pt.pokemon_id = p.id AND slot = 1) AS type1,
-        (SELECT type_id FROM pokemon_types AS pt WHERE pt.pokemon_id = p.id AND slot = 2) AS type2, capture_rate,
-        gender_rate, height, weight, catched FROM pokemon_species AS ps INNER JOIN pokemon AS p ON (ps.id = p.id)
-        INNER JOIN pokemon_species_names AS psn ON (ps.id = pokemon_species_id AND local_language_id = 9)
-        INNER JOIN pokemon_dex_numbers AS pdn ON (ps.id = pdn.species_id AND pokedex_id = ?)
-        INNER JOIN pokemon_species_flavor_text AS ft ON (ps.id = ft.species_id AND language_id = 9 AND version_id = ?)
-        WHERE _id = ?</string>
+                catched
+        FROM   pokemon_species AS ps
+               INNER JOIN pokemon AS p
+                       ON ( ps.id = p.species_id
+                            AND is_default = 1 )
+               INNER JOIN pokemon_species_names
+                       ON ( ps.id = pokemon_species_id
+                            AND local_language_id = 9 )
+               INNER JOIN pokemon_dex_numbers AS pdn
+                       ON ( ps.id = pdn.species_id
+                            AND pokedex_id = ? )
+    </string>
 
-    <string name="get_abilities">SELECT pa.ability_id as _id, name, flavor_text, effect, is_hidden, slot FROM
-        pokemon_abilities AS pa INNER JOIN abilities AS a ON pa.ability_id = a.id AND a.is_main_series = 1
-        INNER JOIN ability_names AS an ON (pa.ability_id = an.ability_id AND an.local_language_id = 9)
-        INNER JOIN ability_flavor_text AS aft ON (pa.ability_id = aft.ability_id AND aft.version_group_id = 15)
-        AND aft.language_id = 9 INNER JOIN ability_prose as ap ON (pa.ability_id = ap.ability_id
-        AND ap.local_language_id = 9) WHERE pokemon_id = ? ORDER BY pa.slot</string>
+    <string name="get_basic_info">
+        SELECT p.id                 AS pokemon_id,
+               ps.id                AS species_id,
+               pokedex_number,
+               name,
+               genus,
+               flavor_text,
+               (SELECT type_id
+                FROM   pokemon_types AS pt
+                WHERE  pt.pokemon_id = p.id
+                       AND slot = 1) AS type1,
+               (SELECT type_id
+                FROM   pokemon_types AS pt
+                WHERE  pt.pokemon_id = p.id
+                       AND slot = 2) AS type2,
+               capture_rate,
+               gender_rate,
+               height,
+               weight,
+               catched
+        FROM   pokemon_species AS ps
+               INNER JOIN pokemon AS p
+                       ON ( ps.id = p.id )
+               INNER JOIN pokemon_species_names AS psn
+                       ON ( ps.id = pokemon_species_id
+                            AND local_language_id = 9 )
+               INNER JOIN pokemon_dex_numbers AS pdn
+                       ON ( ps.id = pdn.species_id
+                            AND pokedex_id = ? )
+               INNER JOIN pokemon_species_flavor_text AS ft
+                       ON ( ps.id = ft.species_id
+                            AND language_id = 9
+                            AND version_id = ? )
+        WHERE  pokemon_id = ?
+    </string>
 
-    <string name="get_egg_groups">SELECT id as _id, name FROM egg_groups
-        INNER JOIN egg_group_prose as egp ON id = egp.egg_group_id AND local_language_id = 9
-        INNER JOIN pokemon_egg_groups  as peg ON id = peg.egg_group_id WHERE species_id = ?</string>
+    <string name="get_abilities">
+        SELECT pa.ability_id,
+               name,
+               flavor_text,
+               effect,
+               is_hidden,
+               slot
+        FROM   pokemon_abilities AS pa
+               INNER JOIN abilities AS a
+                       ON pa.ability_id = a.id
+                          AND a.is_main_series = 1
+               INNER JOIN ability_names AS an
+                       ON ( pa.ability_id = an.ability_id
+                            AND an.local_language_id = 9 )
+               INNER JOIN ability_flavor_text AS aft
+                       ON ( pa.ability_id = aft.ability_id
+                            AND aft.version_group_id = 15 )
+                          AND aft.language_id = 9
+               INNER JOIN ability_prose AS ap
+                       ON ( pa.ability_id = ap.ability_id
+                            AND ap.local_language_id = 9 )
+        WHERE  pokemon_id = ?
+        ORDER  BY pa.slot
+    </string>
 
-    <string name="get_stats">SELECT stat_id as _id, base_stat, effort FROM pokemon_stats WHERE pokemon_id = ?
-        ORDER BY _id ASC</string>
+    <string name="get_egg_groups">
+        SELECT id AS egg_group_id,
+               name
+        FROM   egg_groups
+               INNER JOIN egg_group_prose AS egp
+                       ON id = egp.egg_group_id
+                          AND local_language_id = 9
+               INNER JOIN pokemon_egg_groups AS peg
+                       ON id = peg.egg_group_id
+        WHERE  species_id = ?
+    </string>
+
+    <string name="get_stats">
+        SELECT stat_id,
+               base_stat,
+               effort
+        FROM   pokemon_stats
+        WHERE  pokemon_id = ?
+        ORDER  BY stat_id ASC
+    </string>
+
+    <string name="get_evolution_chain">
+        SELECT (SELECT id
+                FROM   pokemon
+                WHERE  species_id = ps.id
+                       AND is_default = 1)             AS pokemon_id,
+               ps.id                                   AS species_id,
+               psn.name,
+               (SELECT id
+                FROM   pokemon
+                WHERE  species_id = ps.evolves_from_species_id
+                       AND is_default = 1)             AS evolves_from_pokemon_id,
+               ps.evolves_from_species_id,
+               (SELECT name
+                FROM   pokemon_species_names AS psn
+                WHERE  psn.pokemon_species_id = ps.evolves_from_species_id
+                       AND psn.local_language_id = 9)  AS evolves_from_species_name,
+               pe.evolution_trigger_id,
+               pe.minimum_level,
+               pe.trigger_item_id,
+               (SELECT name
+                FROM   item_names AS ina
+                WHERE  ina.item_id = pe.trigger_item_id
+                       AND ina.local_language_id = 9)  AS trigger_item_name,
+               pe.gender_id,
+               pe.location_id,
+               (SELECT locn.name
+                FROM   location_names AS locn
+                WHERE  locn.location_id = pe.location_id
+                       AND locn.local_language_id = 9) AS location_name,
+               (SELECT region_id
+                FROM   locations
+                WHERE  id = pe.location_id)            AS rregion_id,
+               (SELECT name
+                FROM   region_names AS rn
+                WHERE  rn.region_id = (SELECT region_id
+                                       FROM   locations
+                                       WHERE  id = pe.location_id)
+                       AND rn.local_language_id = 9)   AS region_name,
+               pe.held_item_id,
+               (SELECT name
+                FROM   item_names AS ina
+                WHERE  ina.item_id = pe.held_item_id
+                       AND ina.local_language_id = 9)  AS held_item_name,
+               pe.time_of_day,
+               pe.known_move_id,
+               (SELECT name
+                FROM   move_names AS mov
+                WHERE  mov.move_id = pe.known_move_id
+                       AND mov.local_language_id = 9)  AS known_move_name,
+               pe.known_move_type_id,
+               pe.minimum_happiness,
+               pe.minimum_beauty,
+               pe.minimum_affection,
+               pe.relative_physical_stats,
+               (SELECT id
+                FROM   pokemon
+                WHERE  species_id = pe.trade_species_id
+                       AND is_default = 1)             AS party_pokemon_id,
+               pe.party_species_id,
+               (SELECT name
+                FROM   pokemon_species_names AS psn
+                WHERE  psn.pokemon_species_id = pe.party_species_id
+                       AND psn.local_language_id = 9)  AS party_species_name,
+               pe.party_type_id,
+               (SELECT id
+                FROM   pokemon
+                WHERE  species_id = pe.trade_species_id
+                       AND is_default = 1)             AS trade_pokemon_id,
+               pe.trade_species_id,
+               (SELECT name
+                FROM   pokemon_species_names AS psn
+                WHERE  psn.pokemon_species_id = pe.trade_species_id
+                       AND psn.local_language_id = 9)  AS trade_species_name,
+               (SELECT baby_trigger_item_id
+                FROM   evolution_chains AS pec
+                WHERE  pec.id = ps.evolution_chain_id) AS baby_trigger_item_id,
+               (SELECT name
+                FROM   item_names AS ina
+                WHERE  ina.item_id = (SELECT baby_trigger_item_id
+                                      FROM   evolution_chains AS pec
+                                      WHERE  pec.id = ps.evolution_chain_id)
+                       AND ina.local_language_id = 9)  AS baby_trigger_item_name,
+               pe.needs_overworld_rain,
+               pe.turn_upside_down
+        FROM   pokemon_species AS ps
+               INNER JOIN pokemon_species_names AS psn
+                       ON ps.id = psn.pokemon_species_id
+                          AND psn.local_language_id = 9
+               LEFT JOIN pokemon_evolution AS pe
+                      ON ps.id = evolved_species_id
+        WHERE  ps.evolution_chain_id = (SELECT evolution_chain_id
+                                        FROM   pokemon_species
+                                        WHERE  id = ?)
+        ORDER  BY ps.evolves_from_species_id ASC
+    </string>
 
 </resources>

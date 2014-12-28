@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/dex_entry_evolution_chain_label"
+        style="@style/TextLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_evolution_chain" />
+
+    <com.nav.dexedd.ui.TreeLayout
+        android:id="@+id/dex_entry_evolution_chain_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dex_entry_evolution_chain_label"
+        android:orientation="vertical" />
+
+</RelativeLayout>

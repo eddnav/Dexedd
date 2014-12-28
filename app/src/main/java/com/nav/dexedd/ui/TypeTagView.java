@@ -8,7 +8,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.nav.dexedd.R;
-import com.nav.dexedd.util.Type;
+import com.nav.dexedd.util.TypeUtil;
 
 /**
  * Simple tag view for pokemon types.
@@ -41,21 +41,21 @@ public class TypeTagView extends FrameLayout {
             typeTagText.setVisibility(GONE);
         }
 
-        Type.TypeValue type = Type.TypeValue.getTypeValueByValue(typeValue);
+        TypeUtil.TypeValue type = TypeUtil.TypeValue.getTypeValueByValue(typeValue);
         setType(type);
     }
 
-    public void setType(Type.TypeValue type) {
-        if (type == Type.TypeValue.NONE) {
+    public void setType(TypeUtil.TypeValue type) {
+        if (type == TypeUtil.TypeValue.NONE) {
             setVisibility(GONE);
         } else {
             setVisibility(VISIBLE);
         }
         setBackgroundResource(getTypeTagBackgroundRes(type));
-        typeTagText.setText(getResources().getString(Type.getTypeNameRes(type)));
+        typeTagText.setText(getResources().getString(TypeUtil.getTypeNameRes(type)));
     }
 
-    public static int getTypeTagBackgroundRes(Type.TypeValue type) {
+    public static int getTypeTagBackgroundRes(TypeUtil.TypeValue type) {
         switch (type) {
             case NONE:
                 return R.drawable.type_tag_background_none;

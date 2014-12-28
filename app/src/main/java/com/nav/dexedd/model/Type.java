@@ -9,7 +9,12 @@ package com.nav.dexedd.model;
 public class Type {
 
     private Integer id;
-    private String name;
+
+    public Type() {}
+
+    public Type(Integer id) {
+        this.id = id;
+    }
 
     public Integer getId() {
         return id;
@@ -19,11 +24,4 @@ public class Type {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

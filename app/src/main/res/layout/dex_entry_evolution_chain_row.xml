@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dex_entry_panel_row_margin_vertical"
+    android:layout_marginTop="@dimen/dex_entry_panel_row_margin_vertical"
+    android:background="@drawable/dex_entry_panel_row_background"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dex_entry_panel_row_padding_vertical"
+    android:paddingLeft="@dimen/dex_entry_panel_row_padding_horizontal"
+    android:paddingRight="@dimen/dex_entry_panel_row_padding_horizontal"
+    android:paddingTop="@dimen/dex_entry_panel_row_padding_vertical">
+
+    <ImageView
+        android:id="@+id/evolution_party_icon"
+        android:layout_width="@dimen/party_icon_width"
+        android:layout_height="@dimen/party_icon_height"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dex_entry_panel_row_padding_horizontal"
+        android:contentDescription="@string/description_pokemon_image"
+        android:src="@drawable/not_found_party_icon" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/evolution_party_icon"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/evolution_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/evolution_conditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</RelativeLayout>

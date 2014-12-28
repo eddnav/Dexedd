@@ -9,12 +9,12 @@ import android.widget.*;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.nav.dexedd.R;
-import com.nav.dexedd.app.DexEntryActivity;
+import com.nav.dexedd.activity.DexEntryActivity;
 import com.nav.dexedd.model.Pokemon;
 import com.nav.dexedd.persistence.access.Dex;
 import com.nav.dexedd.ui.TypeTagView;
-import com.nav.dexedd.util.PokemonText;
-import com.nav.dexedd.util.Type;
+import com.nav.dexedd.util.PokemonTextUtil;
+import com.nav.dexedd.util.TypeUtil;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -71,19 +71,19 @@ public class DexAdapter extends ArrayAdapter<Pokemon> {
         final Integer speciesId = pokemon.getSpeciesId();
         final com.nav.dexedd.model.Type primaryType = pokemon.getPrimaryType();
         final com.nav.dexedd.model.Type secondaryType = pokemon.getSecondaryType();
-        final String dexNumber = PokemonText.getFormattedDexNumber(pokemon.getDexNumber());
+        final String dexNumber = PokemonTextUtil.getFormattedDexNumber(pokemon.getDexNumber());
         final String name = pokemon.getName();
         final Boolean catched = pokemon.getCatched();
 
-        holder.dexPrimaryType.setType(Type.TypeValue.getTypeValueByValue(primaryType.getId()));
+        holder.dexPrimaryType.setType(TypeUtil.TypeValue.getTypeValueByValue(primaryType.getId()));
 
         if (secondaryType != null) {
-            holder.dexSecondaryType.setType(Type.TypeValue.getTypeValueByValue(secondaryType.getId()));
+            holder.dexSecondaryType.setType(TypeUtil.TypeValue.getTypeValueByValue(secondaryType.getId()));
         } else {
-            holder.dexSecondaryType.setType(Type.TypeValue.NONE);
+            holder.dexSecondaryType.setType(TypeUtil.TypeValue.NONE);
         }
 
-        imageLoader.displayImage("assets://images/pokemon/art/" + dexNumber.substring(1, dexNumber.length()) + ".png",
+        imageLoader.displayImage("assets://images/pokemon/art/" + speciesId + ".png",
                                  holder.dexImage, displayImageOptions);
 
         holder.dexName.setText(name);

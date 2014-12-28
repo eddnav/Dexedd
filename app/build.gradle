@@ -48,4 +48,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.+'
     compile 'com.nostra13.universalimageloader:universal-image-loader:1.9.3'
     compile 'com.jakewharton:butterknife:6.0.0'
+    compile 'com.google.guava:guava:18.0'
 }

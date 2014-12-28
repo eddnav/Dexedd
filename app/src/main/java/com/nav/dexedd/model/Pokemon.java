@@ -1,5 +1,7 @@
 package com.nav.dexedd.model;
 
+import com.nav.dexedd.structure.Tree;
+
 import java.util.List;
 
 /**
@@ -17,7 +19,13 @@ public class Pokemon {
      */
     private static final Double GENDER_RATIO_TOP = 8.0;
 
+    /**
+     * The Pokémon id.
+     */
     private Integer id;
+    /**
+     * The Pokémon species id.
+     */
     private Integer speciesId;
     private Integer dexNumber;
     private String name;
@@ -40,8 +48,22 @@ public class Pokemon {
      */
     private Double genderRatio;
     private Boolean catched;
-    private Stats stats;
+    private StatSpread baseStats;
+    /**
+     * Describes the conditions for evolving to this Pokémon, usually zero or one, except in cases like Leafeon or
+     * Glaceon where there are different ways for Eevee to achieve the evolution.
+     */
+    private List<EvolutionCondition> evolutionConditions;
+    private Tree<Pokemon> evolutionChain;
 
+    public Pokemon() {
+    }
+
+    public Pokemon(Integer id, Integer speciesId, String name) {
+        this.id = id;
+        this.speciesId = speciesId;
+        this.name = name;
+    }
 
     public Integer getId() {
         return id;
@@ -169,12 +191,12 @@ public class Pokemon {
         this.genderRatio = genderRatio;
     }
 
-    public Stats getStats() {
-        return stats;
+    public StatSpread getBaseStats() {
+        return baseStats;
     }
 
-    public void setStats(Stats stats) {
-        this.stats = stats;
+    public void setBaseStats(StatSpread baseStats) {
+        this.baseStats = baseStats;
     }
 
     public Boolean getCatched() {
@@ -185,5 +207,19 @@ public class Pokemon {
         this.catched = catched;
     }
 
+    public Tree<Pokemon> getEvolutionChain() {
+        return evolutionChain;
+    }
 
+    public void setEvolutionChain(Tree<Pokemon> evolutionChain) {
+        this.evolutionChain = evolutionChain;
+    }
+
+    public List<EvolutionCondition> getEvolutionConditions() {
+        return evolutionConditions;
+    }
+
+    public void setEvolutionConditions(List<EvolutionCondition> evolutionConditions) {
+        this.evolutionConditions = evolutionConditions;
+    }
 }

@@ -1,30 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:layout_marginTop="2dp"
-              android:layout_marginBottom="2dp"
-              android:paddingTop="@dimen/dex_entry_panel_row_padding_vertical"
-              android:paddingRight="@dimen/dex_entry_panel_row_padding_horizontal"
-              android:paddingEnd="@dimen/dex_entry_panel_row_padding_horizontal"
-              android:paddingBottom="@dimen/dex_entry_panel_row_padding_vertical"
-              android:paddingLeft="@dimen/dex_entry_panel_row_padding_horizontal"
-              android:paddingStart="@dimen/dex_entry_panel_row_padding_horizontal"
-              android:fadingEdge="vertical"
-              android:background="@drawable/dex_entry_panel_row_background">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/dex_entry_panel_row_margin_vertical"
+    android:layout_marginTop="@dimen/dex_entry_panel_row_margin_vertical"
+    android:background="@drawable/dex_entry_panel_row_background"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dex_entry_panel_row_padding_vertical"
+    android:paddingLeft="@dimen/dex_entry_panel_row_padding_horizontal"
+    android:paddingRight="@dimen/dex_entry_panel_row_padding_horizontal"
+    android:paddingTop="@dimen/dex_entry_panel_row_padding_vertical">
 
     <TextView
-            android:id="@+id/ability_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
+        android:id="@+id/ability_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
     <TextView
-            android:id="@+id/ability_flavor_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+        android:id="@+id/ability_flavor_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

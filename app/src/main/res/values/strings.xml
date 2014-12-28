@@ -20,6 +20,7 @@
     <string name="title_egg_groups">Egg groups</string>
     <string name="title_gender_ratio">Gender ratio</string>
     <string name="title_stats">Stats</string>
+    <string name="title_evolution_chain">Evolution chain</string>
 
     <!-- Unit -->
     <string name="meter_unit">m</string>
@@ -75,6 +76,35 @@
     <string name="special_defense_short">sdef</string>
     <string name="speed">Speed</string>
     <string name="speed_short">spd</string>
+
+    <!-- Evolution  chain-->
+    <string name="base_stage">Base stage</string>
+    <string name="baby_stage">Baby, either parent must hold %1$s</string>
+    <string name="trigger_level_up">Level up</string>
+    <string name="trigger_trade">Trade</string>
+    <string name="trigger_use_item">Use</string>
+    <string name="trigger_shed">Evolve from %1$s (%2$s will consume a Poké Ball and appear in a free party slot)</string>
+    <string name="requirement_minimum_level">starting at level %1$d</string>
+    <string name="requirement_trigger_item">a %1$s</string>
+    <string name="requirement_gender_female">(females only)</string>
+    <string name="requirement_gender_male">(males only)</string>
+    <string name="requirement_location">around %1$s (%2$s)</string>
+    <string name="requirement_held_item">while holding a %1$s</string>
+    <string name="requirement_at_daytime">at daytime</string>
+    <string name="requirement_at_nighttime">at nighttime</string>
+    <string name="requirement_known_move">knowing %s</string>
+    <string name="requirement_known_move_type">knowing a %1$s-type move</string>
+    <string name="requirement_minimum_happiness">with at least %1$d happiness</string>
+    <string name="requirement_minimum_beauty">with at least %1$d beauty</string>
+    <string name="requirement_minimum_affection">with at least %1$d affection hearts</string>
+    <string name="requirement_attack_equals_defense">while having ATK = DEF</string>
+    <string name="requirement_attack_greater_than_defense">while having ATK &gt; DEF</string>
+    <string name="requirement_attack_less_than_defense">while having ATK &lt; DEF</string>
+    <string name="requirement_in_party_pokemon_species">with %1$s in the party</string>
+    <string name="requirement_in_party_pokemon_type">with a %1$s-type Pokémon in the party</string>
+    <string name="requirement_trade_for">in exchange for %1$s</string>
+    <string name="requirement_rain">while raining</string>
+    <string name="requirement_turn_upside_down">with the device turned upside-down</string>
 
     <!-- Content description -->
     <string name="description_pokemon_image">This is a Pókemon image</string>

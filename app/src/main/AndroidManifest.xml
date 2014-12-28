@@ -3,7 +3,7 @@
           package="com.nav.dexedd">
 
     <application
-            android:name=".app.Dexedd"
+            android:name=".activity.Dexedd"
             android:allowBackup="true"
             android:icon="@drawable/ic_launcher"
             android:label="@string/app_name"
@@ -11,25 +11,25 @@
             android:theme="@style/Theme.DexTheme">
 
         <activity
-                android:name=".app.MainActivity"
+                android:name=".activity.MainActivity"
                 android:label="@string/app_name"
                 android:launchMode="singleTop">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".app.SplashActivity" />
+                    android:value=".activity.SplashActivity" />
         </activity>
 
         <activity
-                android:name=".app.DexEntryActivity"
+                android:name=".activity.DexEntryActivity"
                 android:label="@string/app_name"
-                android:parentActivityName=".app.MainActivity">
+                android:parentActivityName=".activity.MainActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".app.MainActivity" />
+                    android:value=".activity.MainActivity" />
         </activity>
 
         <activity
-                android:name=".app.SplashActivity"
+                android:name=".activity.SplashActivity"
                 android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

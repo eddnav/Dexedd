@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <TextView
-            android:id="@+id/dex_entry_height_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/title_height"
-            style="@style/TextLabel" />
+        android:id="@+id/dex_entry_height_label"
+        style="@style/TextLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/title_height" />
 
     <LinearLayout
-            android:id="@+id/dex_entry_height_content"
-            android:layout_width="match_parent"
+        android:id="@+id/dex_entry_height_content"
+        style="@style/PanelRow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dex_entry_height_label"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/dex_entry_height_meters"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/dex_entry_height_label"
-            android:orientation="horizontal"
-            style="@style/PanelRow">
+            android:layout_weight="1"
+            android:gravity="center" />
 
         <TextView
-                android:id="@+id/dex_entry_height_meters"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center" />
-
-        <TextView
-                android:id="@+id/dex_entry_height_feet_inches"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center" />
+            android:id="@+id/dex_entry_height_feet_inches"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center" />
 
     </LinearLayout>
 
