@@ -1,5 +1,7 @@
 # Dexedd! #
 
+> Deprecated. This project has put on hold due to: 1) need of refactoring, it's an old project that would benefit from better and more recent Android features and libraries in many areas, 2) The Pokémon information has changed too much in the recent years and the database used here is not entirely up to date. 3) Pokémon videogames are expected to be mechanically reworked from the ground up in the next iteration of the series, as such it would make more sense to design a new app from there on.
+
 ![Dex and Mew's dex entry](https://raw.githubusercontent.com/eddnav/dexedd/master/app/src/main/assets/images/promo.png)
 
 
